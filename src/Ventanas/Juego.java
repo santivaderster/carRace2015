@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import CarRace.CarRaceGameController;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -36,11 +37,17 @@ public class Juego extends javax.swing.JFrame {
     float fVelocidad = 1;
     int iTiempo;
     int iNafta;
-    public Juego() 
+    CarRaceGameController oCarRaceGameController;
+    public Juego(CarRaceGameController oCarRaceGameController) 
     {
         initComponents();
+        this.oCarRaceGameController = oCarRaceGameController;
         ConfiguracionVisual();
         posicionAuto = lblFondo.getLocation();
+    }
+
+    private Juego() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -302,34 +309,35 @@ public class Juego extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComenzarActionPerformed
-        Comenzar();
+        oCarRaceGameController.Comenzar();
     }//GEN-LAST:event_btnComenzarActionPerformed
 
     private void pnlJuegoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlJuegoKeyReleased
+        
         int x = lblAutoJ.getLocation().x;
         int y = lblAutoJ.getLocation().y;
         switch (evt.getKeyCode())
         {
-            case KeyEvent.VK_UP://Aumenta la velocidad
-                break;
-            case KeyEvent.VK_DOWN:// Baja la velociddad
-                break;
             case KeyEvent.VK_LEFT://Auto mueve a la izquierda
+                oCarRaceGameController.MoverIzquierda();
                 if (correr)
                     if(x > 80)
                         lblAutoJ.setLocation(x-100, y);
                 break;
             case KeyEvent.VK_RIGHT://Auto mueve a la derecha
+                oCarRaceGameController.MoverDerecha();
                 if (correr)
                     if(x < 480)
                         lblAutoJ.setLocation(x+100, y);
                 break;
             case KeyEvent.VK_ESCAPE://Programa en pausa
+                oCarRaceGameController.Pausa();
                 correr = false;
                 JOptionPane.showMessageDialog(this, "JUEGO PAUSADO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
                 correr = true;
                 break;
             case KeyEvent.VK_F2:
+                oCarRaceGameController.Reiniciar();
                 Reiniciar();
                 break;
         }        
@@ -384,6 +392,7 @@ public class Juego extends javax.swing.JFrame {
         switch (evt.getKeyCode())
         {
              case KeyEvent.VK_LEFT://Auto mueve a la izquierda
+                 oCarRaceGameController.FlechaIzquierda();
                 switch(sIconoActual)
                 {
                     case "Amarillo":
@@ -401,6 +410,7 @@ public class Juego extends javax.swing.JFrame {
                 }
                 break;
             case KeyEvent.VK_RIGHT://Auto mueve a la derecha
+                oCarRaceGameController.FlechaDerecha();
                 switch(sIconoActual)
                 {
                     case "Amarillo":
@@ -418,6 +428,7 @@ public class Juego extends javax.swing.JFrame {
                 }
                 break;
             case KeyEvent.VK_ENTER:
+                oCarRaceGameController.Comenzar();
                 Comenzar();
                 break;
         }
