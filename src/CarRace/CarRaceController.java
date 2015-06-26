@@ -16,7 +16,8 @@ public class CarRaceController implements ControllerInterface
     CarRaceModel model;
     DJView view;
 
-    public CarRaceController(CarRaceModel model) {
+    public CarRaceController(CarRaceModel model) 
+    {
         this.model = model;
         view = new DJView(this, new CarRaceAdapter(model));
         view.createView();

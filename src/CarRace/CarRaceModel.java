@@ -19,7 +19,7 @@ public abstract class CarRaceModel implements CarRaceModelInterface, MetaEventLi
     int fuel;
     Sequence sequence;
     Track track;
-
+    
     public CarRaceModel() {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
