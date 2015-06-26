@@ -5,12 +5,21 @@
  */
 package CarRace;
 
+import Ventanas.Juego;
+
 /**
  *
  * @author Pato
+ * 
+ * 
  */
-public class CarRaceGameController implements CarRaceGameControllerInterface{
 
+  
+
+public class CarRaceGameController implements CarRaceGameControllerInterface{
+    CarRaceModel model ;
+    Juego vista ;
+    
     @Override
     public void MoverIzquierda() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -18,11 +27,17 @@ public class CarRaceGameController implements CarRaceGameControllerInterface{
 
     @Override
     public void MoverDerecha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+    model.setPosicionX(100, 80, 480);
+ 
+    
     }
 
     @Override
     public void Pausa() {
+        
+        
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

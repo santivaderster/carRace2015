@@ -66,11 +66,13 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener{
 		
 		fuel  = 0; 
 		colicion =false ;
-         
-		 pistaX1 = 10;
-		 pistaX2 = 50;
-		 pistaY1 = 10;
-		 pistaY2 = 70;
+             
+             // Limite de la pista 
+                
+		 pistaX1 = 80;     //derecha
+		 pistaX2 = 480;    //izquierda
+		 pistaY1 = 100;    // Arriba
+		 pistaY2 = 460;    // abajo
 		
 	    // Creacion de los Autos 
 		 
@@ -195,9 +197,11 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener{
 	}
 
 
-	public void setPosicionX(int x) {
+	public void setPosicionX(int x, int limitex1 ,int limitex2) {
 		
-		xposicion =x;
+	if (x>= limitex1 && x <=limitex2)
+            
+            xposicion = xposicion + x;
 
 	} 
 	
