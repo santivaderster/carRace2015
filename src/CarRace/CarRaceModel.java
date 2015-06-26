@@ -161,4 +161,40 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
             }
         }
     }
+
+    @Override
+    public String FlechaIzquierda(String sIconoActual) 
+    {
+        switch(sIconoActual)
+        {
+            case "Amarillo":
+                sIconoActual = "Rojo";
+                break;
+            case "Rojo":
+                sIconoActual = "Azul";
+                break;
+            case "Azul":
+                sIconoActual = "Amarillo";
+                break;
+        }
+        return sIconoActual;
+    }
+
+    @Override
+    public String FlechaDerecha(String sIconoActual) 
+    {
+        switch(sIconoActual)
+        {
+            case "Amarillo":
+                sIconoActual = "Azul";
+                break;
+            case "Rojo":
+                sIconoActual = "Amarillo";
+                break;
+            case "Azul":
+                sIconoActual = "Rojo";
+                break;
+        }
+        return sIconoActual;
+    }
 }

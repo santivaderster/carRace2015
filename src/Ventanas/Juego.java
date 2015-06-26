@@ -360,39 +360,11 @@ public class Juego extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlJuegoKeyReleased
 
     private void lblDerechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblDerechaMouseClicked
-        switch(sIconoActual)
-        {
-            case "Amarillo":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
-                sIconoActual = "Azul";
-                break;
-            case "Rojo":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
-                sIconoActual = "Amarillo";
-                break;
-            case "Azul":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
-                sIconoActual = "Rojo";
-                break;
-        }
+        controlador.FlechaDerecha();
     }//GEN-LAST:event_lblDerechaMouseClicked
 
     private void lblIzquierdaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIzquierdaMouseClicked
-       switch(sIconoActual)
-        {
-            case "Amarillo":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
-                sIconoActual = "Rojo";
-                break;
-            case "Rojo":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
-                sIconoActual = "Azul";
-                break;
-            case "Azul":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
-                sIconoActual = "Amarillo";
-                break;
-        }
+        controlador.FlechaIzquierda();
     }//GEN-LAST:event_lblIzquierdaMouseClicked
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
@@ -409,39 +381,9 @@ public class Juego extends javax.swing.JFrame {
         {
              case KeyEvent.VK_LEFT://Auto mueve a la izquierda
                  controlador.FlechaIzquierda();
-                switch(sIconoActual)
-                {
-                    case "Amarillo":
-                        lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
-                        sIconoActual = "Rojo";
-                        break;
-                    case "Rojo":
-                        lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
-                        sIconoActual = "Azul";
-                        break;
-                    case "Azul":
-                        lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
-                        sIconoActual = "Amarillo";
-                        break;
-                }
                 break;
             case KeyEvent.VK_RIGHT://Auto mueve a la derecha
                 controlador.FlechaDerecha();
-                switch(sIconoActual)
-                {
-                    case "Amarillo":
-                        lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
-                        sIconoActual = "Azul";
-                        break;
-                    case "Rojo":
-                        lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
-                        sIconoActual = "Amarillo";
-                        break;
-                    case "Azul":
-                        lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
-                        sIconoActual = "Rojo";
-                        break;
-                }
                 break;
             case KeyEvent.VK_ENTER:
                 controlador.start();
@@ -918,6 +860,10 @@ public class Juego extends javax.swing.JFrame {
 
     public String getsIconoActual() {
         return sIconoActual;
+    }
+
+    public void setsIconoActual(String sIconoActual) {
+        this.sIconoActual = sIconoActual;
     }
     
 }

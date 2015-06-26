@@ -14,4 +14,6 @@ public interface CarRaceModelInterface
     void removeObserver(BeatObserver o);
     void registerObserver(BPMObserver o);
     void removeObserver(BPMObserver o);
+    String FlechaIzquierda(String sIconoActual);
+    String FlechaDerecha(String sIconoActual);
 }

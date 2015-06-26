@@ -73,13 +73,39 @@ public class CarRaceGameController implements ControllerInterface
 
     public void FlechaIzquierda() 
     {
-//        Modelo.FlechaIzquierda(Vista.getsIconoActual());
+        String sIconoActual = Modelo.FlechaIzquierda(Vista.getsIconoActual());
+        switch(sIconoActual)
+        {
+            case "Amarillo":
+                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
+                break;
+            case "Rojo":
+                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
+                break;
+            case "Azul":
+                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
+                break;
+        }
+        Vista.setsIconoActual(sIconoActual);
     }
 
 
     public void FlechaDerecha() 
     {
-//        Modelo.FlechaDerecha(Vista.getsIconoActual());
+        String sIconoActual = Modelo.FlechaDerecha(Vista.getsIconoActual());
+        switch(sIconoActual)
+        {
+            case "Amarillo":
+                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
+                break;
+            case "Rojo":
+                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
+                break;
+            case "Azul":
+                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
+                break;
+        }
+        Vista.setsIconoActual(sIconoActual);
     }
     
 }
