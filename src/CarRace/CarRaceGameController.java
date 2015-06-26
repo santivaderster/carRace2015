@@ -12,11 +12,13 @@ import Ventanas.Juego;
  * @author Pato
  */
 
-public class CarRaceGameController implements ControllerInterface{
+public class CarRaceGameController implements ControllerInterface
+{
     CarRaceModel Modelo ;
     Juego Vista ;
 
-    public CarRaceGameController(CarRaceModel modelo, Juego vista) {
+    public CarRaceGameController(CarRaceModel modelo, Juego vista) 
+    {
         this.Modelo = modelo;
         this.Vista = new Juego(this,modelo);
         modelo.initialize();
