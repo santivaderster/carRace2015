@@ -30,9 +30,12 @@ public class StrategyView extends DJView {
  
 	private HeartAdapter heartAdapter = new HeartAdapter(HeartModel.getInstance());
  
-	
- 
-	public StrategyView(ControllerInterface controller, BeatModelInterface model) {
+    /**
+     *
+     * @param controller
+     * @param model
+     */
+    public StrategyView(ControllerInterface controller, BeatModelInterface model) {
  
 		super(controller, model);
  
@@ -158,9 +161,8 @@ public class StrategyView extends DJView {
  
 	}
  
-	
- 
-	public void setController(ControllerInterface controller){
+  
+    public void setController(ControllerInterface controller){
  
 		this.controller = controller;	
  

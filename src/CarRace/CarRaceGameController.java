@@ -21,7 +21,7 @@ public class CarRaceGameController implements ControllerInterface{
         this.Vista = new Juego(this,modelo);
         modelo.initialize();
     }
-
+/*
     public void MoverIzquierda() 
     {
         Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
@@ -48,16 +48,19 @@ public class CarRaceGameController implements ControllerInterface{
         Modelo.FlechaDerecha(Vista.getsIconoActual());
     }
 
+    
+    */
     @Override
     public void start() 
     {
-         Modelo.comenzar();
+         Modelo.initialize();
+         Modelo.on();
     }
 
     @Override
     public void stop() 
     {
-        Modelo.Pause();
+        Modelo.off();
     }
 
     @Override
