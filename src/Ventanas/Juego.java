@@ -6,6 +6,7 @@
 package Ventanas;
 
 import CarRace.CarRaceGameController;
+import CarRace.CarRaceModel;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -44,11 +45,13 @@ public class Juego extends javax.swing.JFrame {
     private int iLimiteYAbajo = 460;
     private int iMovimientoX = 100;
     private int iMovimientoY = 10;
-    CarRaceGameController oCarRaceGameController;
-    public Juego(CarRaceGameController oCarRaceGameController) 
+    CarRaceGameController controlador;
+    CarRaceModel modelo;
+    public Juego(CarRaceGameController controlador, CarRaceModel modelo) 
     {
         initComponents();
-        this.oCarRaceGameController = oCarRaceGameController;
+        this.modelo = modelo;
+        this.controlador = controlador;
         ConfiguracionVisual();
         posicionAuto = lblFondo.getLocation();
     }

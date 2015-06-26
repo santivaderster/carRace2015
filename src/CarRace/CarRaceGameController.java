@@ -12,54 +12,70 @@ import Ventanas.Juego;
  * @author Pato
  */
 
-public class CarRaceGameController implements CarRaceGameControllerInterface{
+public class CarRaceGameController implements ControllerInterface{
     CarRaceModel Modelo ;
     Juego Vista ;
 
-    public CarRaceGameController(CarRaceModel model, Juego vista) {
-        this.Modelo = model;
-        this.Vista = vista;
+    public CarRaceGameController(CarRaceModel modelo, Juego vista) {
+        this.Modelo = modelo;
+        this.Vista = new Juego(this,modelo);
+        modelo.initialize();
     }
-    
-    @Override
+
     public void MoverIzquierda() 
     {
         Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
     }
 
-    @Override
     public void MoverDerecha() 
     {
         Modelo.setPosicionX(Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
     }
 
-    @Override
-    public void Pausa() {
-        
-        
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Reiniciar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void FlechaIzquierda() 
+    public void Reiniciar() 
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void FlechaDerecha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void FlechaIzquierda() 
+    {
+        Modelo.FlechaIzquierda(Vista.getsIconoActual());
+    }
+
+
+    public void FlechaDerecha() 
+    {
+        Modelo.FlechaDerecha(Vista.getsIconoActual());
     }
 
     @Override
-    public void Comenzar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void start() 
+    {
+         Modelo.comenzar();
+    }
+
+    @Override
+    public void stop() 
+    {
+        Modelo.Pause();
+    }
+
+    @Override
+    public void increaseBPM() 
+    {
+        Modelo.setBPM(Modelo.getBPM()+1);
+    }
+
+    @Override
+    public void decreaseBPM() 
+    {
+        Modelo.setBPM(Modelo.getBPM()-1);
+    }
+
+    @Override
+    public void setBPM(int bpm) 
+    {
+        Modelo.setBPM(bpm);
     }
     
 }
