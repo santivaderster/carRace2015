@@ -31,7 +31,6 @@ public class Juego extends javax.swing.JFrame {
      * Creates new form Juego
      */
     private Point posicionAuto;
-    
     private Thread GenerarAutos;
     private Thread Tiempo;
     private boolean correr = true;
@@ -52,12 +51,13 @@ public class Juego extends javax.swing.JFrame {
         initComponents();
         this.modelo = modelo;
         this.controlador = controlador;
+        controlador.setVista(this);
         ConfiguracionVisual();
         posicionAuto = lblFondo.getLocation();
     }
 
     private Juego() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Esto no es"); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

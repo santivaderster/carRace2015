@@ -15,13 +15,14 @@ import Ventanas.Juego;
 
 public class CarRaceGameController implements ControllerInterface
 {
-    CarRaceModel Modelo ;
-    Juego Vista ;
+    private CarRaceModel Modelo ;
+    private Juego Vista ;
 
     public CarRaceGameController(CarRaceModel modelo) 
     {
         this.Modelo = modelo;
         this.Vista = new Juego(this,modelo);
+        Vista.setVisible(true);
         modelo.initialize();
     }
     
@@ -92,7 +93,7 @@ public class CarRaceGameController implements ControllerInterface
 
     public void FlechaDerecha() 
     {
-        String sIconoActual = Modelo.FlechaDerecha(Vista.getsIconoActual());
+        String sIconoActual = Modelo.FlechaDerecha(this.Vista.getsIconoActual());
         switch(sIconoActual)
         {
             case "Amarillo":
@@ -106,6 +107,10 @@ public class CarRaceGameController implements ControllerInterface
                 break;
         }
         Vista.setsIconoActual(sIconoActual);
+    }
+
+    public void setVista(Juego Vista) {
+        this.Vista = Vista;
     }
     
 }
