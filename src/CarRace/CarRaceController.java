@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package CarRace;
+import Beat.ControllerInterface;
 
 /**
  *
@@ -45,18 +46,17 @@ public class CarRaceController implements ControllerInterface{
         }
     
         public void increaseBPM() {
+        int nafta = model.getFuel();
+        model.setFuel(nafta + 1);
         }
     
         public void decreaseBPM() {
+        int nafta = model.getFuel();
+        model.setFuel(nafta - 1);
         }
   
-        public void setBPM() {
-            int nafta = model.getFuel();
-            
-            switch (nafta){
-                
-                case 100: 
-            }
+        public void setBPM(int bpm) {
+                model.setFuel(bpm);
         }
         
         public void setView(DJView view){
