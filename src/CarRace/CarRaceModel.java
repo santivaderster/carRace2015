@@ -17,7 +17,7 @@ public abstract class CarRaceModel implements CarRaceModelInterface, MetaEventLi
  
 	ArrayList<BPMObserver> bpmObservers = new ArrayList<BPMObserver>();
  
-    int bpm = 90;
+    int bpm = 0;   // los bpm arranca en 0 el fuel esta lleno 
     int fuel ;
     
     
@@ -26,6 +26,18 @@ public abstract class CarRaceModel implements CarRaceModelInterface, MetaEventLi
     Track track;
  
  
+    
+    	public CarRaceModel(){
+ 
+		beatObservers = new ArrayList<BeatObserver>();
+ 
+		bpmObservers = new ArrayList<BPMObserver>();
+ 
+		fuel = 10;
+ 
+	}
+    
+    
  
 	public void initialize() {
  

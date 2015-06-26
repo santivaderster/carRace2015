@@ -26,13 +26,13 @@ import Beat.BeatModelInterface;
  
 import Beat.ControllerInterface;
  
-import Detector.DetectorController;
+import CarRace.CarRaceController;
  
-import Detector.DetectorGameController;
+import CarRace.CarRaceGameController;
  
-import Detector.DetectorModel;
+import CarRace.CarRaceModel;
  
-import Detector.Tesoro;
+import CarRace.Autos;
  
 import Heart.HeartController;
  
@@ -141,18 +141,18 @@ public class View {
 		});
  
 		
- 
-		JButton btnGame = new JButton("GAME");
+              
+		JButton btnGame = new JButton("GAME CArRACE");
  
 		btnGame.addActionListener(new ActionListener() {
  
 			public void actionPerformed(ActionEvent e) {
  
-				Tesoro tesoro = new Tesoro();
+				Autos auto = new Autos();
  
-		        DetectorModel model = new DetectorModel(tesoro);
+		        CarRaceModel model = new CarRaceModel() {}; //Ace deberia mandar Autos 
  
-		        DetectorGameController detectorGameController = new DetectorGameController(model);
+		       // CarRaceGameController carGameController = new CarRaceGameController(model);
  
 			}
  
@@ -160,15 +160,15 @@ public class View {
  
 		
  
-		JButton btnDetectorModel = new JButton("Detector Model");
+		JButton btnCarRaceModel = new JButton("CarRace Model");
  
-		btnDetectorModel.addActionListener(new ActionListener() {
+		btnCarRaceModel.addActionListener(new ActionListener() {
  
 			public void actionPerformed(ActionEvent e) {
  
-				DetectorModel detectorModel = new DetectorModel();
+				CarRaceModel carModel = new CarRaceModel() {};
  
-		        ControllerInterface model = new DetectorController(detectorModel);
+		        ControllerInterface model = new CarRaceController(carModel);
  
 			}
  
@@ -214,11 +214,11 @@ public class View {
  
 				BeatModelInterface beatModel = new BeatModel();
  
-		        DetectorModel detectorModel = new DetectorModel();
+		        CarRaceModel carModel = new CarRaceModel() {};
  
 		        ControllerInterface controller1 = new BeatController(beatModel);
  
-				ControllerInterface controller2 = new DetectorController(detectorModel);
+				ControllerInterface controller2 = new CarRaceController(carModel);
  
 		        ControllerInterface controller3 = new HeartController(HeartModel.getInstance());
  
@@ -254,7 +254,7 @@ public class View {
  
 								.addComponent(btnStrategy, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
  
-								.addComponent(btnDetectorModel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnCarRaceModel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
  
 								.addComponent(btnDjModel, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
  
@@ -262,7 +262,7 @@ public class View {
  
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
  
-								.addComponent(btnGame, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+								//.addComponent(btnGame, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
  
 								.addComponent(btnAllModels, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
  
@@ -302,7 +302,7 @@ public class View {
  
 						.addComponent(btnAllModels, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
  
-						.addComponent(btnDetectorModel, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnCarRaceModel, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE))
  
 					.addPreferredGap(ComponentPlacement.RELATED)
  

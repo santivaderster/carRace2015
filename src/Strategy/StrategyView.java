@@ -16,7 +16,7 @@ import Beat.*;
  
 import Heart.*;
  
-import Detector.*;
+import CarRace.*;
  
 
  
@@ -124,13 +124,13 @@ public class StrategyView extends DJView {
  
 						if(controller!=null) controller.stop();
  
-						DetectorModel detector= new DetectorModel();
+						CarRaceModel detector= new CarRaceModel() {};
  
-						DetectorController detectorController = new DetectorController(detector,thisView);
+						CarRaceController detectorController = new CarRaceController(detector,thisView);
  
 						setController(detectorController);
  
-						setModel((new DetectorAdapter(detector)));
+						setModel((new CarRaceAdapter(detector)));
  
 					}
  
