@@ -10,27 +10,27 @@ import Ventanas.Juego;
 /**
  *
  * @author Pato
- * 
- * 
  */
 
-  
-
 public class CarRaceGameController implements CarRaceGameControllerInterface{
-    CarRaceModel model ;
-    Juego vista ;
+    CarRaceModel Modelo ;
+    Juego Vista ;
+
+    public CarRaceGameController(CarRaceModel model, Juego vista) {
+        this.Modelo = model;
+        this.Vista = vista;
+    }
     
     @Override
-    public void MoverIzquierda() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void MoverIzquierda() 
+    {
+        Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
     }
 
     @Override
-    public void MoverDerecha() {
-        
-    model.setPosicionX(100, 80, 480);
- 
-    
+    public void MoverDerecha() 
+    {
+        Modelo.setPosicionX(Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
     }
 
     @Override
@@ -47,7 +47,8 @@ public class CarRaceGameController implements CarRaceGameControllerInterface{
     }
 
     @Override
-    public void FlechaIzquierda() {
+    public void FlechaIzquierda() 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
