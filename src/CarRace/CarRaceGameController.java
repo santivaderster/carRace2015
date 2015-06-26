@@ -10,55 +10,72 @@ import Ventanas.Juego;
 /**
  *
  * @author Pato
- * 
- * 
  */
 
-  
+public class CarRaceGameController implements ControllerInterface{
+    CarRaceModel Modelo ;
+    Juego Vista ;
 
-public class CarRaceGameController implements CarRaceGameControllerInterface{
-    CarRaceModel model ;
-    Juego vista ;
-    
-    @Override
-    public void MoverIzquierda() {
+    public CarRaceGameController(CarRaceModel modelo, Juego vista) {
+        this.Modelo = modelo;
+        this.Vista = new Juego(this,modelo);
+        modelo.initialize();
+    }
+
+    public void MoverIzquierda() 
+    {
+        Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
+    }
+
+    public void MoverDerecha() 
+    {
+        Modelo.setPosicionX(Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
+    }
+
+    public void Reiniciar() 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void MoverDerecha() {
-        
-    model.setPosicionX(100, 80, 480);
- 
-    
+    public void FlechaIzquierda() 
+    {
+        Modelo.FlechaIzquierda(Vista.getsIconoActual());
+    }
+
+
+    public void FlechaDerecha() 
+    {
+        Modelo.FlechaDerecha(Vista.getsIconoActual());
     }
 
     @Override
-    public void Pausa() {
-        
-        
-        
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void start() 
+    {
+         Modelo.comenzar();
     }
 
     @Override
-    public void Reiniciar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void stop() 
+    {
+        Modelo.Pause();
     }
 
     @Override
-    public void FlechaIzquierda() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void increaseBPM() 
+    {
+        Modelo.setBPM(Modelo.getBPM()+1);
     }
 
     @Override
-    public void FlechaDerecha() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void decreaseBPM() 
+    {
+        Modelo.setBPM(Modelo.getBPM()-1);
     }
 
     @Override
-    public void Comenzar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setBPM(int bpm) 
+    {
+        Modelo.setBPM(bpm);
     }
     
 }

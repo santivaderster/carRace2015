@@ -6,6 +6,7 @@
 package Ventanas;
 
 import CarRace.CarRaceGameController;
+import CarRace.CarRaceModel;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -30,22 +31,27 @@ public class Juego extends javax.swing.JFrame {
      * Creates new form Juego
      */
     Point posicionAuto;
-    String sIconoActual = "Amarillo";
+    
     Thread GenerarAutos;
     Thread Tiempo;
     boolean correr = true;
     float fVelocidad = 1;
     int iTiempo;
     int iNafta;
+    private String sIconoActual = "Amarillo";
     private int iLimiteXIzquierda = 80;
     private int iLimiteXDerecha = 480;
     private int iLimiteYArriba = 100;
     private int iLimiteYAbajo = 460;
-    CarRaceGameController oCarRaceGameController;
-    public Juego(CarRaceGameController oCarRaceGameController) 
+    private int iMovimientoX = 100;
+    private int iMovimientoY = 10;
+    CarRaceGameController controlador;
+    CarRaceModel modelo;
+    public Juego(CarRaceGameController controlador, CarRaceModel modelo) 
     {
         initComponents();
-        this.oCarRaceGameController = oCarRaceGameController;
+        this.modelo = modelo;
+        this.controlador = controlador;
         ConfiguracionVisual();
         posicionAuto = lblFondo.getLocation();
     }
@@ -893,6 +899,18 @@ public class Juego extends javax.swing.JFrame {
 
     public int getiLimiteYAbajo() {
         return iLimiteYAbajo;
+    }
+
+    public int getiMovimientoX() {
+        return iMovimientoX;
+    }
+
+    public int getiMovimientoY() {
+        return iMovimientoY;
+    }
+
+    public String getsIconoActual() {
+        return sIconoActual;
     }
     
 }
