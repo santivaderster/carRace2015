@@ -45,16 +45,19 @@ public class CarRaceController implements ControllerInterface{
                 view.enableStartMenuItem();
         }
     
+        @Override
         public void increaseBPM() {
         int nafta = model.getFuel();
         model.setFuel(nafta + 1);
         }
-    
+        
+        @Override
         public void decreaseBPM() {
         int nafta = model.getFuel();
         model.setFuel(nafta - 1);
         }
-  
+        
+        @Override
         public void setBPM(int bpm) {
                 model.setFuel(bpm);
         }
