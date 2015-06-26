@@ -37,6 +37,10 @@ public class Juego extends javax.swing.JFrame {
     float fVelocidad = 1;
     int iTiempo;
     int iNafta;
+    private int iLimiteXIzquierda = 80;
+    private int iLimiteXDerecha = 480;
+    private int iLimiteYArriba = 100;
+    private int iLimiteYAbajo = 460;
     CarRaceGameController oCarRaceGameController;
     public Juego(CarRaceGameController oCarRaceGameController) 
     {
@@ -875,4 +879,20 @@ public class Juego extends javax.swing.JFrame {
         return pnlJuego;
     }
 
+    public int getiLimiteXDerecha() {
+        return iLimiteXDerecha;
+    }
+
+    public int getiLimiteXIzquierda() {
+        return iLimiteXIzquierda;
+    }
+
+    public int getiLimiteYArriba() {
+        return iLimiteYArriba;
+    }
+
+    public int getiLimiteYAbajo() {
+        return iLimiteYAbajo;
+    }
+    
 }
