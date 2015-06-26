@@ -53,7 +53,7 @@ public abstract class CarRaceModel implements CarRaceModelInterface, MetaEventLi
  
         sequencer.start();
  
-        setBPM(60);
+        setBPM(10);
  
     }
  

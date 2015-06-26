@@ -103,7 +103,9 @@ public class CarRaceController implements ControllerInterface{
  
  	//	model.setDistancia(bpm); // ver este metodo por el momento no hace nada porque ya tiene el increase y decrease
  
-	}
+	model.setfuel (bpm);
+        
+        }
  
  	
  

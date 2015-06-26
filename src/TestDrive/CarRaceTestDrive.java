@@ -8,7 +8,7 @@ import CarRace.CarRaceModel;
  
 
  
-public class DetectorTestDrive {
+public class CarRaceTestDrive {
  
 
  
