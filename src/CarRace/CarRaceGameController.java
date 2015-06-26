@@ -5,6 +5,7 @@
  */
 package CarRace;
 
+import Beat.ControllerInterface;
 import Ventanas.Juego;
 
 /**
@@ -23,34 +24,6 @@ public class CarRaceGameController implements ControllerInterface
         this.Vista = new Juego(this,modelo);
         modelo.initialize();
     }
-
-    public void MoverIzquierda() 
-    {
-        //Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
-    }
-
-    public void MoverDerecha() 
-    {
-//        Modelo.setPosicionX(Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
-    }
-
-    public void Reiniciar() 
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void FlechaIzquierda() 
-    {
-//        Modelo.FlechaIzquierda(Vista.getsIconoActual());
-    }
-
-
-    public void FlechaDerecha() 
-    {
-//        Modelo.FlechaDerecha(Vista.getsIconoActual());
-    }
-
-    
     
     @Override
     public void start() 
@@ -82,5 +55,31 @@ public class CarRaceGameController implements ControllerInterface
     {
         Modelo.setBPM(bpm);
     }
+    
+//    public void MoverIzquierda() 
+//    {
+//        //Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
+//    }
+//
+//    public void MoverDerecha() 
+//    {
+////        Modelo.setPosicionX(Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
+//    }
+//
+//    public void Reiniciar() 
+//    {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+//
+//    public void FlechaIzquierda() 
+//    {
+////        Modelo.FlechaIzquierda(Vista.getsIconoActual());
+//    }
+//
+//
+//    public void FlechaDerecha() 
+//    {
+////        Modelo.FlechaDerecha(Vista.getsIconoActual());
+//    }
     
 }

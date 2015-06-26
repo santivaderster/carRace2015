@@ -36,28 +36,33 @@ public class CarRaceController implements ControllerInterface
         this.model.initialize();  // ver inicializacion del modelo 
     }
 
+    @Override
     public void start() {
         model.on();  // ver on del modelo 
         view.disableStartMenuItem();
         view.enableStopMenuItem();
     }
 
+    @Override
     public void stop() {
         model.off();  // ver off del modelo 
         view.disableStopMenuItem();
         view.enableStartMenuItem();
     }
 
+    @Override
     public void increaseBPM() {
         int fuel = model.getfuel();
         model.setfuel(fuel + 1);
     }
 
+    @Override
     public void decreaseBPM() {
         int fuel = model.getfuel();
         model.setfuel(fuel - 1);
     }
 
+    @Override
     public void setBPM(int bpm) {
         //	model.setDistancia(bpm); // ver este metodo por el momento no hace nada porque ya tiene el increase y decrease
         model.setfuel(bpm);
