@@ -9,9 +9,8 @@ import Beat.*;
 import java.util.*;
 
 
-public abstract class CarRaceModel implements CarRaceModelInterface, MetaEventListener
+public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
 {
-
     Sequencer sequencer;
     ArrayList<BeatObserver> beatObservers = new ArrayList<BeatObserver>();
     ArrayList<BPMObserver> bpmObservers = new ArrayList<BPMObserver>();

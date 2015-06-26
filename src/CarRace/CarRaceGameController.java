@@ -23,15 +23,15 @@ public class CarRaceGameController implements ControllerInterface
         this.Vista = new Juego(this,modelo);
         modelo.initialize();
     }
-/*
+
     public void MoverIzquierda() 
     {
-        Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
+        //Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
     }
 
     public void MoverDerecha() 
     {
-        Modelo.setPosicionX(Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
+//        Modelo.setPosicionX(Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
     }
 
     public void Reiniciar() 
@@ -41,17 +41,17 @@ public class CarRaceGameController implements ControllerInterface
 
     public void FlechaIzquierda() 
     {
-        Modelo.FlechaIzquierda(Vista.getsIconoActual());
+//        Modelo.FlechaIzquierda(Vista.getsIconoActual());
     }
 
 
     public void FlechaDerecha() 
     {
-        Modelo.FlechaDerecha(Vista.getsIconoActual());
+//        Modelo.FlechaDerecha(Vista.getsIconoActual());
     }
 
     
-    */
+    
     @Override
     public void start() 
     {
