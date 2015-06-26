@@ -30,14 +30,14 @@ public class Juego extends javax.swing.JFrame {
     /**
      * Creates new form Juego
      */
-    Point posicionAuto;
+    private Point posicionAuto;
     
-    Thread GenerarAutos;
-    Thread Tiempo;
-    boolean correr = true;
-    float fVelocidad = 1;
-    int iTiempo;
-    int iNafta;
+    private Thread GenerarAutos;
+    private Thread Tiempo;
+    private boolean correr = true;
+    private float fVelocidad = 1;
+    private int iTiempo;
+    private int iNafta;
     private String sIconoActual = "Amarillo";
     private int iLimiteXIzquierda = 80;
     private int iLimiteXDerecha = 480;
@@ -45,8 +45,8 @@ public class Juego extends javax.swing.JFrame {
     private int iLimiteYAbajo = 460;
     private int iMovimientoX = 100;
     private int iMovimientoY = 10;
-    CarRaceGameController controlador;
-    CarRaceModel modelo;
+    private CarRaceGameController controlador;
+    private CarRaceModel modelo;
     public Juego(CarRaceGameController controlador, CarRaceModel modelo) 
     {
         initComponents();
