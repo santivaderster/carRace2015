@@ -64,7 +64,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener{
 		bpmObservers = new ArrayList<BPMObserver>();
 		modelObservers = new ArrayList<ModelObserver>();
 		
-		fuel  = 100; 
+		fuel  = 0; 
 		colicion =false ;
          
 		 pistaX1 = 10;
@@ -189,22 +189,23 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener{
     
     
 	
-	public void setTamaño(int x , int y ) {
+	public void setTamaÃ±o(int x , int y ) {
 		pistaX = x;
 		pistaY = y;  
 	}
 
 
-	public void setPosicionx(int x) {
+	public void setPosicionX(int x) {
 		
 		xposicion =x;
 
 	} 
 	
-	public void setPosiciony(int y) {
+	public void setPosicionY(int y) {
 		
-       yposicion = y ;
-	}
+          yposicion = y ;
+	
+        }
 
 
 	public int getPosicionx() {
@@ -238,11 +239,10 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener{
 
 
 	@Override
-	public void setTamaño() {
+	public void setTamaÃ±o() {
 		// TODO Auto-generated method stub
 		
 	}
-
 
 
 	@Override
