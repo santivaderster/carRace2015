@@ -11,8 +11,12 @@ import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
@@ -66,7 +70,7 @@ public class Juego extends javax.swing.JFrame {
         lblAuto5 = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
         pnlDatos = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        btnReiniciar = new javax.swing.JButton();
         prBarNafta = new javax.swing.JProgressBar();
 
         jLabel1.setText("Nombre:");
@@ -224,10 +228,10 @@ public class Juego extends javax.swing.JFrame {
 
         pnlDatos.setBorder(new javax.swing.border.MatteBorder(null));
 
-        jButton1.setText("Reiniciar (F2)");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnReiniciar.setText("Reiniciar (F2)");
+        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnReiniciarActionPerformed(evt);
             }
         });
 
@@ -238,7 +242,7 @@ public class Juego extends javax.swing.JFrame {
             .addGroup(pnlDatosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
@@ -246,7 +250,7 @@ public class Juego extends javax.swing.JFrame {
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLayout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addComponent(jButton1)
+                .addComponent(btnReiniciar)
                 .addGap(18, 18, 18)
                 .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -367,9 +371,9 @@ public class Juego extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lblIzquierdaMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
         Reiniciar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnReiniciarActionPerformed
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
         if(evt.getKeyCode() == KeyEvent.VK_ENTER)
@@ -457,7 +461,7 @@ public class Juego extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComenzar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnReiniciar;
     private javax.swing.JDialog jInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
@@ -799,4 +803,65 @@ public class Juego extends javax.swing.JFrame {
             ComenzarJuego(txtNombre.getText(),lblAuto.getIcon());
         }
     }
+
+    public JButton getBtnComenzar() {
+        return btnComenzar;
+    }
+
+    public JButton getBtnReiniciar() {
+        return btnReiniciar;
+    }
+
+    public JLabel getLblAuto() {
+        return lblAuto;
+    }
+
+    public JLabel getLblAuto1() {
+        return lblAuto1;
+    }
+
+    public JLabel getLblAuto2() {
+        return lblAuto2;
+    }
+
+    public JLabel getLblAuto3() {
+        return lblAuto3;
+    }
+
+    public JLabel getLblAuto4() {
+        return lblAuto4;
+    }
+
+    public JLabel getLblAuto5() {
+        return lblAuto5;
+    }
+
+    public JLabel getLblAutoJ() {
+        return lblAutoJ;
+    }
+
+    public JLabel getLblDerecha() {
+        return lblDerecha;
+    }
+
+    public JLabel getLblIzquierda() {
+        return lblIzquierda;
+    }
+
+    public JPanel getPnlPrincipal() {
+        return pnlPrincipal;
+    }
+
+    public JProgressBar getPrBarNafta() {
+        return prBarNafta;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public JPanel getPnlJuego() {
+        return pnlJuego;
+    }
+
 }
