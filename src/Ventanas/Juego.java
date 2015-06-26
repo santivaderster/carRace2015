@@ -89,6 +89,7 @@ public class Juego extends javax.swing.JFrame {
         pnlDatos = new javax.swing.JPanel();
         btnReiniciar = new javax.swing.JButton();
         prBarNafta = new javax.swing.JProgressBar();
+        jLabel2 = new javax.swing.JLabel();
 
         jLabel1.setText("Nombre:");
 
@@ -252,6 +253,8 @@ public class Juego extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Presione ESC para Pausar");
+
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
         pnlDatosLayout.setHorizontalGroup(
@@ -260,7 +263,8 @@ public class Juego extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
         pnlDatosLayout.setVerticalGroup(
@@ -270,6 +274,8 @@ public class Juego extends javax.swing.JFrame {
                 .addComponent(btnReiniciar)
                 .addGap(18, 18, 18)
                 .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -319,7 +325,7 @@ public class Juego extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComenzarActionPerformed
-        oCarRaceGameController.Comenzar();
+        controlador.start();
     }//GEN-LAST:event_btnComenzarActionPerformed
 
     private void pnlJuegoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlJuegoKeyReleased
@@ -329,25 +335,25 @@ public class Juego extends javax.swing.JFrame {
         switch (evt.getKeyCode())
         {
             case KeyEvent.VK_LEFT://Auto mueve a la izquierda
-                oCarRaceGameController.MoverIzquierda();
+                controlador.MoverIzquierda();
                 if (correr)
                     if(x > 80)
                         lblAutoJ.setLocation(x-100, y);
                 break;
             case KeyEvent.VK_RIGHT://Auto mueve a la derecha
-                oCarRaceGameController.MoverDerecha();
+                controlador.MoverDerecha();
                 if (correr)
                     if(x < 480)
                         lblAutoJ.setLocation(x+100, y);
                 break;
             case KeyEvent.VK_ESCAPE://Programa en pausa
-                oCarRaceGameController.Pausa();
+                controlador.stop();
                 correr = false;
                 JOptionPane.showMessageDialog(this, "JUEGO PAUSADO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
                 correr = true;
                 break;
             case KeyEvent.VK_F2:
-                oCarRaceGameController.Reiniciar();
+                controlador.Reiniciar();
                 Reiniciar();
                 break;
         }        
@@ -402,7 +408,7 @@ public class Juego extends javax.swing.JFrame {
         switch (evt.getKeyCode())
         {
              case KeyEvent.VK_LEFT://Auto mueve a la izquierda
-                 oCarRaceGameController.FlechaIzquierda();
+                 controlador.FlechaIzquierda();
                 switch(sIconoActual)
                 {
                     case "Amarillo":
@@ -420,7 +426,7 @@ public class Juego extends javax.swing.JFrame {
                 }
                 break;
             case KeyEvent.VK_RIGHT://Auto mueve a la derecha
-                oCarRaceGameController.FlechaDerecha();
+                controlador.FlechaDerecha();
                 switch(sIconoActual)
                 {
                     case "Amarillo":
@@ -438,7 +444,7 @@ public class Juego extends javax.swing.JFrame {
                 }
                 break;
             case KeyEvent.VK_ENTER:
-                oCarRaceGameController.Comenzar();
+                controlador.start();
                 Comenzar();
                 break;
         }
@@ -485,6 +491,7 @@ public class Juego extends javax.swing.JFrame {
     private javax.swing.JButton btnReiniciar;
     private javax.swing.JDialog jInicio;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblAuto;
     private javax.swing.JLabel lblAuto1;

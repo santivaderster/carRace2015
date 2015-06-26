@@ -352,6 +352,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnReiniciar" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
                           <Component id="prBarNafta" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="49" max="32767" attributes="0"/>
                   </Group>
@@ -364,6 +365,8 @@
                       <Component id="btnReiniciar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="prBarNafta" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -379,6 +382,11 @@
               </Events>
             </Component>
             <Component class="javax.swing.JProgressBar" name="prBarNafta">
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Presione ESC para Pausar"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
