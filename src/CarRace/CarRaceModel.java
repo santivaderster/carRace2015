@@ -141,7 +141,24 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                             autosContra.get(num).setPosiciony(iLimiteYAbajo);
                         }
                     }
+                if (detectorChoque()){//calculo de choque 
+                
+                notifyModelObservers("AutoSeleccionado");
+                notifyModelObservers("GameOver");
+                }
                     for (int i = 0; i < autosContra.size(); i++) {
+                        if (autosContra.get(i).isVisible())
+                            notifyModelObservers("AutosContra");
+                    }
+                }
+            }   
+        };
+        Tiempo.start();
+    }
+    
+    public boolean detectorChoque(){
+        boolean choque = false;
+        for (int i = 0; i < autosContra.size(); i++) {
                             if(autosContra.get(i).isVisible())
                                 autosContra.get(i).setPosiciony(autosContra.get(i).getPosiciony()-1*iMovimientoY);
                             if (autosContra.get(i).getPosiciony()<iLimiteYArriba+iTamanoAuto)
@@ -162,20 +179,16 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                                             miauto.setColorSelectionJugador("RojoRoto");
                                         break;
                                     }
-                                    notifyModelObservers("AutoSeleccionado");
-                                    notifyModelObservers("GameOver");
+                                   choque=true;
                                 }
                             }
                         }
-                    for (int i = 0; i < autosContra.size(); i++) {
-                        if (autosContra.get(i).isVisible())
-                            notifyModelObservers("AutosContra");
-                    }
-                }
-            }   
-        };
-        Tiempo.start();
+    
+    return choque;
+    
+    
     }
+    
 
     public void off() {
         setBPM(0);
