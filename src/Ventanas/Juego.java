@@ -50,7 +50,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     public Juego() 
     {
         initComponents();
-        miauto = new Autos(80, 0, "Azul");
+        miauto = new Autos(80, 0, "Azul",true);
         this.modelo = new CarRaceModel(miauto);
         this.controlador = new CarRaceGameController (modelo,this);
         modelo.registerObserver(this);
@@ -548,134 +548,134 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                         {
                             if (lblAuto1.isVisible())
                             {
-                                if(lblAuto1.getLocation().y == lblAutoJ.getLocation().y+100)
-                                {
-                                    lblAuto1.setVisible(false);
-                                    if(lblAutoJ.getLocation().x == lblAuto1.getLocation().x)
-                                    {
-                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-                                        switch(sIconoActual)
-                                        {
-                                            case "Amarillo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-                                                break;
-                                            case "Rojo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-                                                break;
-                                            case "Azul":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-                                                break;
-                                        }
-                                        correr = false;
-                                    }
-                                }
-                                else
-                                {
+//                                if(lblAuto1.getLocation().y == lblAutoJ.getLocation().y+100)
+//                                {
+//                                    lblAuto1.setVisible(false);
+//                                    if(lblAutoJ.getLocation().x == lblAuto1.getLocation().x)
+//                                    {
+//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
+//                                        switch(sIconoActual)
+//                                        {
+//                                            case "Amarillo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
+//                                                break;
+//                                            case "Rojo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
+//                                                break;
+//                                            case "Azul":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
+//                                                break;
+//                                        }
+//                                        correr = false;
+//                                    }
+//                                }
+//                                else
+//                                {
                                     lblAuto1.setLocation(lblAuto1.getLocation().x, lblAuto1.getLocation().y-10);
-                                }
+//                                }
                             }
                             if (lblAuto2.isVisible())
                             {
-                                if(lblAuto2.getLocation().y == lblAutoJ.getLocation().y+100)
-                                {
-                                    lblAuto2.setVisible(false);
-                                    if(lblAutoJ.getLocation().x == lblAuto2.getLocation().x)
-                                    {
-                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-                                        switch(sIconoActual)
-                                        {
-                                            case "Amarillo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-                                                break;
-                                            case "Rojo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-                                                break;
-                                            case "Azul":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-                                                break;
-                                        }
-                                        correr = false;
-                                    }
-                                }
-                                else
+//                                if(lblAuto2.getLocation().y == lblAutoJ.getLocation().y+100)
+//                                {
+//                                    lblAuto2.setVisible(false);
+//                                    if(lblAutoJ.getLocation().x == lblAuto2.getLocation().x)
+//                                    {
+//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
+//                                        switch(sIconoActual)
+//                                        {
+//                                            case "Amarillo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
+//                                                break;
+//                                            case "Rojo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
+//                                                break;
+//                                            case "Azul":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
+//                                                break;
+//                                        }
+//                                        correr = false;
+//                                    }
+//                                }
+//                                else
                                     lblAuto2.setLocation(lblAuto2.getLocation().x, lblAuto2.getLocation().y-10);
                             }
                             if (lblAuto3.isVisible())
                             {
-                                if(lblAuto3.getLocation().y == lblAutoJ.getLocation().y+100)
-                                {    
-                                    lblAuto3.setVisible(false);
-                                    if(lblAutoJ.getLocation().x == lblAuto3.getLocation().x)
-                                    {
-                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-                                        switch(sIconoActual)
-                                        {
-                                            case "Amarillo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-                                                break;
-                                            case "Rojo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-                                                break;
-                                            case "Azul":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-                                                break;
-                                        }
-                                        correr = false;
-                                    }
-                                }
-                                else
+//                                if(lblAuto3.getLocation().y == lblAutoJ.getLocation().y+100)
+//                                {    
+//                                    lblAuto3.setVisible(false);
+//                                    if(lblAutoJ.getLocation().x == lblAuto3.getLocation().x)
+//                                    {
+//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
+//                                        switch(sIconoActual)
+//                                        {
+//                                            case "Amarillo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
+//                                                break;
+//                                            case "Rojo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
+//                                                break;
+//                                            case "Azul":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
+//                                                break;
+//                                        }
+//                                        correr = false;
+//                                    }
+//                                }
+//                                else
                                     lblAuto3.setLocation(lblAuto3.getLocation().x, lblAuto3.getLocation().y-10);
                             }
                             if (lblAuto4.isVisible())
                             {
-                                if(lblAuto4.getLocation().y == lblAutoJ.getLocation().y+100)
-                                {
-                                    lblAuto4.setVisible(false);
-                                    if(lblAutoJ.getLocation().x == lblAuto4.getLocation().x)
-                                    {
-                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-                                        switch(sIconoActual)
-                                        {
-                                            case "Amarillo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-                                                break;
-                                            case "Rojo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-                                                break;
-                                            case "Azul":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-                                                break;
-                                        }
-                                        correr = false;
-                                    }
-                                }
-                                else
+//                                if(lblAuto4.getLocation().y == lblAutoJ.getLocation().y+100)
+//                                {
+//                                    lblAuto4.setVisible(false);
+//                                    if(lblAutoJ.getLocation().x == lblAuto4.getLocation().x)
+//                                    {
+//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
+//                                        switch(sIconoActual)
+//                                        {
+//                                            case "Amarillo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
+//                                                break;
+//                                            case "Rojo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
+//                                                break;
+//                                            case "Azul":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
+//                                                break;
+//                                        }
+//                                        correr = false;
+//                                    }
+//                                }
+//                                else
                                     lblAuto4.setLocation(lblAuto4.getLocation().x, lblAuto4.getLocation().y-10);
                             }
                             if (lblAuto5.isVisible())
                             {
-                                if(lblAuto5.getLocation().y == lblAutoJ.getLocation().y+100)
-                                {
-                                    lblAuto5.setVisible(false);
-                                    if(lblAutoJ.getLocation().x == lblAuto5.getLocation().x)
-                                    {
-                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-                                        switch(sIconoActual)
-                                        {
-                                            case "Amarillo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-                                                break;
-                                            case "Rojo":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-                                                break;
-                                            case "Azul":
-                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-                                                break;
-                                        }
-                                        correr = false;
-                                    }
-                                }
-                                else
+//                                if(lblAuto5.getLocation().y == lblAutoJ.getLocation().y+100)
+//                                {
+//                                    lblAuto5.setVisible(false);
+//                                    if(lblAutoJ.getLocation().x == lblAuto5.getLocation().x)
+//                                    {
+//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
+//                                        switch(sIconoActual)
+//                                        {
+//                                            case "Amarillo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
+//                                                break;
+//                                            case "Rojo":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
+//                                                break;
+//                                            case "Azul":
+//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
+//                                                break;
+//                                        }
+//                                        correr = false;
+//                                    }
+//                                }
+//                                else
                                     lblAuto5.setLocation(lblAuto5.getLocation().x, lblAuto5.getLocation().y-10);
                             }
                         }
@@ -695,7 +695,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         Tiempo = new Thread()
         {
 
-            @Override
+            @Override// esta parte hay que sacarla 
             public void run() 
             {
                 super.run(); //To change body of generated methods, choose Tools | Templates.

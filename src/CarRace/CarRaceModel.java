@@ -22,7 +22,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     Sequence sequence;
     Track track;
     Autos miauto;
-     ArrayList<Autos> autosContra = new ArrayList<Autos>();
+    ArrayList<Autos> autosContra = new ArrayList<Autos>();
     Thread Tiempo ;
    
 //        public CarRaceModel() {
@@ -44,6 +44,29 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         modelObservers = new ArrayList<ModelObserver>();
         this.miauto = auto;
         this.miauto.setFuel(10);
+        String sColor = null;
+         for (int i = 0; i < 5; i++) {
+            switch (i)
+            {
+                case 0:
+                    sColor = "Amarillo";
+                    break;
+                case 1:
+                    sColor = "Rojo";
+                    break;
+                case 2:
+                    sColor = "Azul";
+                    break;
+                case 3:
+                    sColor = "Amarillo";
+                    break;
+                case 4:
+                    sColor = "Azul";
+                    break;
+            }
+             Autos oAuto = new Autos(i*iMovimientoX + iLimiteXIzquierda,iLimiteYAbajo, sColor,false);
+             autosContra.add(auto);
+         }
      }
 
     
@@ -66,6 +89,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
             @Override
             public void run() 
             {
+                int cant = 0;
                 super.run(); 
                 while (!tiempofinalizado)
                 {
@@ -76,6 +100,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     {
                         System.out.println(ex.getMessage());
                     }
+                    cant++;
                     if (miauto.getPosicionx() != iLimiteXIzquierda )//&& miauto.getPosicionx() != iLimiteXDerecha)
                         miauto.setFuel(miauto.getFuel()-1*iCantidadCombustible);
                     else
@@ -87,9 +112,20 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     
                         notifyModelObservers("GameOver");
                     }
-                    
-                    
-                    
+                    if (cant == 10 )
+                    {
+                        cant = 0;
+                        Random oRandom = new Random();
+                        int num = (int)(oRandom.nextDouble() * 5 + 1);
+                        if (!autosContra.get(num).isVisible())
+                        {
+                            autosContra.get(num).setVisible(true);
+                        }
+                    }
+                    for (int i = 0; i < autosContra.size(); i++) {
+                        if (autosContra.get(i).isVisible())
+                            
+                    }
                 }
             }   
         };

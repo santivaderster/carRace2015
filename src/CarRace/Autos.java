@@ -11,12 +11,12 @@ public class Autos {
     private int fuel ;
     private int maxFuel = 10;
 
-    public Autos( int x , int y , String color) {
+    public Autos( int x , int y , String color, boolean visible) {
         fuel = 10;
         posicionx = x; // genera posicion x aleatoria de autos en contramano
         posiciony = y;  //  colocar la posicion de donde arranca los autos en contra mano 
         colorSelectionJugador = color;
-    
+        this.visible = visible;
     }
 
     public String getColorSelectionJugador() {
