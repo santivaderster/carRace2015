@@ -90,6 +90,16 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         jLabel2 = new javax.swing.JLabel();
         llblfuel = new javax.swing.JLabel();
         lbltextfuel = new java.awt.Label();
+        jButton1 = new javax.swing.JButton();
+
+        jInicio.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                jInicioWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                jInicioWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Nombre:");
 
@@ -266,21 +276,33 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         lbltextfuel.setForeground(new java.awt.Color(255, 0, 51));
         lbltextfuel.setText("FUEL");
 
+        jButton1.setText("About");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
         pnlDatosLayout.setHorizontalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
                     .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbltextfuel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(llblfuel)))
+                            .addComponent(btnReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addGroup(pnlDatosLayout.createSequentialGroup()
+                                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbltextfuel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(llblfuel))))
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton1)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlDatosLayout.setVerticalGroup(
@@ -297,7 +319,9 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 .addComponent(jLabel2)
                 .addGap(47, 47, 47)
                 .addComponent(btnReiniciar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
@@ -416,6 +440,20 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         // TODO add your handling code here:
     }//GEN-LAST:event_lblAutoKeyPressed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JOptionPane.showMessageDialog(null, "Prados Santiago Agustin \n"
+                + "Perpetua Patricio R. \n"
+                + "Vinas Vizcardi Dardo Ariel", "Programadores", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jInicioWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jInicioWindowClosed
+        
+    }//GEN-LAST:event_jInicioWindowClosed
+
+    private void jInicioWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jInicioWindowClosing
+        System.exit(0);
+    }//GEN-LAST:event_jInicioWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -455,6 +493,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComenzar;
     private javax.swing.JButton btnReiniciar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

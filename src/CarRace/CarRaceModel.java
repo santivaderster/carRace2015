@@ -114,7 +114,19 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     }
                     UpdateFuel();
                     if (miauto.getFuel()==0){
-                    
+                        switch (miauto.getColorSelectionJugador())
+                        {
+                            case "Amarillo":
+                                miauto.setColorSelectionJugador("AmarilloRoto");
+                            break;                                            
+                            case "Azul":
+                                miauto.setColorSelectionJugador("AzulRoto");
+                            break;
+                            case "Rojo":
+                                miauto.setColorSelectionJugador("RojoRoto");
+                            break;
+                        }
+                        notifyModelObservers("AutoSeleccionado");
                         notifyModelObservers("GameOver");
                     }
                     if (cant == iRefrescoAutoContra )
@@ -134,6 +146,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                             if (autosContra.get(i).getPosiciony()<iLimiteYArriba+iTamanoAuto)
                             {
                                 autosContra.get(i).setVisible(false);
+                                autosContra.get(i).setPosiciony(iLimiteYAbajo);
                                 if (miauto.getPosicionx() == autosContra.get(i).getPosicionx())
                                 {                                    
                                     switch (miauto.getColorSelectionJugador())
