@@ -18,11 +18,10 @@ public class CarRaceGameController implements ControllerInterface
     private CarRaceModel Modelo ;
     private Juego Vista ;
 
-    public CarRaceGameController(CarRaceModel modelo) 
+    public CarRaceGameController(CarRaceModel modelo, Juego vista) 
     {
         this.Modelo = modelo;
-        this.Vista = new Juego(this,modelo);
-        Vista.setVisible(true);
+        this.Vista = vista;
         modelo.initialize();
     }
     

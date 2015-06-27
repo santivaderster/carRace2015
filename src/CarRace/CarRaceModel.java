@@ -23,6 +23,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     public CarRaceModel() {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
+        modelObservers = new ArrayList<ModelObserver>();
         fuel = 10;
     }
 
@@ -81,10 +82,30 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
     
-    public void notifyModelObservers() {
+    public void notifyModelObservers(String sAccion, String update) {
         for (int i = 0; i < modelObservers.size(); i++) {
             ModelObserver observer = (ModelObserver) modelObservers.get(i);
-            observer.update();
+            switch(sAccion)
+            {
+                case "AutoMover":
+                    observer.updateAuto(Integer.parseInt(update));
+                    break;
+                case "Auto1Mover":
+                    observer.updateAutoContramano1(Integer.parseInt(update), true);
+                    break;
+                case "Auto2Mover":
+                    break;
+                case "Auto3Mover":
+                    break;
+                case "Auto4Mover":
+                    break;
+                case "Auto5Mover":
+                    break;
+                case "AutoSeleccion":
+                    observer.updateAutoSeleccion(update);
+                    break;
+            }
+//            observer.update();
         }
     }
     

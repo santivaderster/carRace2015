@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import Beat.ControllerInterface;
 import CarRace.CarRaceGameController;
 import CarRace.CarRaceModel;
 import CarRace.ModelObserver;
@@ -47,19 +48,15 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     private int iMovimientoY = 10;
     private CarRaceGameController controlador;
     private CarRaceModel modelo;
-    public Juego(CarRaceGameController controlador, CarRaceModel modelo) 
+    public Juego() 
     {
         initComponents();
-        this.modelo = modelo;
-        this.controlador = controlador;
-        modelo.registerObserver(this);
-        controlador.setVista(this);
+//        this.modelo = modelo;
+//        this.controlador = controlador;
+//        modelo.registerObserver(this);
+//        this.controlador.setVista(this);
         ConfiguracionVisual();
         posicionAuto = lblFondo.getLocation();
-    }
-
-    private Juego() {
-        throw new UnsupportedOperationException("Esto no es"); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -327,7 +324,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComenzarActionPerformed
-        controlador.start();
+        Comenzar2();
     }//GEN-LAST:event_btnComenzarActionPerformed
 
     private void pnlJuegoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlJuegoKeyReleased
@@ -389,7 +386,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 break;
             case KeyEvent.VK_ENTER:
                 controlador.start();
-                Comenzar();
+                Comenzar2();
                 break;
         }
     }//GEN-LAST:event_lblAutoKeyReleased
@@ -879,8 +876,68 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     }
 
     @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateAuto(int posX) 
+    {
+        lblAutoJ.setLocation(posX, 0);
+    }
+
+    @Override
+    public void updateAutoSeleccion(String sIconoActual) 
+    {
+        switch(sIconoActual)
+        {
+            case "Amarillo":
+                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
+                break;
+            case "Rojo":
+                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
+                break;
+            case "Azul":
+                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
+                break;
+        }
+    }
+
+    @Override
+    public void updateAutoContramano1(int posY, boolean estado) 
+    {
+        lblAuto1.setLocation(80, posY);
+        lblAuto1.setVisible(estado);
+    }
+
+    @Override
+    public void updateAutoContramano2(int posY, boolean estado) 
+    {
+        lblAuto2.setLocation(180, posY);
+        lblAuto2.setVisible(estado);
+    }
+
+    @Override
+    public void updateAutoContramano3(int posY, boolean estado) 
+    {
+        lblAuto3.setLocation(80, posY);
+        lblAuto3.setVisible(estado);
+    }
+
+    @Override
+    public void updateAutoContramano4(int posY, boolean estado) 
+    {
+        lblAuto4.setLocation(80, posY);
+        lblAuto4.setVisible(estado);
+    }
+
+    @Override
+    public void updateAutoContramano5(int posY, boolean estado) 
+    {
+        lblAuto5.setLocation(80, posY);
+        lblAuto5.setVisible(estado);
+    }
+
+    private void Comenzar2() 
+    {
+        this.modelo = new CarRaceModel();
+        this.controlador = new CarRaceGameController(modelo,this);
+        Comenzar();
     }
     
 }
