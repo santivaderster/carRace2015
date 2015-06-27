@@ -25,6 +25,11 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         fuel = 10;
     }
 
+    
+    
+    
+    
+    
     public void initialize() {
         setUpMidi();
         buildTrackAndStart();
