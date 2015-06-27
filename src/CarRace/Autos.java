@@ -9,7 +9,7 @@ public class Autos {
     private String colorSelectionJugador ;
     private boolean visible;
     private int fuel ;
-    
+    private int maxFuel = 10;
 
     public Autos( int x , int y , String color) {
         fuel = 10;
@@ -39,8 +39,10 @@ public class Autos {
         return fuel;
     }
 
-    public void setFuel(int fuel) {
-        this.fuel = fuel;
+    public void setFuel(int fuel) 
+    {
+        if (fuel<=maxFuel && fuel >= 0)
+            this.fuel = fuel;
     }
 
  

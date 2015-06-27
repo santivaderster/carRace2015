@@ -52,20 +52,20 @@ public class CarRaceController implements ControllerInterface
 
     @Override
     public void increaseBPM() {
-        int fuel = model.getFuel();
-        model.setfuel(fuel + 1);
+        model.setPosicionX(1);
+        model.UpdateFuel();
     }
 
     @Override
     public void decreaseBPM() {
-        int fuel = model.getFuel();
-        model.setfuel(fuel - 1);
+        model.setPosicionX(-1);
+        model.UpdateFuel();
     }
 
     @Override
     public void setBPM(int bpm) {
         //	model.setDistancia(bpm); // ver este metodo por el momento no hace nada porque ya tiene el increase y decrease
-        model.setfuel(bpm);
+        model.UpdateFuel();
     }
 
     public void setView(DJView view) {

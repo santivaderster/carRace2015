@@ -26,8 +26,8 @@ public class CarRaceAdapter implements BeatModelInterface {
         this.car.off();
     }
 
-    public void setBPM(int bpm) {
-        this.car.setfuel(bpm);
+    public void setBPM(int f) {
+        this.car.UpdateFuel();
     }
 
     public int getBPM() {

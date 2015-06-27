@@ -36,7 +36,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     private int iLimiteYAbajo = 460;
     private int iMovimientoX = 100;
     private int iMovimientoY = 10;
-     
+    private int iCantidadCombustible = 1;
      public CarRaceModel(Autos auto) {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
@@ -63,16 +63,26 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         Tiempo = new Thread()
         {
             @Override
-            public void run() {
+            public void run() 
+            {
                 super.run(); //To change body of generated methods, choose Tools | Templates.
-                try 
+                while (true)
                 {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {}
-                
-            }
-            
+                    try 
+                    {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {}
+                    if (miauto.getPosicionx() != iLimiteXIzquierda && miauto.getPosicionx() != iLimiteXDerecha)
+                        miauto.setFuel(miauto.getFuel()-1*iCantidadCombustible);
+                    else
+                    {
+                        miauto.setFuel(miauto.getFuel()+1*iCantidadCombustible);
+                    }
+                    UpdateFuel();
+                }
+            }   
         };
+        Tiempo.start();
     }
 
     public void off() {
@@ -241,15 +251,9 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
   return  miauto.getFuel();
   }
 
-   public void setfuel(int f) {
-        if (f >= 0 &&  f<=10) {
-            miauto.setFuel(f);
-            if (miauto.getFuel() <= 9) {
-                setBPM(-(-400 + 40 * miauto.getFuel()));
-                notifyModelObservers("updateFuel");
-               
-            }
-        }
+   public void UpdateFuel() {
+        setBPM(-(-400 + 40 * miauto.getFuel()));
+        notifyModelObservers("updateFuel");
     }
 
     @Override
@@ -294,7 +298,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         if (v> 0)
         {
             if(miauto.getPosicionx()<iLimiteXDerecha)
-                miauto.setPosicionx(miauto.getPosicionx()+v*100);
+                miauto.setPosicionx(miauto.getPosicionx()+v*iMovimientoX);
         }
         else
         {

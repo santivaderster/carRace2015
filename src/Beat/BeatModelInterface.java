@@ -8,7 +8,7 @@ public interface BeatModelInterface {
  
 	void off();
  
-    void setBPM(int bpm);
+        void setBPM(int bpm);
  
 	int getBPM();
  
