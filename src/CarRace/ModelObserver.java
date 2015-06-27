@@ -7,10 +7,6 @@ public interface ModelObserver
     void updateAuto(int posX);
     void updateestado(String estado);
     void updateAutoSeleccion(String sIconoActual);
-    void updateAutoSeleccionJugador(String sIconoActual);
+    void updateAutoSeleccionJugador();
     void updateAutosContra();
-    void updateAutoContramano2(int posY,boolean estado);
-    void updateAutoContramano3(int posY,boolean estado);
-    void updateAutoContramano4(int posY,boolean estado);
-    void updateAutoContramano5(int posY,boolean estado);
 } 

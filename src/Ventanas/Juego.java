@@ -851,34 +851,6 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         lblAuto5.setVisible(autosContra.get(4).isVisible());
     }
 
-    @Override
-    public void updateAutoContramano2(int posY, boolean estado) 
-    {
-        lblAuto2.setLocation(180, posY);
-        lblAuto2.setVisible(estado);
-    }
-
-    @Override
-    public void updateAutoContramano3(int posY, boolean estado) 
-    {
-        lblAuto3.setLocation(80, posY);
-        lblAuto3.setVisible(estado);
-    }
-
-    @Override
-    public void updateAutoContramano4(int posY, boolean estado) 
-    {
-        lblAuto4.setLocation(80, posY);
-        lblAuto4.setVisible(estado);
-    }
-
-    @Override
-    public void updateAutoContramano5(int posY, boolean estado) 
-    {
-        lblAuto5.setLocation(80, posY);
-        lblAuto5.setVisible(estado);
-    }
-
     private void Inicarjuego() 
     {
         jInicio.setVisible(false);
@@ -891,7 +863,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     }
 
     @Override
-    public void updateAutoSeleccionJugador(String sIconoActual) 
+    public void updateAutoSeleccionJugador() 
     {
         switch(miauto.getColorSelectionJugador())
         {
@@ -903,6 +875,15 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 break;
             case "Azul":
                 lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
+                break;
+            case "AmarilloRoto":
+                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
+                break;
+            case "RojoRoto":
+                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
+                break;
+            case "AzulRoto":
+                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
                 break;
         }
     }
@@ -916,7 +897,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                controlador.stop();
             
                pnlPrincipal.requestFocus();
-               JOptionPane.showMessageDialog(null, "TE QUEDASTE SIN COMBUSTIBLE", "GAME OVER", JOptionPane.INFORMATION_MESSAGE);
+               JOptionPane.showMessageDialog(null, "Juego Finalizado", "GAME OVER", JOptionPane.INFORMATION_MESSAGE);
                 
                break;
         
