@@ -42,12 +42,6 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     private int iTiempo;
     private int iNafta;
     private String sIconoActual = "Amarillo";
-    private int iLimiteXIzquierda = 80;
-    private int iLimiteXDerecha = 480;
-    private int iLimiteYArriba = 100;
-    private int iLimiteYAbajo = 460;
-    private int iMovimientoX = 100;
-    private int iMovimientoY = 10;
     private CarRaceGameController controlador;
     private CarRaceModel modelo;
     private Autos miauto;
@@ -56,7 +50,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     public Juego() 
     {
         initComponents();
-        miauto = new Autos(80, 0, "azul");
+        miauto = new Autos(80, 0, "Azul");
         this.modelo = new CarRaceModel(miauto);
         this.controlador = new CarRaceGameController (modelo,this);
         modelo.registerObserver(this);
@@ -110,6 +104,9 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
 
         lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png"))); // NOI18N
         lblAuto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lblAutoKeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 lblAutoKeyReleased(evt);
             }
@@ -329,37 +326,37 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void btnComenzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComenzarActionPerformed
-        Comenzar2();
+        Inicarjuego();
     }//GEN-LAST:event_btnComenzarActionPerformed
 
     private void pnlJuegoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlJuegoKeyReleased
         
-        int x = lblAutoJ.getLocation().x;
-        int y = lblAutoJ.getLocation().y;
+//        int x = lblAutoJ.getLocation().x;
+//        int y = lblAutoJ.getLocation().y;
         switch (evt.getKeyCode())
         {
             case KeyEvent.VK_LEFT://Auto mueve a la izquierda
                 controlador.MoverIzquierda();
-                if (correr)
-                    if(x > 80)
-                        lblAutoJ.setLocation(x-100, y);
+//                if (correr)
+//                    if(x > 80)
+//                        lblAutoJ.setLocation(x-100, y);
                 break;
             case KeyEvent.VK_RIGHT://Auto mueve a la derecha
                 controlador.MoverDerecha();
-                if (correr)
-                    if(x < 480)
-                        lblAutoJ.setLocation(x+100, y);
+//                if (correr)
+//                    if(x < 480)
+//                        lblAutoJ.setLocation(x+100, y);
                 break;
             case KeyEvent.VK_ESCAPE://Programa en pausa
                 controlador.stop();
-                correr = false;
-                JOptionPane.showMessageDialog(this, "JUEGO PAUSADO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-                correr = true;
-                break;
+//                correr = false;
+//                JOptionPane.showMessageDialog(this, "JUEGO PAUSADO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
+//                correr = true;
+//                break;
             case KeyEvent.VK_F2:
                 controlador.Reiniciar();
-                Reiniciar();
-                break;
+//                Reiniciar();
+//                break;
         }        
     }//GEN-LAST:event_pnlJuegoKeyReleased
 
@@ -390,11 +387,14 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 controlador.FlechaDerecha();
                 break;
             case KeyEvent.VK_ENTER:
-                controlador.start();
-                Comenzar2();
+                Inicarjuego();
                 break;
         }
     }//GEN-LAST:event_lblAutoKeyReleased
+
+    private void lblAutoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblAutoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblAutoKeyPressed
 
     /**
      * @param args the command line arguments
@@ -778,97 +778,6 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         }
     }
 
-    public JButton getBtnComenzar() {
-        return btnComenzar;
-    }
-
-    public JButton getBtnReiniciar() {
-        return btnReiniciar;
-    }
-
-    public JLabel getLblAuto() {
-        return lblAuto;
-    }
-
-    public JLabel getLblAuto1() {
-        return lblAuto1;
-    }
-
-    public JLabel getLblAuto2() {
-        return lblAuto2;
-    }
-
-    public JLabel getLblAuto3() {
-        return lblAuto3;
-    }
-
-    public JLabel getLblAuto4() {
-        return lblAuto4;
-    }
-
-    public JLabel getLblAuto5() {
-        return lblAuto5;
-    }
-
-    public JLabel getLblAutoJ() {
-        return lblAutoJ;
-    }
-
-    public JLabel getLblDerecha() {
-        return lblDerecha;
-    }
-
-    public JLabel getLblIzquierda() {
-        return lblIzquierda;
-    }
-
-    public JPanel getPnlPrincipal() {
-        return pnlPrincipal;
-    }
-
-    public JProgressBar getPrBarNafta() {
-        return prBarNafta;
-    }
-
-    public JTextField getTxtNombre() {
-        return txtNombre;
-    }
-
-    public JPanel getPnlJuego() {
-        return pnlJuego;
-    }
-
-    public int getiLimiteXDerecha() {
-        return iLimiteXDerecha;
-    }
-
-    public int getiLimiteXIzquierda() {
-        return iLimiteXIzquierda;
-    }
-
-    public int getiLimiteYArriba() {
-        return iLimiteYArriba;
-    }
-
-    public int getiLimiteYAbajo() {
-        return iLimiteYAbajo;
-    }
-
-    public int getiMovimientoX() {
-        return iMovimientoX;
-    }
-
-    public int getiMovimientoY() {
-        return iMovimientoY;
-    }
-
-    public String getsIconoActual() {
-        return sIconoActual;
-    }
-
-    public void setsIconoActual(String sIconoActual) {
-        this.sIconoActual = sIconoActual;
-    }
 
     @Override
     public void setfuel(int i) {
@@ -889,7 +798,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     @Override
     public void updateAutoSeleccion(String sIconoActual) 
     {
-        switch(sIconoActual)
+        switch(miauto.getColorSelectionJugador())
         {
             case "Amarillo":
                 lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
@@ -901,7 +810,6 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
                 break;
         }
-        this.sIconoActual = sIconoActual;
     }
 
     @Override
@@ -939,11 +847,31 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         lblAuto5.setVisible(estado);
     }
 
-    private void Comenzar2() 
+    private void Inicarjuego() 
     {
-        this.modelo = new CarRaceModel(miauto);
-        this.controlador = new CarRaceGameController(modelo,this);
-        Comenzar();
+        jInicio.setVisible(false);
+        this.setTitle("Race: Esta jugando " + txtNombre.getText());
+        pnlJuego.requestFocus();
+        this.setVisible(true);
+        controlador.start();
+        //Comenzar();
+    }
+
+    @Override
+    public void updateAutoSeleccionJugador(String sIconoActual) 
+    {
+        switch(miauto.getColorSelectionJugador())
+        {
+            case "Amarillo":
+                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
+                break;
+            case "Rojo":
+                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
+                break;
+            case "Azul":
+                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
+                break;
+        }
     }
     
 }

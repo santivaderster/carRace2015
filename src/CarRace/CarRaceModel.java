@@ -7,6 +7,8 @@ import Beat.*;
 
 
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
@@ -21,14 +23,19 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     Track track;
     Autos miauto;
      ArrayList<Autos> autosContra = new ArrayList<Autos>();
-     
+    Thread Tiempo ;
    
 //        public CarRaceModel() {
 //        beatObservers = new ArrayList<BeatObserver>();
 //        bpmObservers = new ArrayList<BPMObserver>();
 //       // fuel =10;
 //                }
-     
+    private int iLimiteXIzquierda = 80;
+    private int iLimiteXDerecha = 480;
+    private int iLimiteYArriba = 100;
+    private int iLimiteYAbajo = 460;
+    private int iMovimientoX = 100;
+    private int iMovimientoY = 10;
      
      public CarRaceModel(Autos auto) {
         beatObservers = new ArrayList<BeatObserver>();
@@ -48,9 +55,24 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         buildTrackAndStart();
     }
 
-    public void on() {
+    public void on() 
+    {
         sequencer.start();
-        setBPM(10);
+        setBPM(miauto.getFuel());
+        notifyModelObservers("AutoSeleccionado");
+        Tiempo = new Thread()
+        {
+            @Override
+            public void run() {
+                super.run(); //To change body of generated methods, choose Tools | Templates.
+                try 
+                {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {}
+                
+            }
+            
+        };
     }
 
     public void off() {
@@ -103,7 +125,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
             ModelObserver observer = (ModelObserver) modelObservers.get(i);
             switch(sAccion){
                 case "AutoMover":
-                    //observer.updateAuto(Integer.parseInt(update));
+                    observer.updateAuto(miauto.getPosicionx());
                     break;
                 case "Auto1Mover":
                    // observer.updateAutoContramano1(Integer.parseInt(update), true);
@@ -118,6 +140,9 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     break;
                 case "AutoSeleccion":
                     observer.updateAutoSeleccion(miauto.getColorSelectionJugador());
+                    break;
+                case "AutoSeleccionado":
+                    observer.updateAutoSeleccionJugador(miauto.getColorSelectionJugador());
                     break;
                 case "updateFuel":
                     observer.setfuel(miauto.getFuel());
@@ -228,9 +253,9 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     }
 
     @Override
-    public void FlechaIzquierda(String sIconoActual) 
+    public void FlechaIzquierda() 
     {
-        switch(sIconoActual)
+        switch(miauto.getColorSelectionJugador())
         {
             case "Amarillo":
                 miauto.setColorSelectionJugador("Rojo");
@@ -246,9 +271,9 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     }
 
     @Override
-    public void FlechaDerecha(String sIconoActual) 
+    public void FlechaDerecha() 
     {
-        switch(sIconoActual)
+        switch(miauto.getColorSelectionJugador())
         {
             case "Amarillo":
                 miauto.setColorSelectionJugador("Azul");
@@ -261,5 +286,21 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                 break;
         }
         notifyModelObservers("AutoSeleccion");
+    }
+
+    @Override
+    public void setPosicionX(int v) 
+    {
+        if (v> 0)
+        {
+            if(miauto.getPosicionx()<iLimiteXDerecha)
+                miauto.setPosicionx(miauto.getPosicionx()+v*100);
+        }
+        else
+        {
+            if(miauto.getPosicionx()>iLimiteXIzquierda)
+                miauto.setPosicionx(miauto.getPosicionx()+v*100);
+        }
+        notifyModelObservers("AutoMover");
     }
 }

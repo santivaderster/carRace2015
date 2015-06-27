@@ -12,10 +12,10 @@ public class Autos {
     
 
     public Autos( int x , int y , String color) {
-       
+        fuel = 10;
         posicionx = x; // genera posicion x aleatoria de autos en contramano
         posiciony = y;  //  colocar la posicion de donde arranca los autos en contra mano 
-       colorSelectionJugador = color;
+        colorSelectionJugador = color;
     
     }
 

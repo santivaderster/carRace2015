@@ -14,6 +14,7 @@ public interface CarRaceModelInterface
     void removeObserver(ModelObserver o);
     void registerObserver(BPMObserver o);
     void removeObserver(BPMObserver o);
-    void FlechaIzquierda(String sIconoActual);
-    void FlechaDerecha(String sIconoActual);
+    void FlechaIzquierda();
+    void FlechaDerecha();
+    void setPosicionX(int v);
 }

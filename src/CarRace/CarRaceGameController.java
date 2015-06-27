@@ -58,12 +58,12 @@ public class CarRaceGameController implements ControllerInterface
     
     public void MoverIzquierda() 
     {
-        //Modelo.setPosicionX(-Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
+        Modelo.setPosicionX(-1);
     }
 
     public void MoverDerecha() 
     {
-//        Modelo.setPosicionX(Vista.getiMovimientoX(),Vista.getiLimiteXIzquierda(),Vista.getiLimiteXDerecha());
+        Modelo.setPosicionX(1);
     }
 
     public void Reiniciar() 
@@ -73,7 +73,7 @@ public class CarRaceGameController implements ControllerInterface
 
     public void FlechaIzquierda() 
     {
-        Modelo.FlechaIzquierda(Vista.getsIconoActual());
+        Modelo.FlechaIzquierda();
 //        switch(sIconoActual)
 //        {
 //            case "Amarillo":
@@ -91,7 +91,7 @@ public class CarRaceGameController implements ControllerInterface
 
     public void FlechaDerecha() 
     {
-        Modelo.FlechaDerecha(this.Vista.getsIconoActual());
+        Modelo.FlechaDerecha();
     }
 
     public void setVista(Juego Vista) {
