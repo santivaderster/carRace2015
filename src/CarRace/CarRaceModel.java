@@ -38,13 +38,15 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     private int iMovimientoY = 10;
     private int iCantidadCombustible = 1;
     private boolean tiempofinalizado=false; 
-     public CarRaceModel(Autos auto) {
+     public CarRaceModel(Autos auto, ArrayList<Autos> autosContra) {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
         modelObservers = new ArrayList<ModelObserver>();
+        this.autosContra = autosContra;
         this.miauto = auto;
         this.miauto.setFuel(10);
         String sColor = null;
+        Autos oAuto;
          for (int i = 0; i < 5; i++) {
             switch (i)
             {
@@ -64,8 +66,9 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     sColor = "Azul";
                     break;
             }
-             Autos oAuto = new Autos(i*iMovimientoX + iLimiteXIzquierda,iLimiteYAbajo, sColor,false);
-             autosContra.add(auto);
+            oAuto = new Autos(i*iMovimientoX + iLimiteXIzquierda,iLimiteYAbajo, sColor,false);
+             autosContra.add(oAuto);
+             oAuto = null;
          }
      }
 
@@ -116,15 +119,16 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     {
                         cant = 0;
                         Random oRandom = new Random();
-                        int num = (int)(oRandom.nextDouble() * 5 + 1);
+                        int num = (int)(oRandom.nextDouble() * 4 + 0);
                         if (!autosContra.get(num).isVisible())
                         {
                             autosContra.get(num).setVisible(true);
+                            autosContra.get(num).setPosiciony(iLimiteYAbajo);
                         }
                     }
                     for (int i = 0; i < autosContra.size(); i++) {
                         if (autosContra.get(i).isVisible())
-                            
+                            notifyModelObservers("AutosContra");
                     }
                 }
             }   
@@ -185,8 +189,8 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                 case "AutoMover":
                     observer.updateAuto(miauto.getPosicionx());
                     break;
-                case "Auto1Mover":
-                   // observer.updateAutoContramano1(Integer.parseInt(update), true);
+                case "AutosContra":
+                   observer.updateAutosContra();
                     break;
                 case "Auto2Mover":
                     break;

@@ -51,7 +51,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     {
         initComponents();
         miauto = new Autos(80, 0, "Azul",true);
-        this.modelo = new CarRaceModel(miauto);
+        this.modelo = new CarRaceModel(miauto,autosContra);
         this.controlador = new CarRaceGameController (modelo,this);
         modelo.registerObserver(this);
         ConfiguracionVisual();
@@ -837,10 +837,18 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     }
 
     @Override
-    public void updateAutoContramano1(int posY, boolean estado) 
-    {
-        lblAuto1.setLocation(80, posY);
-        lblAuto1.setVisible(estado);
+    public void updateAutosContra() 
+    {        
+        lblAuto1.setLocation(autosContra.get(0).getPosicionx(), autosContra.get(0).getPosiciony());
+        lblAuto2.setLocation(autosContra.get(1).getPosicionx(), autosContra.get(1).getPosiciony());
+        lblAuto3.setLocation(autosContra.get(2).getPosicionx(), autosContra.get(2).getPosiciony());
+        lblAuto4.setLocation(autosContra.get(3).getPosicionx(), autosContra.get(3).getPosiciony());
+        lblAuto5.setLocation(autosContra.get(4).getPosicionx(), autosContra.get(4).getPosiciony());
+        lblAuto1.setVisible(autosContra.get(0).isVisible());
+        lblAuto2.setVisible(autosContra.get(1).isVisible());
+        lblAuto3.setVisible(autosContra.get(2).isVisible());
+        lblAuto4.setVisible(autosContra.get(3).isVisible());
+        lblAuto5.setVisible(autosContra.get(4).isVisible());
     }
 
     @Override

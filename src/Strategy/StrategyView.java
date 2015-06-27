@@ -91,10 +91,10 @@ public class StrategyView extends DJView {
                         {
                             controller.stop();
                         }
-                        CarRaceModel detector = new CarRaceModel() {};
-                        CarRaceController detectorController = new CarRaceController(detector, thisView);
-                        setController(detectorController);
-                        setModel((new CarRaceAdapter(detector)));
+//                        CarRaceModel detector = new CarRaceModel() {};
+//                        CarRaceController detectorController = new CarRaceController(detector, thisView);
+//                        setController(detectorController);
+//                        setModel((new CarRaceAdapter(detector)));
                     }
                 }
             }
