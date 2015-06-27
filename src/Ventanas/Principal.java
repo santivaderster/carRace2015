@@ -16,6 +16,8 @@ import Heart.HeartController;
 import Heart.HeartModel;
 import Heart.HeartModelInterface;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**
  *
@@ -30,6 +32,10 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("NTN - Trabajo Final Ing. de Software");
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.BusinessBlueSteelSkin");
+        SubstanceLookAndFeel.setCurrentTheme( "org.jvnet.substance.theme.SubstanceAquaTheme");
+        SubstanceLookAndFeel.setCurrentWatermark("org.jvnet.substance.watermark.SubstanceBinaryWatermark");
     }
 
     /**
