@@ -383,6 +383,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JProgressBar" name="prBarNafta">
+              <Properties>
+                <Property name="maximum" type="int" value="10"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>

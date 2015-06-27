@@ -254,6 +254,8 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
             }
         });
 
+        prBarNafta.setMaximum(10);
+
         jLabel2.setText("Presione ESC para Pausar");
 
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
@@ -780,12 +782,14 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
 
 
     @Override
-    public void setfuel(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setfuel(int i) 
+    {
+        prBarNafta.setValue(i);
     }
 
     @Override
-    public void getfuel() {
+    public void getfuel() 
+    {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -850,6 +854,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     private void Inicarjuego() 
     {
         jInicio.setVisible(false);
+        prBarNafta.setValue(miauto.getFuel());
         this.setTitle("Race: Esta jugando " + txtNombre.getText());
         pnlJuego.requestFocus();
         this.setVisible(true);

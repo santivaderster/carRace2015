@@ -71,8 +71,11 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     try 
                     {
                         Thread.sleep(1000);
-                    } catch (InterruptedException ex) {}
-                    if (miauto.getPosicionx() != iLimiteXIzquierda && miauto.getPosicionx() != iLimiteXDerecha)
+                    } catch (InterruptedException ex) 
+                    {
+                        System.out.println(ex.getMessage());
+                    }
+                    if (miauto.getPosicionx() != iLimiteXIzquierda )//&& miauto.getPosicionx() != iLimiteXDerecha)
                         miauto.setFuel(miauto.getFuel()-1*iCantidadCombustible);
                     else
                     {
