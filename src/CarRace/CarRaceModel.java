@@ -14,6 +14,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     Sequencer sequencer;
     ArrayList<BeatObserver> beatObservers = new ArrayList<BeatObserver>();
     ArrayList<BPMObserver> bpmObservers = new ArrayList<BPMObserver>();
+    ArrayList<ModelObserver> modelObservers = new ArrayList<ModelObserver>();
     int bpm = 0;   // los bpm arranca en 0 el fuel esta lleno 
     int fuel;
     Sequence sequence;
@@ -22,6 +23,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     public CarRaceModel() {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
+        modelObservers = new ArrayList<ModelObserver>();
         fuel = 10;
     }
 
@@ -63,17 +65,14 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         beatObservers.add(o);
     }
 
-    public void notifyBeatObservers() {
-        for (int i = 0; i < beatObservers.size(); i++) {
-            BeatObserver observer = (BeatObserver) beatObservers.get(i);
-            observer.updateBeat();
-        }
-    }
-
     public void registerObserver(BPMObserver o) {
         bpmObservers.add(o);
     }
 
+    public void registerObserver(ModelObserver o) {
+        modelObservers.add(o);
+    }
+    
     public void notifyBPMObservers() {
         for (int i = 0; i < bpmObservers.size(); i++) {
             BPMObserver observer = (BPMObserver) bpmObservers.get(i);
@@ -81,6 +80,40 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
 
+    public void notifyBeatObservers() {
+        for (int i = 0; i < beatObservers.size(); i++) {
+            BeatObserver observer = (BeatObserver) beatObservers.get(i);
+            observer.updateBeat();
+        }
+    }
+    
+    public void notifyModelObservers(String sAccion, String update) {
+        for (int i = 0; i < modelObservers.size(); i++) {
+            ModelObserver observer = (ModelObserver) modelObservers.get(i);
+            switch(sAccion)
+            {
+                case "AutoMover":
+                    observer.updateAuto(Integer.parseInt(update));
+                    break;
+                case "Auto1Mover":
+                    observer.updateAutoContramano1(Integer.parseInt(update), true);
+                    break;
+                case "Auto2Mover":
+                    break;
+                case "Auto3Mover":
+                    break;
+                case "Auto4Mover":
+                    break;
+                case "Auto5Mover":
+                    break;
+                case "AutoSeleccion":
+                    observer.updateAutoSeleccion(update);
+                    break;
+            }
+//            observer.update();
+        }
+    }
+    
     public void removeObserver(BeatObserver o) {
         int i = beatObservers.indexOf(o);
         if (i >= 0) {
@@ -92,6 +125,13 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         int i = bpmObservers.indexOf(o);
         if (i >= 0) {
             bpmObservers.remove(i);
+        }
+    }
+    
+    public void removeObserver(ModelObserver o) {
+        int i = modelObservers.indexOf(o);
+        if (i >= 0) {
+            modelObservers.remove(i);
         }
     }
 

@@ -10,8 +10,8 @@ public interface CarRaceModelInterface
     void off();
     void setBPM(int bpm);
     int getBPM();
-    void registerObserver(BeatObserver o);
-    void removeObserver(BeatObserver o);
+    void registerObserver(ModelObserver o);
+    void removeObserver(ModelObserver o);
     void registerObserver(BPMObserver o);
     void removeObserver(BPMObserver o);
     String FlechaIzquierda(String sIconoActual);
