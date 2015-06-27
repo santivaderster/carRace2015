@@ -4,19 +4,46 @@ import java.util.Random;
 
 public class Autos {
 
-    int posicionx;
-    int posiciony;
+    private int posicionx;
+    private int posiciony;
+    private String colorSelectionJugador ;
+    private boolean visible;
+    private int fuel ;
+    
 
-    public Autos() {
-        Random pos = new Random();
-        posicionx = pos.nextInt(50); // genera posicion x aleatoria de autos en contramano
-        posiciony = 70;  //  colocar la posicion de donde arranca los autos en contra mano 
+    public Autos( int x , int y , String color) {
+       
+        posicionx = x; // genera posicion x aleatoria de autos en contramano
+        posiciony = y;  //  colocar la posicion de donde arranca los autos en contra mano 
+       colorSelectionJugador = color;
+    
     }
 
-    public Autos(int x, int y) {
-        posicionx = x;
-        posiciony = y;
+    public String getColorSelectionJugador() {
+        return colorSelectionJugador;
     }
+
+    public void setColorSelectionJugador(String colorSelectionJugador) {
+        this.colorSelectionJugador = colorSelectionJugador;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public int getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(int fuel) {
+        this.fuel = fuel;
+    }
+
+ 
 
     public int getPosicionx() {
         return posicionx;

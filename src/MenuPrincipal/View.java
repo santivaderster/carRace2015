@@ -89,6 +89,10 @@ public class View
                 view.createControls();
             }
         });
+        
+        
+        
+        
         JButton btnGame = new JButton("GAME CArRACE");
         btnGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

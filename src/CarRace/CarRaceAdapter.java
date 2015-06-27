@@ -31,7 +31,7 @@ public class CarRaceAdapter implements BeatModelInterface {
     }
 
     public int getBPM() {
-        return this.car.getfuel();
+        return this.car.getFuel();
     }
 
     public void registerObserver(BeatObserver o) {

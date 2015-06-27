@@ -16,16 +16,27 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     ArrayList<BPMObserver> bpmObservers = new ArrayList<BPMObserver>();
     ArrayList<ModelObserver> modelObservers = new ArrayList<ModelObserver>();
     int bpm = 0;   // los bpm arranca en 0 el fuel esta lleno 
-    int fuel;
+ 
     Sequence sequence;
     Track track;
-    
-    public CarRaceModel() {
+    Autos miauto;
+     ArrayList<Autos> autosContra = new ArrayList<Autos>();
+     
+   
+        public CarRaceModel() {
+        beatObservers = new ArrayList<BeatObserver>();
+        bpmObservers = new ArrayList<BPMObserver>();
+       // fuel =10;
+                }
+     
+     
+     public CarRaceModel(Autos auto) {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
         modelObservers = new ArrayList<ModelObserver>();
-        fuel = 10;
-    }
+        this.miauto = auto;
+        this.miauto.setFuel(10);
+     }
 
     
     
@@ -87,29 +98,29 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
     
-    public void notifyModelObservers(String sAccion, String update) {
+    public void notifyModelObservers() {
         for (int i = 0; i < modelObservers.size(); i++) {
             ModelObserver observer = (ModelObserver) modelObservers.get(i);
-            switch(sAccion)
-            {
-                case "AutoMover":
-                    observer.updateAuto(Integer.parseInt(update));
-                    break;
-                case "Auto1Mover":
-                    observer.updateAutoContramano1(Integer.parseInt(update), true);
-                    break;
-                case "Auto2Mover":
-                    break;
-                case "Auto3Mover":
-                    break;
-                case "Auto4Mover":
-                    break;
-                case "Auto5Mover":
-                    break;
-                case "AutoSeleccion":
-                    observer.updateAutoSeleccion(update);
-                    break;
-            }
+//            switch(sAccion)
+//            {
+//                case "AutoMover":
+//                    observer.updateAuto(Integer.parseInt(update));
+//                    break;
+//                case "Auto1Mover":
+//                    observer.updateAutoContramano1(Integer.parseInt(update), true);
+//                    break;
+//                case "Auto2Mover":
+//                    break;
+//                case "Auto3Mover":
+//                    break;
+//                case "Auto4Mover":
+//                    break;
+//                case "Auto5Mover":
+//                    break;
+//                case "AutoSeleccion":
+//                    observer.updateAutoSeleccion(update);
+//                    break;
+//            }
 //            observer.update();
         }
     }
@@ -158,7 +169,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     }
 
     public void buildTrackAndStart() {
-        int[] trackList = {35, 0, 46, 0};
+        int[] trackList = {80, 0, 0, 0};
         sequence.deleteTrack(null);
         track = sequence.createTrack();
         makeTracks(trackList);
@@ -194,15 +205,17 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
 
     // Metodos propios del Modelo 
 
-    public int getfuel() {
-        return this.fuel;
-    }
+  public int getFuel(){
+  return  miauto.getFuel();
+  }
 
-    public void setfuel(int f) {
-        if (f >= 0) {
-            this.fuel = f;
-            if (fuel <= 9) {
-                setBPM(-(-600 + 60 * fuel));
+   public void setfuel(int f) {
+        if (f >= 0 &&  f<=10) {
+            miauto.setFuel(f);
+            if (miauto.getFuel() <= 9) {
+                setBPM(-(-400 + 40 * miauto.getFuel()));
+                notifyModelObservers();
+               
             }
         }
     }
