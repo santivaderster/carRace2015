@@ -253,6 +253,11 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 btnReiniciarActionPerformed(evt);
             }
         });
+        btnReiniciar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                btnReiniciarKeyReleased(evt);
+            }
+        });
 
         prBarNafta.setMaximum(10);
 
@@ -386,8 +391,8 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
 //                correr = true;
 //                break;
             case KeyEvent.VK_F2:
-                controlador.Reiniciar();
-//                Reiniciar();
+//                controlador.Reiniciar();
+                Reiniciar();
 //                break;
         }        
     }//GEN-LAST:event_pnlJuegoKeyReleased
@@ -441,6 +446,10 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     private void jInicioWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jInicioWindowClosing
         System.exit(0);
     }//GEN-LAST:event_jInicioWindowClosing
+
+    private void btnReiniciarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnReiniciarKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReiniciarKeyReleased
 
     /**
      * @param args the command line arguments
