@@ -14,6 +14,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     Sequencer sequencer;
     ArrayList<BeatObserver> beatObservers = new ArrayList<BeatObserver>();
     ArrayList<BPMObserver> bpmObservers = new ArrayList<BPMObserver>();
+    ArrayList<ModelObserver> modelObservers = new ArrayList<ModelObserver>();
     int bpm = 0;   // los bpm arranca en 0 el fuel esta lleno 
     int fuel;
     Sequence sequence;
@@ -58,17 +59,14 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         beatObservers.add(o);
     }
 
-    public void notifyBeatObservers() {
-        for (int i = 0; i < beatObservers.size(); i++) {
-            BeatObserver observer = (BeatObserver) beatObservers.get(i);
-            observer.updateBeat();
-        }
-    }
-
     public void registerObserver(BPMObserver o) {
         bpmObservers.add(o);
     }
 
+    public void registerObserver(ModelObserver o) {
+        modelObservers.add(o);
+    }
+    
     public void notifyBPMObservers() {
         for (int i = 0; i < bpmObservers.size(); i++) {
             BPMObserver observer = (BPMObserver) bpmObservers.get(i);
@@ -76,6 +74,20 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
 
+    public void notifyBeatObservers() {
+        for (int i = 0; i < beatObservers.size(); i++) {
+            BeatObserver observer = (BeatObserver) beatObservers.get(i);
+            observer.updateBeat();
+        }
+    }
+    
+    public void notifyModelObservers() {
+        for (int i = 0; i < modelObservers.size(); i++) {
+            ModelObserver observer = (ModelObserver) modelObservers.get(i);
+            observer.update();
+        }
+    }
+    
     public void removeObserver(BeatObserver o) {
         int i = beatObservers.indexOf(o);
         if (i >= 0) {
@@ -87,6 +99,13 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         int i = bpmObservers.indexOf(o);
         if (i >= 0) {
             bpmObservers.remove(i);
+        }
+    }
+    
+    public void removeObserver(ModelObserver o) {
+        int i = modelObservers.indexOf(o);
+        if (i >= 0) {
+            modelObservers.remove(i);
         }
     }
 

@@ -7,6 +7,7 @@ package Ventanas;
 
 import CarRace.CarRaceGameController;
 import CarRace.CarRaceModel;
+import CarRace.ModelObserver;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -25,7 +26,7 @@ import javax.swing.WindowConstants;
  *
  * @author Pato
  */
-public class Juego extends javax.swing.JFrame {
+public class Juego extends javax.swing.JFrame implements ModelObserver{
 
     /**
      * Creates new form Juego
@@ -51,6 +52,7 @@ public class Juego extends javax.swing.JFrame {
         initComponents();
         this.modelo = modelo;
         this.controlador = controlador;
+        modelo.registerObserver(this);
         controlador.setVista(this);
         ConfiguracionVisual();
         posicionAuto = lblFondo.getLocation();
@@ -864,6 +866,21 @@ public class Juego extends javax.swing.JFrame {
 
     public void setsIconoActual(String sIconoActual) {
         this.sIconoActual = sIconoActual;
+    }
+
+    @Override
+    public void setfuel(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void getfuel() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
