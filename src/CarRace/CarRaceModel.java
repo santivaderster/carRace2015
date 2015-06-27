@@ -32,11 +32,13 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
 //                }
     private int iLimiteXIzquierda = 80;
     private int iLimiteXDerecha = 480;
-    private int iLimiteYArriba = 100;
+    private int iLimiteYArriba = 0;
     private int iLimiteYAbajo = 460;
     private int iMovimientoX = 100;
-    private int iMovimientoY = 10;
+    private int iMovimientoY = 50;
     private int iCantidadCombustible = 1;
+    private int iRefrescoAutoContra = 3;
+    private int iTamanoAuto = 113;
     private boolean tiempofinalizado=false; 
      public CarRaceModel(Autos auto, ArrayList<Autos> autosContra) {
         beatObservers = new ArrayList<BeatObserver>();
@@ -92,7 +94,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
             @Override
             public void run() 
             {
-                int cant = 0;
+                int cant = iRefrescoAutoContra-1;
                 super.run(); 
                 while (!tiempofinalizado)
                 {
@@ -115,17 +117,23 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     
                         notifyModelObservers("GameOver");
                     }
-                    if (cant == 10 )
+                    if (cant == iRefrescoAutoContra )
                     {
                         cant = 0;
                         Random oRandom = new Random();
-                        int num = (int)(oRandom.nextDouble() * 4 + 0);
+                        int num = (int)(oRandom.nextDouble() * 5 + 0);
                         if (!autosContra.get(num).isVisible())
                         {
                             autosContra.get(num).setVisible(true);
                             autosContra.get(num).setPosiciony(iLimiteYAbajo);
                         }
                     }
+                    for (int i = 0; i < autosContra.size(); i++) {
+                            if(autosContra.get(i).isVisible())
+                                autosContra.get(i).setPosiciony(autosContra.get(i).getPosiciony()-1*iMovimientoY);
+                            if (autosContra.get(i).getPosiciony()<iLimiteYArriba-iTamanoAuto)
+                                autosContra.get(i).setVisible(false);
+                        }
                     for (int i = 0; i < autosContra.size(); i++) {
                         if (autosContra.get(i).isVisible())
                             notifyModelObservers("AutosContra");
