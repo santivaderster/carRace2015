@@ -37,6 +37,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     private int iMovimientoX = 100;
     private int iMovimientoY = 10;
     private int iCantidadCombustible = 1;
+    private boolean tiempofinalizado=false; 
      public CarRaceModel(Autos auto) {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
@@ -65,8 +66,8 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
             @Override
             public void run() 
             {
-                super.run(); //To change body of generated methods, choose Tools | Templates.
-                while (true)
+                super.run(); 
+                while (!tiempofinalizado)
                 {
                     try 
                     {
@@ -82,6 +83,13 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                         miauto.setFuel(miauto.getFuel()+1*iCantidadCombustible);
                     }
                     UpdateFuel();
+                    if (miauto.getFuel()==0){
+                    
+                        notifyModelObservers("GameOver");
+                    }
+                    
+                    
+                    
                 }
             }   
         };
@@ -91,6 +99,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     public void off() {
         setBPM(0);
         sequencer.stop();
+        tiempofinalizado =true;
     }
 
     public void setBPM(int bpm) {
@@ -166,6 +175,9 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     //falta el update de todos los autos de contramano
                     observer.updateAutoSeleccion(miauto.getColorSelectionJugador());
                     break;
+                case "GameOver":
+                    observer.updateestado("GameOver");
+                        break;
             }
         }
     }
@@ -250,7 +262,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
 
     // Metodos propios del Modelo 
 
-  public int getFuel(){
+ public int getFuel(){
   return  miauto.getFuel();
   }
 

@@ -88,6 +88,8 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         btnReiniciar = new javax.swing.JButton();
         prBarNafta = new javax.swing.JProgressBar();
         jLabel2 = new javax.swing.JLabel();
+        llblfuel = new javax.swing.JLabel();
+        lbltextfuel = new java.awt.Label();
 
         jLabel1.setText("Nombre:");
 
@@ -258,6 +260,12 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
 
         jLabel2.setText("Presione ESC para Pausar");
 
+        llblfuel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/nafta.png"))); // NOI18N
+
+        lbltextfuel.setFont(new java.awt.Font("Iskoola Pota", 1, 18)); // NOI18N
+        lbltextfuel.setForeground(new java.awt.Color(255, 0, 51));
+        lbltextfuel.setText("FUEL");
+
         javax.swing.GroupLayout pnlDatosLayout = new javax.swing.GroupLayout(pnlDatos);
         pnlDatos.setLayout(pnlDatosLayout);
         pnlDatosLayout.setHorizontalGroup(
@@ -266,19 +274,29 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 .addContainerGap()
                 .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnReiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(49, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbltextfuel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(llblfuel)))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlDatosLayout.setVerticalGroup(
             pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlDatosLayout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(btnReiniciar)
-                .addGap(18, 18, 18)
-                .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(29, 29, 29)
+                .addGroup(pnlDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(llblfuel)
+                    .addGroup(pnlDatosLayout.createSequentialGroup()
+                        .addComponent(lbltextfuel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(prBarNafta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(109, 109, 109)
                 .addComponent(jLabel2)
+                .addGap(47, 47, 47)
+                .addComponent(btnReiniciar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -451,6 +469,8 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     private javax.swing.JLabel lblDerecha;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblIzquierda;
+    private java.awt.Label lbltextfuel;
+    private javax.swing.JLabel llblfuel;
     private javax.swing.JPanel pnlDatos;
     private javax.swing.JPanel pnlJuego;
     private javax.swing.JPanel pnlPrincipal;
@@ -877,6 +897,24 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
                 break;
         }
+    }
+
+    @Override
+    public void updateestado(String estado) {
+     
+        switch (estado){
+            case "GameOver":
+                
+               controlador.stop();
+            
+               pnlPrincipal.requestFocus();
+               JOptionPane.showMessageDialog(null, "TE QUEDASTE SIN COMBUSTIBLE", "GAME OVER", JOptionPane.INFORMATION_MESSAGE);
+                
+               break;
+        
+        
+        }
+    
     }
     
 }
