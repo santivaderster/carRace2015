@@ -55,7 +55,6 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         this.controlador = new CarRaceGameController (modelo,this);
         modelo.registerObserver(this);
         ConfiguracionVisual();
-        //posicionAuto = lblFondo.getLocation();
     }
 
     /**
@@ -151,26 +150,18 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIzquierda)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(lblAuto)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                        .addComponent(lblDerecha)
-                        .addGap(43, 43, 43))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(btnComenzar)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(lblIzquierda)
+                .addGap(18, 18, 18)
+                .addComponent(lblAuto)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDerecha))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(btnComenzar))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,20 +172,17 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(lblIzquierda)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblAuto)
-                                .addGap(34, 34, 34)
-                                .addComponent(btnComenzar)
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(94, 94, 94))))))
+                        .addGap(61, 61, 61)
+                        .addComponent(lblIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(lblAuto))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(lblDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(btnComenzar)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jInicioLayout = new javax.swing.GroupLayout(jInicio.getContentPane());
@@ -203,8 +191,8 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
             jInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInicioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jInicioLayout.setVerticalGroup(
             jInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,9 +429,9 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     }//GEN-LAST:event_lblAutoKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Prados Santiago Agustin \n"
-                + "Perpetua Patricio R. \n"
-                + "Vinas Vizcardi Dardo Ariel", "Programadores", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Prados, Santiago Agustin \n"
+                + "Perpetua, Patricio R. \n"
+                + "Viñas Viscardi, Dardo Ariel", "Programadores - Ing. Software 2015", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jInicioWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jInicioWindowClosed
@@ -519,7 +507,6 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
 
     private void ComenzarJuego(String text, Icon icon) 
     {
-        PosicionAutos();
         this.setTitle("Race: Esta jugando " + text);
         lblAutoJ.setIcon(icon);
         pnlJuego.requestFocus();
@@ -775,7 +762,6 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
 
     private void ConfiguracionVisual() 
     {
-        PosicionAutos();
         prBarNafta.setValue(0);
         prBarNafta.setStringPainted(true);
         this.setLocationRelativeTo(null);           
@@ -783,25 +769,11 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
         this.setVisible(false);                     
         jInicio.setTitle("Race: Esperando Usuario");
         jInicio.setResizable(false);
-        jInicio.setSize(455,284);    
+        jInicio.setSize(271, 272);    
         jInicio.setLocationRelativeTo(this);
         jInicio.setVisible(true);
         jInicio.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         txtNombre.requestFocus();
-    }
-
-    private void PosicionAutos() 
-    {
-        lblAuto1.setLocation(80, 460);
-        lblAuto2.setLocation(180, 460);
-        lblAuto3.setLocation(280, 460);
-        lblAuto4.setLocation(380, 460);
-        lblAuto5.setLocation(480, 460);
-        lblAuto1.setVisible(false);
-        lblAuto2.setVisible(false);
-        lblAuto3.setVisible(false);
-        lblAuto4.setVisible(false);
-        lblAuto5.setVisible(false);
     }
 
     private void Reiniciar() 

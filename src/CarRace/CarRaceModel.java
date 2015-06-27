@@ -89,6 +89,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         sequencer.start();
         setBPM(miauto.getFuel());
         notifyModelObservers("AutoSeleccionado");
+        notifyModelObservers("AutosContra");
         Tiempo = new Thread()
         {
             @Override
