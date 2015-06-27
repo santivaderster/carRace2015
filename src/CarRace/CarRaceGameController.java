@@ -22,7 +22,7 @@ public class CarRaceGameController implements ControllerInterface
     {
         this.Modelo = modelo;
         this.Vista = vista;
-        modelo.initialize();
+        Modelo.notifyModelObservers("todo");
     }
     
     @Override
@@ -73,39 +73,25 @@ public class CarRaceGameController implements ControllerInterface
 
     public void FlechaIzquierda() 
     {
-        String sIconoActual = Modelo.FlechaIzquierda(Vista.getsIconoActual());
-        switch(sIconoActual)
-        {
-            case "Amarillo":
-                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
-                break;
-            case "Rojo":
-                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
-                break;
-            case "Azul":
-                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
-                break;
-        }
-        Vista.setsIconoActual(sIconoActual);
+        Modelo.FlechaIzquierda(Vista.getsIconoActual());
+//        switch(sIconoActual)
+//        {
+//            case "Amarillo":
+//                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
+//                break;
+//            case "Rojo":
+//                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
+//                break;
+//            case "Azul":
+//                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
+//                break;
+//        }
     }
 
 
     public void FlechaDerecha() 
     {
-        String sIconoActual = Modelo.FlechaDerecha(this.Vista.getsIconoActual());
-        switch(sIconoActual)
-        {
-            case "Amarillo":
-                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
-                break;
-            case "Rojo":
-                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
-                break;
-            case "Azul":
-                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
-                break;
-        }
-        Vista.setsIconoActual(sIconoActual);
+        Modelo.FlechaDerecha(this.Vista.getsIconoActual());
     }
 
     public void setVista(Juego Vista) {

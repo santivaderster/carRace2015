@@ -23,11 +23,11 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
      ArrayList<Autos> autosContra = new ArrayList<Autos>();
      
    
-        public CarRaceModel() {
-        beatObservers = new ArrayList<BeatObserver>();
-        bpmObservers = new ArrayList<BPMObserver>();
-       // fuel =10;
-                }
+//        public CarRaceModel() {
+//        beatObservers = new ArrayList<BeatObserver>();
+//        bpmObservers = new ArrayList<BPMObserver>();
+//       // fuel =10;
+//                }
      
      
      public CarRaceModel(Autos auto) {
@@ -98,30 +98,37 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
     
-    public void notifyModelObservers() {
+    public void notifyModelObservers(String sAccion) {
         for (int i = 0; i < modelObservers.size(); i++) {
             ModelObserver observer = (ModelObserver) modelObservers.get(i);
-//            switch(sAccion)
-//            {
-//                case "AutoMover":
-//                    observer.updateAuto(Integer.parseInt(update));
-//                    break;
-//                case "Auto1Mover":
-//                    observer.updateAutoContramano1(Integer.parseInt(update), true);
-//                    break;
-//                case "Auto2Mover":
-//                    break;
-//                case "Auto3Mover":
-//                    break;
-//                case "Auto4Mover":
-//                    break;
-//                case "Auto5Mover":
-//                    break;
-//                case "AutoSeleccion":
-//                    observer.updateAutoSeleccion(update);
-//                    break;
-//            }
-//            observer.update();
+            switch(sAccion){
+                case "AutoMover":
+                    //observer.updateAuto(Integer.parseInt(update));
+                    break;
+                case "Auto1Mover":
+                   // observer.updateAutoContramano1(Integer.parseInt(update), true);
+                    break;
+                case "Auto2Mover":
+                    break;
+                case "Auto3Mover":
+                    break;
+                case "Auto4Mover":
+                    break;
+                case "Auto5Mover":
+                    break;
+                case "AutoSeleccion":
+                    observer.updateAutoSeleccion(miauto.getColorSelectionJugador());
+                    break;
+                case "updateFuel":
+                    observer.setfuel(miauto.getFuel());
+                    break;
+                case "todo":
+                    observer.setfuel(miauto.getFuel());
+                    observer.updateAuto(miauto.getPosicionx());
+                    //falta el update de todos los autos de contramano
+                    observer.updateAutoSeleccion(miauto.getColorSelectionJugador());
+                    break;
+            }
         }
     }
     
@@ -214,45 +221,45 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
             miauto.setFuel(f);
             if (miauto.getFuel() <= 9) {
                 setBPM(-(-400 + 40 * miauto.getFuel()));
-                notifyModelObservers();
+                notifyModelObservers("updateFuel");
                
             }
         }
     }
 
     @Override
-    public String FlechaIzquierda(String sIconoActual) 
+    public void FlechaIzquierda(String sIconoActual) 
     {
         switch(sIconoActual)
         {
             case "Amarillo":
-                sIconoActual = "Rojo";
+                miauto.setColorSelectionJugador("Rojo");
                 break;
             case "Rojo":
-                sIconoActual = "Azul";
+                miauto.setColorSelectionJugador("Azul");
                 break;
             case "Azul":
-                sIconoActual = "Amarillo";
+                miauto.setColorSelectionJugador("Amarillo");
                 break;
         }
-        return sIconoActual;
+        notifyModelObservers("AutoSeleccion");
     }
 
     @Override
-    public String FlechaDerecha(String sIconoActual) 
+    public void FlechaDerecha(String sIconoActual) 
     {
         switch(sIconoActual)
         {
             case "Amarillo":
-                sIconoActual = "Azul";
+                miauto.setColorSelectionJugador("Azul");
                 break;
             case "Rojo":
-                sIconoActual = "Amarillo";
+                miauto.setColorSelectionJugador("Amarillo");
                 break;
             case "Azul":
-                sIconoActual = "Rojo";
+                miauto.setColorSelectionJugador("Rojo");
                 break;
         }
-        return sIconoActual;
+        notifyModelObservers("AutoSeleccion");
     }
 }

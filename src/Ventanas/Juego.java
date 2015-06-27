@@ -6,11 +6,13 @@
 package Ventanas;
 
 import Beat.ControllerInterface;
+import CarRace.Autos;
 import CarRace.CarRaceGameController;
 import CarRace.CarRaceModel;
 import CarRace.ModelObserver;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,15 +50,18 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     private int iMovimientoY = 10;
     private CarRaceGameController controlador;
     private CarRaceModel modelo;
+    private Autos miauto;
+    private ArrayList<Autos> autosContra = new ArrayList<Autos>();
+    
     public Juego() 
     {
         initComponents();
-//        this.modelo = modelo;
-//        this.controlador = controlador;
-//        modelo.registerObserver(this);
-//        this.controlador.setVista(this);
+        miauto = new Autos(80, 0, "azul");
+        this.modelo = new CarRaceModel(miauto);
+        this.controlador = new CarRaceGameController (modelo,this);
+        modelo.registerObserver(this);
         ConfiguracionVisual();
-        posicionAuto = lblFondo.getLocation();
+        //posicionAuto = lblFondo.getLocation();
     }
 
     /**
@@ -896,6 +901,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
                 lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
                 break;
         }
+        this.sIconoActual = sIconoActual;
     }
 
     @Override
@@ -935,7 +941,7 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
 
     private void Comenzar2() 
     {
-        this.modelo = new CarRaceModel();
+        this.modelo = new CarRaceModel(miauto);
         this.controlador = new CarRaceGameController(modelo,this);
         Comenzar();
     }
