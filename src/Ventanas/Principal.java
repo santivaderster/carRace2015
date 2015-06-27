@@ -5,6 +5,7 @@
  */
 package Ventanas;
 
+import 
 import Beat.BeatController;
 import Beat.BeatModel;
 import Beat.BeatModelInterface;
@@ -17,7 +18,7 @@ import Heart.HeartModel;
 import Heart.HeartModelInterface;
 import java.util.ArrayList;
 import javax.swing.JFrame;
-import org.jvnet.substance.SubstanceLookAndFeel;
+
 
 /**
  *
