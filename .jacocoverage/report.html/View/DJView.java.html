@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DJView.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Juego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">View</a> &gt; <span class="el_source">DJView.java</span></div><h1>DJView.java</h1><pre class="source lang-java linenums">package View;
+
+import Class.BeatBar;
+import Observer.BeatObserver;
+import Observer.BPMObserver;
+import Controller.ControllerInterface;
+import Model.BeatModelInterface;
+import java.awt.*;
+
+import java.awt.event.*;
+ 
+import javax.swing.*;
+ 
+
+ 
+public class DJView implements ActionListener,  BeatObserver, BPMObserver {
+ 
+	protected BeatModelInterface model;
+ 
+	protected ControllerInterface controller;
+ 
+    protected JFrame viewFrame;
+ 
+    protected JPanel viewPanel;
+ 
+	protected BeatBar beatBar;
+ 
+	protected JLabel bpmOutputLabel;
+ 
+    JFrame controlFrame;
+ 
+    JPanel controlPanel;
+ 
+    JLabel bpmLabel;
+ 
+    JTextField bpmTextField;
+ 
+    JButton setBPMButton;
+ 
+    JButton increaseBPMButton;
+ 
+    JButton decreaseBPMButton;
+ 
+    JMenuBar menuBar;
+ 
+    JMenu menu;
+ 
+    JMenuItem startMenuItem;
+ 
+    JMenuItem stopMenuItem;
+ 
+
+ 
+
+ 
+<span class="nc" id="L56">    public DJView(ControllerInterface controller, BeatModelInterface model) {	</span>
+ 
+<span class="nc" id="L58">		this.controller = controller;</span>
+ 
+<span class="nc" id="L60">		this.model = model;</span>
+ 
+<span class="nc" id="L62">		model.registerObserver((BeatObserver)this);</span>
+ 
+<span class="nc" id="L64">		model.registerObserver((BPMObserver)this);</span>
+ 
+<span class="nc" id="L66">    }</span>
+ 
+    
+ 
+<span class="nc" id="L70">    public DJView(){</span>
+ 
+    	
+ 
+<span class="nc" id="L74">    }</span>
+ 
+
+ 
+    public void createView() {
+ 
+<span class="nc" id="L80">		viewPanel = new JPanel(new GridLayout(1, 2));</span>
+ 
+<span class="nc" id="L82">        viewFrame = new JFrame(&quot;View&quot;);</span>
+ 
+<span class="nc" id="L84">        viewFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+ 
+<span class="nc" id="L86">        viewFrame.setSize(new Dimension(308, 115));</span>
+ 
+<span class="nc" id="L88">        bpmOutputLabel = new JLabel(&quot;offline&quot;, SwingConstants.CENTER);</span>
+ 
+<span class="nc" id="L90">		beatBar = new BeatBar();</span>
+ 
+<span class="nc" id="L92">		beatBar.setValue(0);</span>
+ 
+<span class="nc" id="L94">        JPanel bpmPanel = new JPanel(new GridLayout(2, 1));</span>
+ 
+<span class="nc" id="L96">		bpmPanel.add(beatBar);</span>
+ 
+<span class="nc" id="L98">        bpmPanel.add(bpmOutputLabel);</span>
+ 
+<span class="nc" id="L100">        viewPanel.add(bpmPanel);</span>
+ 
+<span class="nc" id="L102">        viewFrame.getContentPane().add(viewPanel, BorderLayout.CENTER);</span>
+ 
+<span class="nc" id="L104">        viewFrame.pack();</span>
+ 
+<span class="nc" id="L106">        viewFrame.setVisible(true);</span>
+ 
+<span class="nc" id="L108">	}</span>
+ 
+  
+ 
+  
+ 
+    public void createControls() {
+ 
+<span class="nc" id="L116">		JFrame.setDefaultLookAndFeelDecorated(true);</span>
+ 
+<span class="nc" id="L118">        controlFrame = new JFrame(&quot;Control&quot;);</span>
+ 
+<span class="nc" id="L120">        controlFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+ 
+<span class="nc" id="L122">        controlFrame.setSize(new Dimension(100, 80));</span>
+ 
+
+ 
+<span class="nc" id="L126">        controlPanel = new JPanel(new GridLayout(1, 2));</span>
+ 
+
+ 
+<span class="nc" id="L130">        menuBar = new JMenuBar();</span>
+ 
+<span class="nc" id="L132">        menu = new JMenu(&quot;DJ Control&quot;);</span>
+ 
+        
+ 
+<span class="nc" id="L136">        startMenuItem = new JMenuItem(&quot;Start&quot;);</span>
+ 
+<span class="nc" id="L138">        menu.add(startMenuItem);</span>
+ 
+<span class="nc" id="L140">        startMenuItem.addActionListener(new ActionListener() {</span>
+ 
+            public void actionPerformed(ActionEvent event) {
+ 
+<span class="nc" id="L144">                controller.start();</span>
+ 
+<span class="nc" id="L146">            }</span>
+ 
+        });
+ 
+        
+ 
+<span class="nc" id="L152">        stopMenuItem = new JMenuItem(&quot;Stop&quot;);</span>
+ 
+<span class="nc" id="L154">        menu.add(stopMenuItem); </span>
+ 
+<span class="nc" id="L156">        stopMenuItem.addActionListener(new ActionListener() {</span>
+ 
+            public void actionPerformed(ActionEvent event) {
+ 
+<span class="nc" id="L160">                controller.stop();</span>
+ 
+<span class="nc" id="L162">            }</span>
+ 
+        });
+ 
+        
+ 
+<span class="nc" id="L168">        JMenuItem exit = new JMenuItem(&quot;Quit&quot;);</span>
+ 
+<span class="nc" id="L170">        exit.addActionListener(new ActionListener() {</span>
+ 
+            public void actionPerformed(ActionEvent event) {
+ 
+<span class="nc" id="L174">                System.exit(0);</span>
+ 
+<span class="nc" id="L176">            }</span>
+ 
+        });
+ 
+
+ 
+<span class="nc" id="L182">        menu.add(exit);</span>
+ 
+<span class="nc" id="L184">        menuBar.add(menu);</span>
+ 
+<span class="nc" id="L186">        controlFrame.setJMenuBar(menuBar);</span>
+ 
+
+ 
+<span class="nc" id="L190">        bpmTextField = new JTextField(2);</span>
+ 
+<span class="nc" id="L192">        bpmLabel = new JLabel(&quot;Enter BPM:&quot;, SwingConstants.RIGHT);</span>
+ 
+<span class="nc" id="L194">        setBPMButton = new JButton(&quot;Set&quot;);</span>
+ 
+<span class="nc" id="L196">        setBPMButton.setSize(new Dimension(10,40));</span>
+ 
+<span class="nc" id="L198">        increaseBPMButton = new JButton(&quot;&gt;&gt;&quot;);</span>
+ 
+<span class="nc" id="L200">        decreaseBPMButton = new JButton(&quot;&lt;&lt;&quot;);</span>
+ 
+<span class="nc" id="L202">        setBPMButton.addActionListener(this);</span>
+ 
+<span class="nc" id="L204">        increaseBPMButton.addActionListener(this);</span>
+ 
+<span class="nc" id="L206">        decreaseBPMButton.addActionListener(this);</span>
+ 
+
+ 
+<span class="nc" id="L210">        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));</span>
+ 
+
+ 
+<span class="nc" id="L214">		buttonPanel.add(decreaseBPMButton);</span>
+ 
+<span class="nc" id="L216">		buttonPanel.add(increaseBPMButton);</span>
+ 
+
+ 
+<span class="nc" id="L220">        JPanel enterPanel = new JPanel(new GridLayout(1, 2));</span>
+ 
+<span class="nc" id="L222">        enterPanel.add(bpmLabel);</span>
+ 
+<span class="nc" id="L224">        enterPanel.add(bpmTextField);</span>
+ 
+<span class="nc" id="L226">        JPanel insideControlPanel = new JPanel(new GridLayout(3, 1));</span>
+ 
+<span class="nc" id="L228">        insideControlPanel.add(enterPanel);</span>
+ 
+<span class="nc" id="L230">        insideControlPanel.add(setBPMButton);</span>
+ 
+<span class="nc" id="L232">        insideControlPanel.add(buttonPanel);</span>
+ 
+<span class="nc" id="L234">        controlPanel.add(insideControlPanel);</span>
+ 
+        
+ 
+<span class="nc" id="L238">        bpmLabel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));</span>
+ 
+<span class="nc" id="L240">        bpmOutputLabel.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));</span>
+ 
+
+ 
+<span class="nc" id="L244">        controlFrame.getRootPane().setDefaultButton(setBPMButton);</span>
+ 
+<span class="nc" id="L246">        controlFrame.getContentPane().add(controlPanel, BorderLayout.CENTER);</span>
+ 
+
+ 
+<span class="nc" id="L250">        controlFrame.pack();</span>
+ 
+<span class="nc" id="L252">        controlFrame.setVisible(true);</span>
+ 
+<span class="nc" id="L254">    }</span>
+ 
+
+ 
+	public void enableStopMenuItem() {
+ 
+<span class="nc" id="L260">    	stopMenuItem.setEnabled(true);</span>
+ 
+<span class="nc" id="L262">	}</span>
+ 
+
+ 
+	public void disableStopMenuItem() {
+ 
+<span class="nc" id="L268">    	stopMenuItem.setEnabled(false);</span>
+ 
+<span class="nc" id="L270">	}</span>
+ 
+
+ 
+	public void enableStartMenuItem() {
+ 
+<span class="nc" id="L276">    	startMenuItem.setEnabled(true);</span>
+ 
+<span class="nc" id="L278">	}</span>
+ 
+
+ 
+	public void disableStartMenuItem() {
+ 
+<span class="nc" id="L284">    	startMenuItem.setEnabled(false);</span>
+ 
+<span class="nc" id="L286">	}</span>
+ 
+
+ 
+    public void actionPerformed(ActionEvent event) {
+ 
+<span class="nc bnc" id="L292" title="All 2 branches missed.">		if (event.getSource() == setBPMButton) {</span>
+ 
+<span class="nc" id="L294">			int bpm = Integer.parseInt(bpmTextField.getText());</span>
+ 
+<span class="nc" id="L296">        	controller.setBPM(bpm);</span>
+ 
+<span class="nc bnc" id="L298" title="All 2 branches missed.">		} else if (event.getSource() == increaseBPMButton) {</span>
+ 
+<span class="nc" id="L300">			controller.increaseBPM();</span>
+ 
+<span class="nc bnc" id="L302" title="All 2 branches missed.">		} else if (event.getSource() == decreaseBPMButton) {</span>
+ 
+<span class="nc" id="L304">			controller.decreaseBPM();</span>
+ 
+		}
+ 
+<span class="nc" id="L308">    }</span>
+ 
+
+ 
+	public void updateBPM() {
+ 
+<span class="nc bnc" id="L314" title="All 2 branches missed.">		if (model != null) {</span>
+ 
+<span class="nc" id="L316">			int bpm = model.getBPM();</span>
+ 
+<span class="nc bnc" id="L318" title="All 2 branches missed.">			if (bpm == 0) {</span>
+ 
+<span class="nc bnc" id="L320" title="All 2 branches missed.">				if (bpmOutputLabel != null) {</span>
+ 
+<span class="nc" id="L322">        			bpmOutputLabel.setText(&quot;offline&quot;);</span>
+ 
+				}
+ 
+			} else {
+ 
+<span class="nc bnc" id="L328" title="All 2 branches missed.">				if (bpmOutputLabel != null) {</span>
+ 
+<span class="nc" id="L330">        			bpmOutputLabel.setText(&quot;Current BPM: &quot; + model.getBPM());</span>
+ 
+				}
+ 
+			}
+ 
+		}
+ 
+<span class="nc" id="L338">	}</span>
+ 
+  
+ 
+	public void updateBeat() {
+ 
+<span class="nc bnc" id="L344" title="All 2 branches missed.">		if (beatBar != null) {</span>
+ 
+<span class="nc" id="L346">			 beatBar.setValue(100);</span>
+ 
+		}
+ 
+<span class="nc" id="L350">	}</span>
+ 
+	
+ 
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

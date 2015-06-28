@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BeatModel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Juego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">BeatModel.java</span></div><h1>BeatModel.java</h1><pre class="source lang-java linenums">package Model;
+
+import Observer.BPMObserver;
+import Observer.BeatObserver;
+import javax.sound.midi.*;
+
+import java.util.*;
+ 
+
+ 
+<span class="fc" id="L11">public class BeatModel implements BeatModelInterface, MetaEventListener {</span>
+ 
+    Sequencer sequencer;
+ 
+<span class="fc" id="L15">	ArrayList&lt;BeatObserver&gt; beatObservers = new ArrayList&lt;BeatObserver&gt;();</span>
+ 
+<span class="fc" id="L17">	ArrayList&lt;BPMObserver&gt; bpmObservers = new ArrayList&lt;BPMObserver&gt;();</span>
+ 
+<span class="fc" id="L19">    int bpm = 90;</span>
+ 
+    Sequence sequence;
+ 
+    Track track;
+ 
+ 
+ 
+	public void initialize() {
+ 
+<span class="fc" id="L29">        setUpMidi();</span>
+ 
+<span class="fc" id="L31">        buildTrackAndStart();</span>
+ 
+<span class="fc" id="L33">	}</span>
+ 
+ 
+ 
+    public void on() {
+ 
+<span class="fc" id="L39">        sequencer.start();</span>
+ 
+<span class="fc" id="L41">        setBPM(90);</span>
+ 
+<span class="fc" id="L43">    }</span>
+ 
+ 
+ 
+    public void off() {
+ 
+<span class="fc" id="L49">		setBPM(0);</span>
+ 
+<span class="fc" id="L51">		sequencer.stop();</span>
+ 
+<span class="fc" id="L53">    }</span>
+ 
+ 
+ 
+    public void setBPM(int bpm) {
+ 
+<span class="fc" id="L59">		this.bpm = bpm;</span>
+ 
+<span class="fc" id="L61">		sequencer.setTempoInBPM(getBPM());</span>
+ 
+<span class="fc" id="L63">		notifyBPMObservers();</span>
+ 
+<span class="fc" id="L65">    }</span>
+ 
+  
+ 
+	public int getBPM() {
+ 
+<span class="fc" id="L71">		return bpm;</span>
+ 
+	}
+ 
+  
+ 
+	void beatEvent() {
+ 
+<span class="nc" id="L79">		notifyBeatObservers();</span>
+ 
+<span class="nc" id="L81">	}</span>
+ 
+  
+ 
+   
+ 
+	public void registerObserver(BeatObserver o) {
+ 
+<span class="nc" id="L89">		beatObservers.add(o);</span>
+ 
+<span class="nc" id="L91">	}</span>
+ 
+  
+ 
+	public void notifyBeatObservers() {
+ 
+<span class="nc bnc" id="L97" title="All 2 branches missed.">		for(int i = 0; i &lt; beatObservers.size(); i++) {</span>
+ 
+<span class="nc" id="L99">			BeatObserver observer = (BeatObserver)beatObservers.get(i);</span>
+ 
+<span class="nc" id="L101">			observer.updateBeat();</span>
+ 
+		}
+ 
+<span class="nc" id="L105">	}</span>
+ 
+  
+ 
+	public void registerObserver(BPMObserver o) {
+ 
+<span class="nc" id="L111">		bpmObservers.add(o);</span>
+ 
+<span class="nc" id="L113">	}</span>
+ 
+  
+ 
+	public void notifyBPMObservers() {
+ 
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">		for(int i = 0; i &lt; bpmObservers.size(); i++) {</span>
+ 
+<span class="nc" id="L121">			BPMObserver observer = (BPMObserver)bpmObservers.get(i);</span>
+ 
+<span class="nc" id="L123">			observer.updateBPM();</span>
+ 
+		}
+ 
+<span class="fc" id="L127">	}</span>
+ 
+
+ 
+
+ 
+	public void removeObserver(BeatObserver o) {
+ 
+<span class="nc" id="L135">		int i = beatObservers.indexOf(o);</span>
+ 
+<span class="nc bnc" id="L137" title="All 2 branches missed.">		if (i &gt;= 0) {</span>
+ 
+<span class="nc" id="L139">			beatObservers.remove(i);</span>
+ 
+		}
+ 
+<span class="nc" id="L143">	}</span>
+ 
+
+ 
+
+ 
+
+ 
+	public void removeObserver(BPMObserver o) {
+ 
+<span class="nc" id="L153">		int i = bpmObservers.indexOf(o);</span>
+ 
+<span class="nc bnc" id="L155" title="All 2 branches missed.">		if (i &gt;= 0) {</span>
+ 
+<span class="nc" id="L157">			bpmObservers.remove(i);</span>
+ 
+		}
+ 
+<span class="nc" id="L161">	}</span>
+ 
+
+ 
+
+ 
+    public void meta(MetaMessage message) {
+ 
+<span class="nc bnc" id="L169" title="All 2 branches missed.">    	if (message.getType() == 0x2F ) {</span>
+ 
+<span class="nc" id="L171">			beatEvent();</span>
+ 
+<span class="nc" id="L173">            sequencer.setTickPosition(0) ; </span>
+ 
+<span class="nc" id="L175">            sequencer.start(); </span>
+ 
+<span class="nc" id="L177">        	setBPM(getBPM());	</span>
+ 
+        }
+ 
+<span class="nc" id="L181">    }</span>
+ 
+
+ 
+	public void setUpMidi() {
+ 
+		try {
+ 
+<span class="fc" id="L189">			sequencer = MidiSystem.getSequencer();</span>
+ 
+<span class="fc" id="L191">			sequencer.open();</span>
+ 
+<span class="fc" id="L193">			sequencer.addMetaEventListener(this);</span>
+ 
+<span class="fc" id="L195">			sequence = new Sequence(Sequence.PPQ,4);</span>
+ 
+<span class="fc" id="L197">			track = sequence.createTrack();</span>
+ 
+<span class="fc" id="L199">			sequencer.setTempoInBPM(getBPM());</span>
+ 
+<span class="nc" id="L201">		} catch(Exception e) {</span>
+ 
+<span class="nc" id="L203">				e.printStackTrace();</span>
+ 
+<span class="fc" id="L205">		}</span>
+ 
+<span class="fc" id="L207">    } </span>
+ 
+
+ 
+     public void buildTrackAndStart() {
+ 
+<span class="fc" id="L213">        int[] trackList = {35, 0, 46, 0};</span>
+ 
+    
+ 
+<span class="fc" id="L217">        sequence.deleteTrack(null);</span>
+ 
+<span class="fc" id="L219">        track = sequence.createTrack();</span>
+ 
+
+ 
+<span class="fc" id="L223">      	makeTracks(trackList);</span>
+ 
+<span class="fc" id="L225">		track.add(makeEvent(192,9,1,0,4));      </span>
+ 
+	 	try {
+ 
+<span class="fc" id="L229">			sequencer.setSequence(sequence);                    </span>
+ 
+<span class="nc" id="L231">		} catch(Exception e) {</span>
+ 
+<span class="nc" id="L233">			e.printStackTrace();</span>
+ 
+<span class="fc" id="L235">		}</span>
+ 
+<span class="fc" id="L237">    } </span>
+ 
+            
+ 
+    public void makeTracks(int[] list) {        
+ 
+       
+ 
+<span class="fc bfc" id="L245" title="All 2 branches covered.">       for (int i = 0; i &lt; list.length; i++) {</span>
+ 
+<span class="fc" id="L247">          int key = list[i];</span>
+ 
+
+ 
+<span class="fc bfc" id="L251" title="All 2 branches covered.">          if (key != 0) {</span>
+ 
+<span class="fc" id="L253">             track.add(makeEvent(144,9,key, 100, i));</span>
+ 
+<span class="fc" id="L255">             track.add(makeEvent(128,9,key, 100, i+1));</span>
+ 
+          }
+ 
+       }
+ 
+<span class="fc" id="L261">    }</span>
+ 
+        
+ 
+    public  MidiEvent makeEvent(int comd, int chan, int one, int two, int tick) {
+ 
+<span class="fc" id="L267">        MidiEvent event = null;</span>
+ 
+        try {
+ 
+<span class="fc" id="L271">            ShortMessage a = new ShortMessage();</span>
+ 
+<span class="fc" id="L273">            a.setMessage(comd, chan, one, two);</span>
+ 
+<span class="fc" id="L275">            event = new MidiEvent(a, tick);</span>
+ 
+            
+ 
+<span class="nc" id="L279">        } catch(Exception e) {</span>
+ 
+<span class="nc" id="L281">			e.printStackTrace(); </span>
+ 
+<span class="fc" id="L283">		}</span>
+ 
+<span class="fc" id="L285">        return event;</span>
+ 
+    }
+ 
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

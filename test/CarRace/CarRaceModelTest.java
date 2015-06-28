@@ -110,13 +110,5 @@ public class CarRaceModelTest
     public void finalizar() 
     {
         model.off();
-    }    
-
-//    @Test
-//    public void testBPMEncontrado(){
-//            int iFuel = 3;
-//            int iBPMEncontrado = 300; //valor de BPM que debería existir cuando se acaba el combustible
-//            autoTest.setFuel(iFuel);
-//            assertEquals(iBPMEncontrado, model.getBPM());
-//    }
+    }
 }

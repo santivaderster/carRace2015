@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CarRaceModel.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Juego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Model</a> &gt; <span class="el_source">CarRaceModel.java</span></div><h1>CarRaceModel.java</h1><pre class="source lang-java linenums">package Model;
+
+import Observer.BeatObserver;
+import Observer.BPMObserver;
+import javax.sound.midi.*;
+
+import Class.Car;
+import Observer.CarRaceObserver;
+
+import java.util.*;
+
+/**
+ *
+ * @author Santiago
+ */
+public class CarRaceModel implements CarRaceModelInterface, MetaEventListener {
+
+    Sequencer sequencer;
+<span class="fc" id="L19">    ArrayList&lt;BeatObserver&gt; beatObservers = new ArrayList&lt;BeatObserver&gt;();</span>
+<span class="fc" id="L20">    ArrayList&lt;BPMObserver&gt; bpmObservers = new ArrayList&lt;BPMObserver&gt;();</span>
+<span class="fc" id="L21">    ArrayList&lt;CarRaceObserver&gt; modelObservers = new ArrayList&lt;CarRaceObserver&gt;();</span>
+<span class="fc" id="L22">    int bpm = 0;   // los bpm arranca en 0 el fuel esta lleno </span>
+
+    Sequence sequence;
+    Track track;
+    Car miauto;
+<span class="fc" id="L27">    ArrayList&lt;Car&gt; autosContra = new ArrayList&lt;Car&gt;();</span>
+    Thread Tiempo;
+
+//        public CarRaceModel() {
+//        beatObservers = new ArrayList&lt;BeatObserver&gt;();
+//        bpmObservers = new ArrayList&lt;BPMObserver&gt;();
+//       // fuel =10;
+//                }
+<span class="fc" id="L35">    private int iLimiteXIzquierda = 80;</span>
+<span class="fc" id="L36">    private int iLimiteXDerecha = 480;</span>
+<span class="fc" id="L37">    private int iLimiteYArriba = 0;</span>
+<span class="fc" id="L38">    private int iLimiteYAbajo = 460;</span>
+<span class="fc" id="L39">    private int iMovimientoX = 100;</span>
+<span class="fc" id="L40">    private int iMovimientoY = 50;</span>
+<span class="fc" id="L41">    private int iCantidadCombustible = 1;</span>
+<span class="fc" id="L42">    private int iRefrescoAutoContra = 3;</span>
+<span class="fc" id="L43">    private int iTamanoAuto = 63;</span>
+<span class="fc" id="L44">    private boolean tiempofinalizado = false;</span>
+
+<span class="fc" id="L46">    public CarRaceModel(Car auto, ArrayList&lt;Car&gt; autosContra) {</span>
+<span class="fc" id="L47">        beatObservers = new ArrayList&lt;BeatObserver&gt;();</span>
+<span class="fc" id="L48">        bpmObservers = new ArrayList&lt;BPMObserver&gt;();</span>
+<span class="fc" id="L49">        modelObservers = new ArrayList&lt;CarRaceObserver&gt;();</span>
+<span class="fc" id="L50">        this.autosContra = autosContra;</span>
+<span class="fc" id="L51">        this.miauto = auto;</span>
+<span class="fc" id="L52">        this.miauto.setFuel(10);</span>
+<span class="fc" id="L53">        String sColor = null;</span>
+        Car oAuto;
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (int i = 0; i &lt; 5; i++) {</span>
+<span class="pc bpc" id="L56" title="1 of 6 branches missed.">            switch (i) {</span>
+                case 0:
+<span class="fc" id="L58">                    sColor = &quot;Amarillo&quot;;</span>
+<span class="fc" id="L59">                    break;</span>
+                case 1:
+<span class="fc" id="L61">                    sColor = &quot;Rojo&quot;;</span>
+<span class="fc" id="L62">                    break;</span>
+                case 2:
+<span class="fc" id="L64">                    sColor = &quot;Azul&quot;;</span>
+<span class="fc" id="L65">                    break;</span>
+                case 3:
+<span class="fc" id="L67">                    sColor = &quot;Amarillo&quot;;</span>
+<span class="fc" id="L68">                    break;</span>
+                case 4:
+<span class="fc" id="L70">                    sColor = &quot;Azul&quot;;</span>
+                    break;
+            }
+<span class="fc" id="L73">            oAuto = new Car(i * iMovimientoX + iLimiteXIzquierda, iLimiteYAbajo, sColor, false);</span>
+<span class="fc" id="L74">            autosContra.add(oAuto);</span>
+<span class="fc" id="L75">            oAuto = null;</span>
+        }
+<span class="fc" id="L77">    }</span>
+
+    @Override
+    public void initialize() {
+<span class="fc" id="L81">        setUpMidi();</span>
+<span class="fc" id="L82">        buildTrackAndStart();</span>
+<span class="fc" id="L83">    }</span>
+
+    @Override
+    public void on() {
+<span class="fc" id="L87">        sequencer.start();</span>
+<span class="fc" id="L88">        setBPM(miauto.getFuel());</span>
+<span class="fc" id="L89">        notifyModelObservers(&quot;AutoSeleccionado&quot;);</span>
+<span class="fc" id="L90">        notifyModelObservers(&quot;AutosContra&quot;);</span>
+<span class="fc" id="L91">        Tiempo = new Thread() {</span>
+            @Override
+            public void run() {
+<span class="fc" id="L94">                int cant = iRefrescoAutoContra - 1;</span>
+<span class="fc" id="L95">                super.run();</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">                while (!tiempofinalizado) {</span>
+                    try {
+<span class="nc" id="L98">                        Thread.sleep(1000);</span>
+<span class="nc" id="L99">                    } catch (InterruptedException ex) {</span>
+<span class="nc" id="L100">                        System.out.println(ex.getMessage());</span>
+<span class="nc" id="L101">                    }</span>
+<span class="nc" id="L102">                    cant++;</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">                    if (miauto.getPosicionx() != iLimiteXIzquierda)//&amp;&amp; miauto.getPosicionx() != iLimiteXDerecha)</span>
+                    {
+<span class="nc" id="L105">                        miauto.setFuel(miauto.getFuel() - 1 * iCantidadCombustible);</span>
+                    } else {
+<span class="nc" id="L107">                        miauto.setFuel(miauto.getFuel() + 1 * iCantidadCombustible);</span>
+                    }
+<span class="nc" id="L109">                    UpdateFuel();</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">                    if (miauto.getFuel() == 0) {</span>
+<span class="nc bnc" id="L111" title="All 14 branches missed.">                        switch (miauto.getColorSelectionJugador()) {</span>
+                            case &quot;Amarillo&quot;:
+<span class="nc" id="L113">                                miauto.setColorSelectionJugador(&quot;AmarilloRoto&quot;);</span>
+<span class="nc" id="L114">                                break;</span>
+                            case &quot;Azul&quot;:
+<span class="nc" id="L116">                                miauto.setColorSelectionJugador(&quot;AzulRoto&quot;);</span>
+<span class="nc" id="L117">                                break;</span>
+                            case &quot;Rojo&quot;:
+<span class="nc" id="L119">                                miauto.setColorSelectionJugador(&quot;RojoRoto&quot;);</span>
+                                break;
+                        }
+<span class="nc" id="L122">                        notifyModelObservers(&quot;AutoSeleccionado&quot;);</span>
+<span class="nc" id="L123">                        notifyModelObservers(&quot;GameOver&quot;);</span>
+                    }
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                    if (cant == iRefrescoAutoContra) {</span>
+<span class="nc" id="L126">                        cant = 0;</span>
+<span class="nc" id="L127">                        Random oRandom = new Random();</span>
+<span class="nc" id="L128">                        int num = (int) (oRandom.nextDouble() * 5 + 0);</span>
+<span class="nc bnc" id="L129" title="All 2 branches missed.">                        if (!autosContra.get(num).isVisible()) {</span>
+<span class="nc" id="L130">                            autosContra.get(num).setVisible(true);</span>
+<span class="nc" id="L131">                            autosContra.get(num).setPosiciony(iLimiteYAbajo);</span>
+                        }
+                    }
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                    if (detectorChoque()) { //&amp;&amp; miauto.getColorSelectionJugador()!=&quot;carRaceTestDrive&quot;){//calculo de choque </span>
+
+<span class="nc" id="L136">                        notifyModelObservers(&quot;AutoSeleccionado&quot;);</span>
+<span class="nc" id="L137">                        notifyModelObservers(&quot;GameOver&quot;);</span>
+                    }
+<span class="nc bnc" id="L139" title="All 2 branches missed.">                    for (int i = 0; i &lt; autosContra.size(); i++) {</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">                        if (autosContra.get(i).isVisible()) {</span>
+<span class="nc" id="L141">                            notifyModelObservers(&quot;AutosContra&quot;);</span>
+                        }
+                    }
+                }
+<span class="fc" id="L145">            }</span>
+        };
+<span class="fc" id="L147">        Tiempo.start();</span>
+<span class="fc" id="L148">    }</span>
+
+    public boolean detectorChoque() {
+<span class="fc" id="L151">        boolean choque = false;</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        for (int i = 0; i &lt; autosContra.size(); i++) {</span>
+<span class="fc bfc" id="L153" title="All 2 branches covered.">            if (autosContra.get(i).isVisible()) {</span>
+<span class="fc" id="L154">                autosContra.get(i).setPosiciony(autosContra.get(i).getPosiciony() - 1 * iMovimientoY);</span>
+            }
+<span class="fc bfc" id="L156" title="All 2 branches covered.">            if (autosContra.get(i).getPosiciony() &lt; iLimiteYArriba + iTamanoAuto) {</span>
+<span class="fc" id="L157">                autosContra.get(i).setVisible(false);</span>
+<span class="fc" id="L158">                autosContra.get(i).setPosiciony(iLimiteYAbajo);</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">                if (miauto.getPosicionx() == autosContra.get(i).getPosicionx()) {</span>
+<span class="pc bpc" id="L160" title="11 of 14 branches missed.">                    switch (miauto.getColorSelectionJugador()) {</span>
+                        case &quot;Amarillo&quot;:
+<span class="fc" id="L162">                            miauto.setColorSelectionJugador(&quot;AmarilloRoto&quot;);</span>
+<span class="fc" id="L163">                            break;</span>
+                        case &quot;Azul&quot;:
+<span class="nc" id="L165">                            miauto.setColorSelectionJugador(&quot;AzulRoto&quot;);</span>
+<span class="nc" id="L166">                            break;</span>
+                        case &quot;Rojo&quot;:
+<span class="nc" id="L168">                            miauto.setColorSelectionJugador(&quot;RojoRoto&quot;);</span>
+                            break;
+                    }
+<span class="fc" id="L171">                    choque = true;</span>
+                }
+            }
+        }
+
+<span class="fc" id="L176">        return choque;</span>
+
+    }
+
+    @Override
+    public void off() {
+<span class="fc" id="L182">        setBPM(0);</span>
+<span class="fc" id="L183">        sequencer.stop();</span>
+<span class="fc" id="L184">        tiempofinalizado = true;</span>
+<span class="fc" id="L185">    }</span>
+
+    @Override
+    public void setBPM(int bpm) {
+<span class="fc" id="L189">        this.bpm = bpm;</span>
+<span class="fc" id="L190">        sequencer.setTempoInBPM(getBPM());</span>
+<span class="fc" id="L191">        notifyBPMObservers();</span>
+<span class="fc" id="L192">    }</span>
+
+    @Override
+    public int getBPM() {
+<span class="fc" id="L196">        return bpm;</span>
+    }
+
+    void beatEvent() {
+<span class="nc" id="L200">        notifyBeatObservers();</span>
+<span class="nc" id="L201">    }</span>
+
+    @Override
+    public void registerObserver(BeatObserver o) {
+<span class="nc" id="L205">        beatObservers.add(o);</span>
+<span class="nc" id="L206">    }</span>
+
+    @Override
+    public void registerObserver(BPMObserver o) {
+<span class="nc" id="L210">        bpmObservers.add(o);</span>
+<span class="nc" id="L211">    }</span>
+
+    @Override
+    public void registerObserver(CarRaceObserver o) {
+<span class="nc" id="L215">        modelObservers.add(o);</span>
+<span class="nc" id="L216">    }</span>
+
+    @Override
+    public void notifyBPMObservers() {
+<span class="pc bpc" id="L220" title="1 of 2 branches missed.">        for (int i = 0; i &lt; bpmObservers.size(); i++) {</span>
+<span class="nc" id="L221">            BPMObserver observer = (BPMObserver) bpmObservers.get(i);</span>
+<span class="nc" id="L222">            observer.updateBPM();</span>
+        }
+<span class="fc" id="L224">    }</span>
+
+    @Override
+    public void notifyBeatObservers() {
+<span class="nc bnc" id="L228" title="All 2 branches missed.">        for (int i = 0; i &lt; beatObservers.size(); i++) {</span>
+<span class="nc" id="L229">            BeatObserver observer = (BeatObserver) beatObservers.get(i);</span>
+<span class="nc" id="L230">            observer.updateBeat();</span>
+        }
+<span class="nc" id="L232">    }</span>
+
+    @Override
+    public void notifyModelObservers(String sAccion) {
+<span class="pc bpc" id="L236" title="1 of 2 branches missed.">        for (int i = 0; i &lt; modelObservers.size(); i++) {</span>
+<span class="nc" id="L237">            CarRaceObserver observer = (CarRaceObserver) modelObservers.get(i);</span>
+<span class="nc bnc" id="L238" title="All 46 branches missed.">            switch (sAccion) {</span>
+                case &quot;AutoMover&quot;:
+<span class="nc" id="L240">                    observer.updateAuto(miauto.getPosicionx());</span>
+<span class="nc" id="L241">                    break;</span>
+                case &quot;AutosContra&quot;:
+<span class="nc" id="L243">                    observer.updateAutosContra();</span>
+<span class="nc" id="L244">                    break;</span>
+                case &quot;Auto2Mover&quot;:
+<span class="nc" id="L246">                    break;</span>
+                case &quot;Auto3Mover&quot;:
+<span class="nc" id="L248">                    break;</span>
+                case &quot;Auto4Mover&quot;:
+<span class="nc" id="L250">                    break;</span>
+                case &quot;Auto5Mover&quot;:
+<span class="nc" id="L252">                    break;</span>
+                case &quot;AutoSeleccion&quot;:
+<span class="nc" id="L254">                    observer.updateAutoSeleccion(miauto.getColorSelectionJugador());</span>
+<span class="nc" id="L255">                    break;</span>
+                case &quot;AutoSeleccionado&quot;:
+<span class="nc" id="L257">                    observer.updateAutoSeleccionJugador();</span>
+<span class="nc" id="L258">                    break;</span>
+                case &quot;updateFuel&quot;:
+<span class="nc" id="L260">                    observer.setfuel(miauto.getFuel());</span>
+<span class="nc" id="L261">                    break;</span>
+                case &quot;todo&quot;:
+<span class="nc" id="L263">                    observer.setfuel(miauto.getFuel());</span>
+<span class="nc" id="L264">                    observer.updateAuto(miauto.getPosicionx());</span>
+                    //falta el update de todos los autos de contramano
+<span class="nc" id="L266">                    observer.updateAutoSeleccion(miauto.getColorSelectionJugador());</span>
+<span class="nc" id="L267">                    break;</span>
+                case &quot;GameOver&quot;:
+<span class="nc" id="L269">                    observer.updateestado(&quot;GameOver&quot;);</span>
+                    break;
+            }
+        }
+<span class="fc" id="L273">    }</span>
+
+    @Override
+    public void removeObserver(BeatObserver o) {
+<span class="nc" id="L277">        int i = beatObservers.indexOf(o);</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">        if (i &gt;= 0) {</span>
+<span class="nc" id="L279">            beatObservers.remove(i);</span>
+        }
+<span class="nc" id="L281">    }</span>
+
+    @Override
+    public void removeObserver(BPMObserver o) {
+<span class="nc" id="L285">        int i = bpmObservers.indexOf(o);</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">        if (i &gt;= 0) {</span>
+<span class="nc" id="L287">            bpmObservers.remove(i);</span>
+        }
+<span class="nc" id="L289">    }</span>
+
+    @Override
+    public void removeObserver(CarRaceObserver o) {
+<span class="nc" id="L293">        int i = modelObservers.indexOf(o);</span>
+<span class="nc bnc" id="L294" title="All 2 branches missed.">        if (i &gt;= 0) {</span>
+<span class="nc" id="L295">            modelObservers.remove(i);</span>
+        }
+<span class="nc" id="L297">    }</span>
+
+    @Override
+    public void meta(MetaMessage message) {
+<span class="nc bnc" id="L301" title="All 2 branches missed.">        if (message.getType() == 0x2F) {</span>
+<span class="nc" id="L302">            beatEvent();</span>
+<span class="nc" id="L303">            sequencer.setTickPosition(0);</span>
+<span class="nc" id="L304">            sequencer.start();</span>
+<span class="nc" id="L305">            setBPM(getBPM());</span>
+        }
+<span class="nc" id="L307">    }</span>
+
+    public void setUpMidi() {
+        try {
+<span class="fc" id="L311">            sequencer = MidiSystem.getSequencer();</span>
+<span class="fc" id="L312">            sequencer.open();</span>
+<span class="fc" id="L313">            sequencer.addMetaEventListener(this);</span>
+<span class="fc" id="L314">            sequence = new Sequence(Sequence.PPQ, 4);</span>
+<span class="fc" id="L315">            track = sequence.createTrack();</span>
+<span class="fc" id="L316">            sequencer.setTempoInBPM(getBPM());</span>
+<span class="nc" id="L317">        } catch (Exception e) {</span>
+<span class="nc" id="L318">            e.printStackTrace();</span>
+<span class="fc" id="L319">        }</span>
+<span class="fc" id="L320">    }</span>
+
+    public void buildTrackAndStart() {
+<span class="fc" id="L323">        int[] trackList = {80, 0, 0, 0};</span>
+<span class="fc" id="L324">        sequence.deleteTrack(null);</span>
+<span class="fc" id="L325">        track = sequence.createTrack();</span>
+<span class="fc" id="L326">        makeTracks(trackList);</span>
+<span class="fc" id="L327">        track.add(makeEvent(192, 9, 1, 0, 4));</span>
+        try {
+<span class="fc" id="L329">            sequencer.setSequence(sequence);</span>
+<span class="nc" id="L330">        } catch (Exception e) {</span>
+<span class="nc" id="L331">            e.printStackTrace();</span>
+<span class="fc" id="L332">        }</span>
+<span class="fc" id="L333">    }</span>
+
+    public void makeTracks(int[] list) {
+<span class="fc bfc" id="L336" title="All 2 branches covered.">        for (int i = 0; i &lt; list.length; i++) {</span>
+<span class="fc" id="L337">            int key = list[i];</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">            if (key != 0) {</span>
+<span class="fc" id="L339">                track.add(makeEvent(144, 9, key, 100, i));</span>
+<span class="fc" id="L340">                track.add(makeEvent(128, 9, key, 100, i + 1));</span>
+            }
+        }
+<span class="fc" id="L343">    }</span>
+
+    public MidiEvent makeEvent(int comd, int chan, int one, int two, int tick) {
+<span class="fc" id="L346">        MidiEvent event = null;</span>
+        try {
+<span class="fc" id="L348">            ShortMessage a = new ShortMessage();</span>
+<span class="fc" id="L349">            a.setMessage(comd, chan, one, two);</span>
+<span class="fc" id="L350">            event = new MidiEvent(a, tick);</span>
+<span class="nc" id="L351">        } catch (Exception e) {</span>
+<span class="nc" id="L352">            e.printStackTrace();</span>
+<span class="fc" id="L353">        }</span>
+<span class="fc" id="L354">        return event;</span>
+    }
+
+    public int getFuel() {
+<span class="nc" id="L358">        return miauto.getFuel();</span>
+    }
+
+    public void UpdateFuel() {
+<span class="nc" id="L362">        setBPM(-(-400 + 40 * miauto.getFuel()));</span>
+<span class="nc" id="L363">        notifyModelObservers(&quot;updateFuel&quot;);</span>
+<span class="nc" id="L364">    }</span>
+
+    @Override
+    public void FlechaIzquierda() {
+<span class="nc bnc" id="L368" title="All 14 branches missed.">        switch (miauto.getColorSelectionJugador()) {</span>
+            case &quot;Amarillo&quot;:
+<span class="nc" id="L370">                miauto.setColorSelectionJugador(&quot;Rojo&quot;);</span>
+<span class="nc" id="L371">                break;</span>
+            case &quot;Rojo&quot;:
+<span class="nc" id="L373">                miauto.setColorSelectionJugador(&quot;Azul&quot;);</span>
+<span class="nc" id="L374">                break;</span>
+            case &quot;Azul&quot;:
+<span class="nc" id="L376">                miauto.setColorSelectionJugador(&quot;Amarillo&quot;);</span>
+                break;
+        }
+<span class="nc" id="L379">        notifyModelObservers(&quot;AutoSeleccion&quot;);</span>
+<span class="nc" id="L380">    }</span>
+
+    @Override
+    public void FlechaDerecha() {
+<span class="nc bnc" id="L384" title="All 14 branches missed.">        switch (miauto.getColorSelectionJugador()) {</span>
+            case &quot;Amarillo&quot;:
+<span class="nc" id="L386">                miauto.setColorSelectionJugador(&quot;Azul&quot;);</span>
+<span class="nc" id="L387">                break;</span>
+            case &quot;Rojo&quot;:
+<span class="nc" id="L389">                miauto.setColorSelectionJugador(&quot;Amarillo&quot;);</span>
+<span class="nc" id="L390">                break;</span>
+            case &quot;Azul&quot;:
+<span class="nc" id="L392">                miauto.setColorSelectionJugador(&quot;Rojo&quot;);</span>
+                break;
+        }
+<span class="nc" id="L395">        notifyModelObservers(&quot;AutoSeleccion&quot;);</span>
+<span class="nc" id="L396">    }</span>
+
+    @Override
+    public void setPosicionX(int v) 
+    {
+<span class="pc bpc" id="L401" title="1 of 2 branches missed.">        if (v&gt; 0)</span>
+        {
+<span class="fc bfc" id="L403" title="All 2 branches covered.">            if(miauto.getPosicionx()+v*iMovimientoX&lt;=iLimiteXDerecha)</span>
+<span class="fc" id="L404">                miauto.setPosicionx(miauto.getPosicionx()+v*iMovimientoX);</span>
+        }
+        else
+        {
+<span class="nc bnc" id="L408" title="All 2 branches missed.">            if(miauto.getPosicionx()+v*iMovimientoX&gt;=iLimiteXIzquierda)</span>
+<span class="nc" id="L409">                miauto.setPosicionx(miauto.getPosicionx()+v*100);</span>
+        }
+<span class="fc" id="L411">        notifyModelObservers(&quot;AutoMover&quot;);</span>
+<span class="fc" id="L412">    }</span>
+    
+     public Car getMiauto() {
+<span class="fc" id="L415">        return miauto;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

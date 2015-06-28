@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BeatController.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Juego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Controller</a> &gt; <span class="el_source">BeatController.java</span></div><h1>BeatController.java</h1><pre class="source lang-java linenums">package Controller;
+
+import View.DJView;
+import Model.BeatModelInterface;
+import Model.BeatModel;
+import View.CmbView;
+
+
+
+
+
+public class BeatController implements ControllerInterface {
+ 
+	BeatModelInterface model;
+ 
+	DJView view;
+ 
+   
+ 
+<span class="nc" id="L20">	public BeatController(BeatModelInterface model) {</span>
+ 
+<span class="nc" id="L22">		this.model = model;</span>
+ 
+<span class="nc" id="L24">		view = new DJView(this, model);</span>
+ 
+<span class="nc" id="L26">        view.createView();</span>
+ 
+<span class="nc" id="L28">        view.createControls();</span>
+ 
+<span class="nc" id="L30">		view.disableStopMenuItem();</span>
+ 
+<span class="nc" id="L32">		view.enableStartMenuItem();</span>
+ 
+<span class="nc" id="L34">		model.initialize();</span>
+ 
+<span class="nc" id="L36">	}</span>
+ 
+	
+ 
+<span class="nc" id="L40">	public BeatController(BeatModel model, CmbView view) {</span>
+ 
+<span class="nc" id="L42">		this.view = view;</span>
+ 
+<span class="nc" id="L44">		this.view.disableStopMenuItem();</span>
+ 
+<span class="nc" id="L46">		this.view.enableStartMenuItem();</span>
+ 
+<span class="nc" id="L48">		this.model = model;</span>
+ 
+<span class="nc" id="L50">		this.model.initialize();</span>
+ 
+<span class="nc" id="L52">	}</span>
+ 
+  
+ 
+	public void start() {
+ 
+<span class="nc" id="L58">		model.on();</span>
+ 
+<span class="nc" id="L60">		view.disableStartMenuItem();</span>
+ 
+<span class="nc" id="L62">		view.enableStopMenuItem();</span>
+ 
+<span class="nc" id="L64">	}</span>
+ 
+  
+ 
+	public void stop() {
+ 
+<span class="nc" id="L70">		model.off();</span>
+ 
+<span class="nc" id="L72">		view.disableStopMenuItem();</span>
+ 
+<span class="nc" id="L74">		view.enableStartMenuItem();</span>
+ 
+<span class="nc" id="L76">	}</span>
+ 
+    
+ 
+	public void increaseBPM() {
+ 
+<span class="nc" id="L82">        int bpm = model.getBPM();</span>
+ 
+<span class="nc" id="L84">        model.setBPM(bpm + 1);</span>
+ 
+<span class="nc" id="L86">	}</span>
+ 
+    
+ 
+	public void decreaseBPM() {
+ 
+<span class="nc" id="L92">        int bpm = model.getBPM();</span>
+ 
+<span class="nc" id="L94">        model.setBPM(bpm - 1);</span>
+ 
+<span class="nc" id="L96">  	}</span>
+ 
+  
+ 
+ 	public void setBPM(int bpm) {
+ 
+<span class="nc" id="L102">		model.setBPM(bpm);</span>
+ 
+<span class="nc" id="L104">	}</span>
+ 
+ 	
+ 
+ 	public void setView(DJView view){
+ 
+<span class="nc" id="L110"> 		this.view = view;</span>
+ 
+<span class="nc" id="L112"> 	}</span>
+ 
+} 
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

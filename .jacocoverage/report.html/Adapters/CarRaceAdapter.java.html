@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>CarRaceAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;Juego&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">Adapters</a> &gt; <span class="el_source">CarRaceAdapter.java</span></div><h1>CarRaceAdapter.java</h1><pre class="source lang-java linenums">
+package Adapters;
+
+import Model.CarRaceModel;
+import Observer.BPMObserver;
+import Model.BeatModelInterface;
+import Observer.BeatObserver;
+
+/**
+ *
+ * @author Santiago
+ */
+public class CarRaceAdapter implements BeatModelInterface {
+   
+    CarRaceModel car;
+
+<span class="nc" id="L17">    public CarRaceAdapter(CarRaceModel car) {</span>
+<span class="nc" id="L18">        this.car = car;</span>
+<span class="nc" id="L19">    }</span>
+
+    @Override
+    public void initialize() {
+<span class="nc" id="L23">        this.car.initialize();</span>
+<span class="nc" id="L24">    }</span>
+
+    @Override
+    public void on() {
+<span class="nc" id="L28">        this.car.on();</span>
+<span class="nc" id="L29">    }</span>
+
+    @Override
+    public void off() {
+<span class="nc" id="L33">        this.car.off();</span>
+<span class="nc" id="L34">    }</span>
+
+    @Override
+    public void setBPM(int f) {
+<span class="nc" id="L38">        this.car.UpdateFuel();</span>
+<span class="nc" id="L39">    }</span>
+
+    @Override
+    public int getBPM() {
+<span class="nc" id="L43">        return this.car.getFuel();</span>
+    }
+
+    @Override
+    public void registerObserver(BeatObserver o) {
+<span class="nc" id="L48">        this.car.registerObserver(o);</span>
+<span class="nc" id="L49">    }</span>
+
+    @Override
+    public void removeObserver(BeatObserver o) {
+<span class="nc" id="L53">        this.car.removeObserver(o);</span>
+<span class="nc" id="L54">    }</span>
+
+    @Override
+    public void registerObserver(BPMObserver o) {
+<span class="nc" id="L58">        this.car.registerObserver(o);</span>
+<span class="nc" id="L59">    }</span>
+
+    @Override
+    public void removeObserver(BPMObserver o) {
+<span class="nc" id="L63">        this.car.removeObserver(o);</span>
+<span class="nc" id="L64">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
