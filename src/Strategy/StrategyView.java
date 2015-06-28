@@ -92,12 +92,13 @@ public class StrategyView extends DJView {
                         {
                             controller.stop();
                         }
-                       CarRaceModel car = new CarRaceModel(new Autos(80,0,null,false) ,new ArrayList<Autos>());
-                        CarRaceController detectorController = new CarRaceController(car, thisView);
-                        setController(detectorController);
+                       CarRaceModel car = new CarRaceModel(new Autos(80,0,"Azul",false) ,new ArrayList<Autos>());
+                        CarRaceController carController = new CarRaceController(car, thisView);
+                        setController(carController);
                         setModel((new CarRaceAdapter(car)));
                     }
                 }
+                
             }
         });
         bpmPanel.add(comboBox);
