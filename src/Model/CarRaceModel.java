@@ -396,16 +396,22 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener {
     }
 
     @Override
-    public void setPosicionX(int v) {
-        if (v > 0) {
-            if (miauto.getPosicionx() < iLimiteXDerecha) {
-                miauto.setPosicionx(miauto.getPosicionx() + v * iMovimientoX);
-            }
-        } else {
-            if (miauto.getPosicionx() > iLimiteXIzquierda) {
-                miauto.setPosicionx(miauto.getPosicionx() + v * 100);
-            }
+    public void setPosicionX(int v) 
+    {
+        if (v> 0)
+        {
+            if(miauto.getPosicionx()+v*iMovimientoX<=iLimiteXDerecha)
+                miauto.setPosicionx(miauto.getPosicionx()+v*iMovimientoX);
+        }
+        else
+        {
+            if(miauto.getPosicionx()+v*iMovimientoX>=iLimiteXIzquierda)
+                miauto.setPosicionx(miauto.getPosicionx()+v*100);
         }
         notifyModelObservers("AutoMover");
+    }
+    
+     public Car getMiauto() {
+        return miauto;
     }
 }
