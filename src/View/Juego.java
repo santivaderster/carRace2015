@@ -5,24 +5,13 @@
  */
 package View;
 
-import Controller.ControllerInterface;
 import Class.Car;
 import Controller.CarRaceGameController;
 import Model.CarRaceModel;
 import Observer.CarRaceObserver;
-import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 /**
@@ -34,14 +23,6 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
     /**
      * Creates new form Juego
      */
-    private Point posicionAuto;
-    private Thread GenerarAutos;
-    private Thread Tiempo;
-    private boolean correr = true;
-    private float fVelocidad = 1;
-    private int iTiempo;
-    private int iNafta;
-    private String sIconoActual = "Amarillo";
     private CarRaceGameController controlador;
     private CarRaceModel modelo;
     private Car miauto;
@@ -89,7 +70,7 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
         jLabel2 = new javax.swing.JLabel();
         llblfuel = new javax.swing.JLabel();
         lbltextfuel = new java.awt.Label();
-        jButton1 = new javax.swing.JButton();
+        btnAbout = new javax.swing.JButton();
 
         jInicio.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
@@ -269,10 +250,10 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
         lbltextfuel.setForeground(new java.awt.Color(255, 0, 51));
         lbltextfuel.setText("FUEL");
 
-        jButton1.setText("About");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAbout.setText("About");
+        btnAbout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAboutActionPerformed(evt);
             }
         });
 
@@ -295,7 +276,7 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
                                 .addComponent(llblfuel))))
                     .addGroup(pnlDatosLayout.createSequentialGroup()
                         .addGap(51, 51, 51)
-                        .addComponent(jButton1)))
+                        .addComponent(btnAbout)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlDatosLayout.setVerticalGroup(
@@ -313,7 +294,7 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
                 .addGap(47, 47, 47)
                 .addComponent(btnReiniciar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnAbout)
                 .addContainerGap())
         );
 
@@ -367,33 +348,17 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
     }//GEN-LAST:event_btnComenzarActionPerformed
 
     private void pnlJuegoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pnlJuegoKeyReleased
-        
-//        int x = lblAutoJ.getLocation().x;
-//        int y = lblAutoJ.getLocation().y;
         switch (evt.getKeyCode())
         {
             case KeyEvent.VK_LEFT://Auto mueve a la izquierda
                 controlador.MoverIzquierda();
-//                if (correr)
-//                    if(x > 80)
-//                        lblAutoJ.setLocation(x-100, y);
                 break;
             case KeyEvent.VK_RIGHT://Auto mueve a la derecha
                 controlador.MoverDerecha();
-//                if (correr)
-//                    if(x < 480)
-//                        lblAutoJ.setLocation(x+100, y);
                 break;
             case KeyEvent.VK_ESCAPE://Programa en pausa
                 controlador.stop();
-//                correr = false;
-//                JOptionPane.showMessageDialog(this, "JUEGO PAUSADO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-//                correr = true;
-//                break;
             case KeyEvent.VK_F2:
-//                controlador.Reiniciar();
-                Reiniciar();
-//                break;
         }        
     }//GEN-LAST:event_pnlJuegoKeyReleased
 
@@ -406,7 +371,7 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
     }//GEN-LAST:event_lblIzquierdaMouseClicked
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
-        Reiniciar();
+
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
     private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
@@ -433,11 +398,11 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
         // TODO add your handling code here:
     }//GEN-LAST:event_lblAutoKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAboutActionPerformed
         JOptionPane.showMessageDialog(null, "Prados, Santiago Agustin \n"
                 + "Perpetua, Patricio R. \n"
                 + "Viñas Viscardi, Dardo Ariel", "Programadores - Ing. Software 2015", JOptionPane.INFORMATION_MESSAGE);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAboutActionPerformed
 
     private void jInicioWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_jInicioWindowClosed
         
@@ -488,9 +453,9 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAbout;
     private javax.swing.JButton btnComenzar;
     private javax.swing.JButton btnReiniciar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -514,264 +479,8 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
-    private void ComenzarJuego(String text, Icon icon) 
-    {
-        this.setTitle("Race: Esta jugando " + text);
-        lblAutoJ.setIcon(icon);
-        pnlJuego.requestFocus();
-        this.setVisible(true);
-        GenerarAutos = new Thread(){
-
-            @Override
-            public void run() 
-            {
-                Random oRandom = new Random();
-                int num;
-                int cant =0;
-                super.run(); //To change body of generated methods, choose Tools | Templates.
-                while(true)
-                {
-                    if (correr)
-                    {
-                        try 
-                        {
-                            Thread.sleep((long) (100*fVelocidad));
-                        } catch (InterruptedException ex){}                      
-                        if (cant == 0 )
-                        {
-                            num = (int)(oRandom.nextDouble() * 5 + 1);
-                            switch(num)
-                            {
-                                case 1:
-                                    if (!lblAuto1.isVisible())
-                                    {
-                                        lblAuto1.setVisible(true);
-                                        lblAuto1.setLocation(80, 460);
-                                    }
-                                break;
-                                case 2:
-                                if (!lblAuto2.isVisible())
-                                {
-                                    lblAuto2.setVisible(true);
-                                    lblAuto2.setLocation(180, 460);
-                                }
-                                break;
-                                case 3:
-                                if (!lblAuto3.isVisible())
-                                {
-                                    lblAuto3.setVisible(true);                                   
-                                    lblAuto3.setLocation(280, 460);
-                                }
-                                break;
-                                case 4:
-                                    if (!lblAuto4.isVisible())
-                                    {
-                                        lblAuto4.setVisible(true);
-                                        lblAuto4.setLocation(380, 460);
-                                    }
-                                break;
-                                    case 5:
-                                    if (!lblAuto5.isVisible())
-                                    {
-                                        lblAuto5.setVisible(true);
-                                        lblAuto5.setLocation(480, 460);
-                                    }
-                                break;
-                            }                            
-                        }
-                        else
-                        {
-                            if (lblAuto1.isVisible())
-                            {
-//                                if(lblAuto1.getLocation().y == lblAutoJ.getLocation().y+100)
-//                                {
-//                                    lblAuto1.setVisible(false);
-//                                    if(lblAutoJ.getLocation().x == lblAuto1.getLocation().x)
-//                                    {
-//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-//                                        switch(sIconoActual)
-//                                        {
-//                                            case "Amarillo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-//                                                break;
-//                                            case "Rojo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-//                                                break;
-//                                            case "Azul":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-//                                                break;
-//                                        }
-//                                        correr = false;
-//                                    }
-//                                }
-//                                else
-//                                {
-                                    lblAuto1.setLocation(lblAuto1.getLocation().x, lblAuto1.getLocation().y-10);
-//                                }
-                            }
-                            if (lblAuto2.isVisible())
-                            {
-//                                if(lblAuto2.getLocation().y == lblAutoJ.getLocation().y+100)
-//                                {
-//                                    lblAuto2.setVisible(false);
-//                                    if(lblAutoJ.getLocation().x == lblAuto2.getLocation().x)
-//                                    {
-//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-//                                        switch(sIconoActual)
-//                                        {
-//                                            case "Amarillo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-//                                                break;
-//                                            case "Rojo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-//                                                break;
-//                                            case "Azul":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-//                                                break;
-//                                        }
-//                                        correr = false;
-//                                    }
-//                                }
-//                                else
-                                    lblAuto2.setLocation(lblAuto2.getLocation().x, lblAuto2.getLocation().y-10);
-                            }
-                            if (lblAuto3.isVisible())
-                            {
-//                                if(lblAuto3.getLocation().y == lblAutoJ.getLocation().y+100)
-//                                {    
-//                                    lblAuto3.setVisible(false);
-//                                    if(lblAutoJ.getLocation().x == lblAuto3.getLocation().x)
-//                                    {
-//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-//                                        switch(sIconoActual)
-//                                        {
-//                                            case "Amarillo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-//                                                break;
-//                                            case "Rojo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-//                                                break;
-//                                            case "Azul":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-//                                                break;
-//                                        }
-//                                        correr = false;
-//                                    }
-//                                }
-//                                else
-                                    lblAuto3.setLocation(lblAuto3.getLocation().x, lblAuto3.getLocation().y-10);
-                            }
-                            if (lblAuto4.isVisible())
-                            {
-//                                if(lblAuto4.getLocation().y == lblAutoJ.getLocation().y+100)
-//                                {
-//                                    lblAuto4.setVisible(false);
-//                                    if(lblAutoJ.getLocation().x == lblAuto4.getLocation().x)
-//                                    {
-//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-//                                        switch(sIconoActual)
-//                                        {
-//                                            case "Amarillo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-//                                                break;
-//                                            case "Rojo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-//                                                break;
-//                                            case "Azul":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-//                                                break;
-//                                        }
-//                                        correr = false;
-//                                    }
-//                                }
-//                                else
-                                    lblAuto4.setLocation(lblAuto4.getLocation().x, lblAuto4.getLocation().y-10);
-                            }
-                            if (lblAuto5.isVisible())
-                            {
-//                                if(lblAuto5.getLocation().y == lblAutoJ.getLocation().y+100)
-//                                {
-//                                    lblAuto5.setVisible(false);
-//                                    if(lblAutoJ.getLocation().x == lblAuto5.getLocation().x)
-//                                    {
-//                                        JOptionPane.showMessageDialog(null, "CHOCASTE MOSTRO!", "ATENCION", JOptionPane.INFORMATION_MESSAGE);
-//                                        switch(sIconoActual)
-//                                        {
-//                                            case "Amarillo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAmaRoto.png")));
-//                                                break;
-//                                            case "Rojo":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojoRoto.png")));
-//                                                break;
-//                                            case "Azul":
-//                                                lblAutoJ.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzulRoto.png")));
-//                                                break;
-//                                        }
-//                                        correr = false;
-//                                    }
-//                                }
-//                                else
-                                    lblAuto5.setLocation(lblAuto5.getLocation().x, lblAuto5.getLocation().y-10);
-                            }
-                        }
-                        cant++;
-                        if (cant == 10)
-                            cant = 0;
-                    }
-                    else
-                    {
-                        
-                    }
-                }
-            }
-        };
-        GenerarAutos.start();
-        iTiempo = 0;
-        Tiempo = new Thread()
-        {
-
-            @Override// esta parte hay que sacarla 
-            public void run() 
-            {
-                super.run(); //To change body of generated methods, choose Tools | Templates.
-                while(true)
-                {
-                    try 
-                    {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex){}
-                    iTiempo++;
-                    if (iNafta != 0 && correr)
-                    {
-                        if(lblAutoJ.getLocation().x == 80 || lblAutoJ.getLocation().x == 480)
-                        {
-                            iNafta++;
-                        }
-                        else
-                            iNafta--;
-                    }
-                    else
-                    {
-                        if(correr == true)
-                        {
-                            correr = false;
-                            JOptionPane.showMessageDialog(null,"Has Perdido, Vuelve a intentarlo!", "GameOver", JOptionPane.ERROR_MESSAGE);                            
-                        }
-                    }
-                    prBarNafta.setValue(iNafta);
-                    if (iTiempo% 60 == 0)
-                        fVelocidad = fVelocidad/10;
-                    
-                }
-            }
-            
-        };
-        Tiempo.start();
-    }
-
     private void ConfiguracionVisual() 
     {
-        prBarNafta.setValue(0);
         prBarNafta.setStringPainted(true);
         this.setLocationRelativeTo(null);           
         this.setResizable(false);
@@ -785,52 +494,10 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
         txtNombre.requestFocus();
     }
 
-    private void Reiniciar() 
-    {
-        switch(sIconoActual)
-        {
-            case "Amarillo":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
-                break;
-            case "Rojo":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
-                break;
-            case "Azul":
-                lblAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
-                break;
-        }
-        txtNombre.setText("");
-        jInicio.setVisible(true);
-        this.setVisible(false);
-        txtNombre.requestFocus();
-        
-    }
-
-    private void Comenzar() 
-    {
-        if (txtNombre.getText().isEmpty())
-            JOptionPane.showMessageDialog(null,"Debe escribir su nombre para comenzar!", "Error", JOptionPane.ERROR_MESSAGE);
-        else
-        {
-            iNafta = 10;
-            prBarNafta.setValue(iNafta);
-            jInicio.setVisible(false);
-            correr = true;
-            ComenzarJuego(txtNombre.getText(),lblAuto.getIcon());
-        }
-    }
-
-
     @Override
     public void setfuel(int i) 
     {
         prBarNafta.setValue(i);
-    }
-
-    @Override
-    public void getfuel() 
-    {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -879,7 +546,6 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
         pnlJuego.requestFocus();
         this.setVisible(true);
         controlador.start();
-        //Comenzar();
     }
 
     @Override
@@ -910,20 +576,12 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
 
     @Override
     public void updateestado(String estado) {
-     
         switch (estado){
             case "GameOver":
-                
                controlador.stop();
-            
                pnlPrincipal.requestFocus();
                JOptionPane.showMessageDialog(null, "Juego Finalizado", "GAME OVER", JOptionPane.INFORMATION_MESSAGE);
-                
                break;
-        
-        
         }
-    
     }
-    
 }

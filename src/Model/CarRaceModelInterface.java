@@ -15,6 +15,11 @@ public interface CarRaceModelInterface
     void removeObserver(CarRaceObserver o);
     void registerObserver(BPMObserver o);
     void removeObserver(BPMObserver o);
+    void registerObserver(BeatObserver o);
+    void removeObserver(BeatObserver o);
+    void notifyModelObservers(String sAccion);
+    void notifyBeatObservers();
+    void notifyBPMObservers();
     void FlechaIzquierda();
     void FlechaDerecha();
     void setPosicionX(int v);

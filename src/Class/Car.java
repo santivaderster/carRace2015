@@ -1,6 +1,9 @@
 package Class;
 
-import java.util.Random;
+/**
+ *
+ * @author Santiago
+ */
 
 public class Car {
 
@@ -12,7 +15,7 @@ public class Car {
     private int maxFuel = 10;
 
     public Car( int x , int y , String color, boolean visible) {
-        fuel =maxFuel;
+        fuel = maxFuel;
         posicionx = x; // genera posicion x aleatoria de autos en contramano
         posiciony = y;  //  colocar la posicion de donde arranca los autos en contra mano 
         colorSelectionJugador = color;
@@ -41,11 +44,9 @@ public class Car {
 
     public void setFuel(int fuel) 
     {
-        if (fuel<=maxFuel && fuel >= 0)
+        if (fuel <= maxFuel && fuel >= 0)
             this.fuel = fuel;
     }
-
- 
 
     public int getPosicionx() {
         return posicionx;

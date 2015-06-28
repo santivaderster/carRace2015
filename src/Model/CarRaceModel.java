@@ -6,27 +6,27 @@ import javax.sound.midi.*;
 
 import Class.Car;
 import Observer.CarRaceObserver;
-//import Ca.ModelObserver;
 
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ *
+ * @author Santiago
+ */
+public class CarRaceModel implements CarRaceModelInterface, MetaEventListener {
 
-public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
-{
     Sequencer sequencer;
     ArrayList<BeatObserver> beatObservers = new ArrayList<BeatObserver>();
     ArrayList<BPMObserver> bpmObservers = new ArrayList<BPMObserver>();
     ArrayList<CarRaceObserver> modelObservers = new ArrayList<CarRaceObserver>();
     int bpm = 0;   // los bpm arranca en 0 el fuel esta lleno 
- 
+
     Sequence sequence;
     Track track;
     Car miauto;
     ArrayList<Car> autosContra = new ArrayList<Car>();
-    Thread Tiempo ;
-   
+    Thread Tiempo;
+
 //        public CarRaceModel() {
 //        beatObservers = new ArrayList<BeatObserver>();
 //        bpmObservers = new ArrayList<BPMObserver>();
@@ -41,8 +41,8 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     private int iCantidadCombustible = 1;
     private int iRefrescoAutoContra = 3;
     private int iTamanoAuto = 63;
-    private boolean tiempofinalizado=false; 
-     
+    private boolean tiempofinalizado = false;
+
     public CarRaceModel(Car auto, ArrayList<Car> autosContra) {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
@@ -52,9 +52,8 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         this.miauto.setFuel(10);
         String sColor = null;
         Car oAuto;
-         for (int i = 0; i < 5; i++) {
-            switch (i)
-            {
+        for (int i = 0; i < 5; i++) {
+            switch (i) {
                 case 0:
                     sColor = "Amarillo";
                     break;
@@ -71,140 +70,128 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     sColor = "Azul";
                     break;
             }
-            oAuto = new Car(i*iMovimientoX + iLimiteXIzquierda,iLimiteYAbajo, sColor,false);
-             autosContra.add(oAuto);
-             oAuto = null;
-         }
-     }
+            oAuto = new Car(i * iMovimientoX + iLimiteXIzquierda, iLimiteYAbajo, sColor, false);
+            autosContra.add(oAuto);
+            oAuto = null;
+        }
+    }
 
-    
-    
-    
-    
-    
+    @Override
     public void initialize() {
         setUpMidi();
         buildTrackAndStart();
     }
 
-    public void on() 
-    {
+    @Override
+    public void on() {
         sequencer.start();
         setBPM(miauto.getFuel());
         notifyModelObservers("AutoSeleccionado");
         notifyModelObservers("AutosContra");
-        Tiempo = new Thread()
-        {
+        Tiempo = new Thread() {
             @Override
-            public void run() 
-            {
-                int cant = iRefrescoAutoContra-1;
-                super.run(); 
-                while (!tiempofinalizado)
-                {
-                    try 
-                    {
+            public void run() {
+                int cant = iRefrescoAutoContra - 1;
+                super.run();
+                while (!tiempofinalizado) {
+                    try {
                         Thread.sleep(1000);
-                    } catch (InterruptedException ex) 
-                    {
+                    } catch (InterruptedException ex) {
                         System.out.println(ex.getMessage());
                     }
                     cant++;
-                    if (miauto.getPosicionx() != iLimiteXIzquierda )//&& miauto.getPosicionx() != iLimiteXDerecha)
-                        miauto.setFuel(miauto.getFuel()-1*iCantidadCombustible);
-                    else
+                    if (miauto.getPosicionx() != iLimiteXIzquierda)//&& miauto.getPosicionx() != iLimiteXDerecha)
                     {
-                        miauto.setFuel(miauto.getFuel()+1*iCantidadCombustible);
+                        miauto.setFuel(miauto.getFuel() - 1 * iCantidadCombustible);
+                    } else {
+                        miauto.setFuel(miauto.getFuel() + 1 * iCantidadCombustible);
                     }
                     UpdateFuel();
-                    if (miauto.getFuel()==0){
-                        switch (miauto.getColorSelectionJugador())
-                        {
+                    if (miauto.getFuel() == 0) {
+                        switch (miauto.getColorSelectionJugador()) {
                             case "Amarillo":
                                 miauto.setColorSelectionJugador("AmarilloRoto");
-                            break;                                            
+                                break;
                             case "Azul":
                                 miauto.setColorSelectionJugador("AzulRoto");
-                            break;
+                                break;
                             case "Rojo":
                                 miauto.setColorSelectionJugador("RojoRoto");
-                            break;
+                                break;
                         }
                         notifyModelObservers("AutoSeleccionado");
                         notifyModelObservers("GameOver");
                     }
-                    if (cant == iRefrescoAutoContra )
-                    {
+                    if (cant == iRefrescoAutoContra) {
                         cant = 0;
                         Random oRandom = new Random();
-                        int num = (int)(oRandom.nextDouble() * 5 + 0);
-                        if (!autosContra.get(num).isVisible())
-                        {
+                        int num = (int) (oRandom.nextDouble() * 5 + 0);
+                        if (!autosContra.get(num).isVisible()) {
                             autosContra.get(num).setVisible(true);
                             autosContra.get(num).setPosiciony(iLimiteYAbajo);
                         }
                     }
-                if (detectorChoque()){ //&& miauto.getColorSelectionJugador()!="carRaceTestDrive"){//calculo de choque 
-                
-                notifyModelObservers("AutoSeleccionado");
-                notifyModelObservers("GameOver");
-                }
+                    if (detectorChoque()) { //&& miauto.getColorSelectionJugador()!="carRaceTestDrive"){//calculo de choque 
+
+                        notifyModelObservers("AutoSeleccionado");
+                        notifyModelObservers("GameOver");
+                    }
                     for (int i = 0; i < autosContra.size(); i++) {
-                        if (autosContra.get(i).isVisible())
+                        if (autosContra.get(i).isVisible()) {
                             notifyModelObservers("AutosContra");
+                        }
                     }
                 }
-            }   
+            }
         };
         Tiempo.start();
     }
-    
-    public boolean detectorChoque(){
+
+    public boolean detectorChoque() {
         boolean choque = false;
         for (int i = 0; i < autosContra.size(); i++) {
-                            if(autosContra.get(i).isVisible())
-                                autosContra.get(i).setPosiciony(autosContra.get(i).getPosiciony()-1*iMovimientoY);
-                            if (autosContra.get(i).getPosiciony()<iLimiteYArriba+iTamanoAuto)
-                            {
-                                autosContra.get(i).setVisible(false);
-                                autosContra.get(i).setPosiciony(iLimiteYAbajo);
-                                if (miauto.getPosicionx() == autosContra.get(i).getPosicionx())
-                                {                                    
-                                    switch (miauto.getColorSelectionJugador())
-                                    {
-                                        case "Amarillo":
-                                            miauto.setColorSelectionJugador("AmarilloRoto");
-                                        break;                                            
-                                        case "Azul":
-                                            miauto.setColorSelectionJugador("AzulRoto");
-                                        break;
-                                        case "Rojo":
-                                            miauto.setColorSelectionJugador("RojoRoto");
-                                        break;
-                                    }
-                                   choque=true;
-                                }
-                            }
-                        }
-    
-    return choque;
-    
-    
-    }
-    
+            if (autosContra.get(i).isVisible()) {
+                autosContra.get(i).setPosiciony(autosContra.get(i).getPosiciony() - 1 * iMovimientoY);
+            }
+            if (autosContra.get(i).getPosiciony() < iLimiteYArriba + iTamanoAuto) {
+                autosContra.get(i).setVisible(false);
+                autosContra.get(i).setPosiciony(iLimiteYAbajo);
+                if (miauto.getPosicionx() == autosContra.get(i).getPosicionx()) {
+                    switch (miauto.getColorSelectionJugador()) {
+                        case "Amarillo":
+                            miauto.setColorSelectionJugador("AmarilloRoto");
+                            break;
+                        case "Azul":
+                            miauto.setColorSelectionJugador("AzulRoto");
+                            break;
+                        case "Rojo":
+                            miauto.setColorSelectionJugador("RojoRoto");
+                            break;
+                    }
+                    choque = true;
+                }
+            }
+        }
 
+        return choque;
+
+    }
+
+    @Override
     public void off() {
         setBPM(0);
         sequencer.stop();
-        tiempofinalizado =true;
+        tiempofinalizado = true;
     }
 
+    @Override
     public void setBPM(int bpm) {
         this.bpm = bpm;
         sequencer.setTempoInBPM(getBPM());
         notifyBPMObservers();
     }
 
+    @Override
     public int getBPM() {
         return bpm;
     }
@@ -213,18 +200,22 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         notifyBeatObservers();
     }
 
+    @Override
     public void registerObserver(BeatObserver o) {
         beatObservers.add(o);
     }
 
+    @Override
     public void registerObserver(BPMObserver o) {
         bpmObservers.add(o);
     }
 
+    @Override
     public void registerObserver(CarRaceObserver o) {
         modelObservers.add(o);
     }
-    
+
+    @Override
     public void notifyBPMObservers() {
         for (int i = 0; i < bpmObservers.size(); i++) {
             BPMObserver observer = (BPMObserver) bpmObservers.get(i);
@@ -232,22 +223,24 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
 
+    @Override
     public void notifyBeatObservers() {
         for (int i = 0; i < beatObservers.size(); i++) {
             BeatObserver observer = (BeatObserver) beatObservers.get(i);
             observer.updateBeat();
         }
     }
-    
+
+    @Override
     public void notifyModelObservers(String sAccion) {
         for (int i = 0; i < modelObservers.size(); i++) {
             CarRaceObserver observer = (CarRaceObserver) modelObservers.get(i);
-            switch(sAccion){
+            switch (sAccion) {
                 case "AutoMover":
                     observer.updateAuto(miauto.getPosicionx());
                     break;
                 case "AutosContra":
-                   observer.updateAutosContra();
+                    observer.updateAutosContra();
                     break;
                 case "Auto2Mover":
                     break;
@@ -274,11 +267,12 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     break;
                 case "GameOver":
                     observer.updateestado("GameOver");
-                        break;
+                    break;
             }
         }
     }
-    
+
+    @Override
     public void removeObserver(BeatObserver o) {
         int i = beatObservers.indexOf(o);
         if (i >= 0) {
@@ -286,13 +280,15 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
 
+    @Override
     public void removeObserver(BPMObserver o) {
         int i = bpmObservers.indexOf(o);
         if (i >= 0) {
             bpmObservers.remove(i);
         }
     }
-    
+
+    @Override
     public void removeObserver(CarRaceObserver o) {
         int i = modelObservers.indexOf(o);
         if (i >= 0) {
@@ -300,6 +296,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
 
+    @Override
     public void meta(MetaMessage message) {
         if (message.getType() == 0x2F) {
             beatEvent();
@@ -357,22 +354,18 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         return event;
     }
 
-    // Metodos propios del Modelo 
+    public int getFuel() {
+        return miauto.getFuel();
+    }
 
- public int getFuel(){
-  return  miauto.getFuel();
-  }
-
-   public void UpdateFuel() {
+    public void UpdateFuel() {
         setBPM(-(-400 + 40 * miauto.getFuel()));
         notifyModelObservers("updateFuel");
     }
 
     @Override
-    public void FlechaIzquierda() 
-    {
-        switch(miauto.getColorSelectionJugador())
-        {
+    public void FlechaIzquierda() {
+        switch (miauto.getColorSelectionJugador()) {
             case "Amarillo":
                 miauto.setColorSelectionJugador("Rojo");
                 break;
@@ -387,10 +380,8 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     }
 
     @Override
-    public void FlechaDerecha() 
-    {
-        switch(miauto.getColorSelectionJugador())
-        {
+    public void FlechaDerecha() {
+        switch (miauto.getColorSelectionJugador()) {
             case "Amarillo":
                 miauto.setColorSelectionJugador("Azul");
                 break;
@@ -405,17 +396,15 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     }
 
     @Override
-    public void setPosicionX(int v) 
-    {
-        if (v> 0)
-        {
-            if(miauto.getPosicionx()<iLimiteXDerecha)
-                miauto.setPosicionx(miauto.getPosicionx()+v*iMovimientoX);
-        }
-        else
-        {
-            if(miauto.getPosicionx()>iLimiteXIzquierda)
-                miauto.setPosicionx(miauto.getPosicionx()+v*100);
+    public void setPosicionX(int v) {
+        if (v > 0) {
+            if (miauto.getPosicionx() < iLimiteXDerecha) {
+                miauto.setPosicionx(miauto.getPosicionx() + v * iMovimientoX);
+            }
+        } else {
+            if (miauto.getPosicionx() > iLimiteXIzquierda) {
+                miauto.setPosicionx(miauto.getPosicionx() + v * 100);
+            }
         }
         notifyModelObservers("AutoMover");
     }
