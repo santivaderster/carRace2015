@@ -3,7 +3,7 @@ package Controller;
 import View.DJView;
 import Model.BeatModelInterface;
 import Model.BeatModel;
-import View.StrategyView;
+import View.CmbView;
 
 
 
@@ -37,7 +37,7 @@ public class BeatController implements ControllerInterface {
  
 	
  
-	public BeatController(BeatModel model, StrategyView view) {
+	public BeatController(BeatModel model, CmbView view) {
  
 		this.view = view;
  

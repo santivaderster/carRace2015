@@ -27,11 +27,11 @@ import javax.swing.*;
 
 import java.util.ArrayList;
 
-public class StrategyView extends DJView {
+public class CmbView extends DJView {
 
-    private final JComboBox comboBox = new JComboBox();
+    private final JComboBox cmbEleccion = new JComboBox();
 
-    private final StrategyView thisView = this;
+    private final CmbView thisView = this;
 
     private HeartAdapter heartAdapter = new HeartAdapter(HeartModel.getInstance());
 
@@ -40,13 +40,13 @@ public class StrategyView extends DJView {
      * @param controller
      * @param model
      */
-    public StrategyView(ControllerInterface controller, BeatModelInterface model) {
+    public CmbView(ControllerInterface controller, BeatModelInterface model) {
 
         super(controller, model);
 
     }
 
-    public StrategyView() {
+    public CmbView() {
 
         super();
 
@@ -68,52 +68,41 @@ public class StrategyView extends DJView {
         viewFrame.getContentPane().add(viewPanel, BorderLayout.CENTER);
         viewFrame.pack();
         viewFrame.setVisible(true);
-        comboBox.setModel(new DefaultComboBoxModel(new String[]{"", "ModelHeart", "ModelBeat", "ModelCarRace"}));
-        comboBox.setSelectedIndex(0);
-        comboBox.setToolTipText("");
-        comboBox.addItemListener(new ItemListener()
+        cmbEleccion.setModel(new DefaultComboBoxModel(new String[]{"Seleccionar", "ModelHeart", "ModelBeat", "ModelCarRace"}));
+        cmbEleccion.setSelectedIndex(0);
+        cmbEleccion.setToolTipText("");
+        cmbEleccion.addItemListener(new ItemListener()
         {
             public void itemStateChanged(ItemEvent e) 
             {
                 if (e.getStateChange() == ItemEvent.SELECTED) 
                 {
-                    if (comboBox.getSelectedIndex() == 1) 
-                    {
-                        if (controller != null) 
-                        {
+                    if (controller != null) 
                             controller.stop();
-                        }
-                        HeartController heartController = new HeartController(thisView);
-                        setController(heartController);
-                        setModel(heartAdapter);
-                    }
-                    if (comboBox.getSelectedIndex() == 2) 
+                    switch (e.getItem().toString())
                     {
-                        if (controller != null) 
-                        {
-                            controller.stop();
-                        }
-                        BeatModel beat = new BeatModel();
-                        BeatController beatController = new BeatController(beat, thisView);
-                        setController(beatController);
-                        setModel(beat);
-                    }
-                    if (comboBox.getSelectedIndex() == 3) 
-                    {
-                        if (controller != null) 
-                        {
-                            controller.stop();
-                        }
-                       CarRaceModel car = new CarRaceModel(new Car(80,0,"Azul",false) ,new ArrayList<Car>());
-                        CarRaceController carController = new CarRaceController(car, thisView);
-                        setController(carController);
-                        setModel((new CarRaceAdapter(car)));
+                        case "ModelHeart":
+                            HeartController heartController = new HeartController(thisView);
+                            setController(heartController);
+                            setModel(heartAdapter);
+                            break;
+                        case "ModelBeat":
+                            BeatModel beat = new BeatModel();
+                            BeatController beatController = new BeatController(beat, thisView);
+                            setController(beatController);
+                            setModel(beat);
+                            break;
+                        case "ModelCarRace":
+                            CarRaceModel car = new CarRaceModel(new Car(80,0,"Azul",false) ,new ArrayList<Car>());
+                            CarRaceController carController = new CarRaceController(car, thisView);
+                            setController(carController);
+                            setModel((new CarRaceAdapter(car)));
+                            break;
                     }
                 }
-                
             }
         });
-        bpmPanel.add(comboBox);
+        bpmPanel.add(cmbEleccion);
     }
 
     public void setModel(BeatModelInterface model) 

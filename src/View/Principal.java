@@ -16,7 +16,7 @@ import Model.CarRaceModel;
 import Controller.HeartController;
 import Model.HeartModel;
 import Model.HeartModelInterface;
-import View.StrategyView;
+import View.CmbView;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -190,7 +190,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTodosActionPerformed
 
     private void btnCmbBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCmbBoxActionPerformed
-       StrategyView view = new StrategyView();
+       CmbView view = new CmbView();
        view.createView();
        view.createControls();
     }//GEN-LAST:event_btnCmbBoxActionPerformed

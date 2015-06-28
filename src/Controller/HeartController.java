@@ -2,7 +2,7 @@ package Controller;
 
 
 import Adapters.HeartAdapter;
-import View.StrategyView;
+import View.CmbView;
 
 import Controller.ControllerInterface;
 import Model.HeartModel;
@@ -37,7 +37,7 @@ public class HeartController implements ControllerInterface {
  
 	
  
-	public HeartController(StrategyView view){
+	public HeartController(CmbView view){
  
 		this.model = HeartModel.getInstance();
  
