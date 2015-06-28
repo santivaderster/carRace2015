@@ -1,5 +1,7 @@
-package Beat;
+package Model;
 
+import Observer.BPMObserver;
+import Observer.BeatObserver;
 import javax.sound.midi.*;
 
 import java.util.*;

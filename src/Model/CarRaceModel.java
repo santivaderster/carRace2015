@@ -1,10 +1,12 @@
-package CarRace;
+package Model;
 
+import Observer.BeatObserver;
+import Observer.BPMObserver;
 import javax.sound.midi.*;
 
-import Beat.*;
+import Class.Car;
+import Observer.CarRaceObserver;
 //import Ca.ModelObserver;
-
 
 import java.util.*;
 import java.util.logging.Level;
@@ -16,13 +18,13 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     Sequencer sequencer;
     ArrayList<BeatObserver> beatObservers = new ArrayList<BeatObserver>();
     ArrayList<BPMObserver> bpmObservers = new ArrayList<BPMObserver>();
-    ArrayList<ModelObserver> modelObservers = new ArrayList<ModelObserver>();
+    ArrayList<CarRaceObserver> modelObservers = new ArrayList<CarRaceObserver>();
     int bpm = 0;   // los bpm arranca en 0 el fuel esta lleno 
  
     Sequence sequence;
     Track track;
-    Autos miauto;
-    ArrayList<Autos> autosContra = new ArrayList<Autos>();
+    Car miauto;
+    ArrayList<Car> autosContra = new ArrayList<Car>();
     Thread Tiempo ;
    
 //        public CarRaceModel() {
@@ -41,15 +43,15 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     private int iTamanoAuto = 63;
     private boolean tiempofinalizado=false; 
      
-    public CarRaceModel(Autos auto, ArrayList<Autos> autosContra) {
+    public CarRaceModel(Car auto, ArrayList<Car> autosContra) {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
-        modelObservers = new ArrayList<ModelObserver>();
+        modelObservers = new ArrayList<CarRaceObserver>();
         this.autosContra = autosContra;
         this.miauto = auto;
         this.miauto.setFuel(10);
         String sColor = null;
-        Autos oAuto;
+        Car oAuto;
          for (int i = 0; i < 5; i++) {
             switch (i)
             {
@@ -69,7 +71,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                     sColor = "Azul";
                     break;
             }
-            oAuto = new Autos(i*iMovimientoX + iLimiteXIzquierda,iLimiteYAbajo, sColor,false);
+            oAuto = new Car(i*iMovimientoX + iLimiteXIzquierda,iLimiteYAbajo, sColor,false);
              autosContra.add(oAuto);
              oAuto = null;
          }
@@ -219,7 +221,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         bpmObservers.add(o);
     }
 
-    public void registerObserver(ModelObserver o) {
+    public void registerObserver(CarRaceObserver o) {
         modelObservers.add(o);
     }
     
@@ -239,7 +241,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     
     public void notifyModelObservers(String sAccion) {
         for (int i = 0; i < modelObservers.size(); i++) {
-            ModelObserver observer = (ModelObserver) modelObservers.get(i);
+            CarRaceObserver observer = (CarRaceObserver) modelObservers.get(i);
             switch(sAccion){
                 case "AutoMover":
                     observer.updateAuto(miauto.getPosicionx());
@@ -291,7 +293,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
         }
     }
     
-    public void removeObserver(ModelObserver o) {
+    public void removeObserver(CarRaceObserver o) {
         int i = modelObservers.indexOf(o);
         if (i >= 0) {
             modelObservers.remove(i);

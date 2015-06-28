@@ -5,17 +5,17 @@
  */
 package Ventanas;
 
-import Beat.BeatController;
-import Beat.BeatModel;
-import Beat.BeatModelInterface;
-import Beat.ControllerInterface;
-import CarRace.Autos;
-import CarRace.CarRaceController;
-import CarRace.CarRaceModel;
-import Heart.HeartController;
-import Heart.HeartModel;
-import Heart.HeartModelInterface;
-import Strategy.StrategyView;
+import Controller.BeatController;
+import Model.BeatModel;
+import Model.BeatModelInterface;
+import Controller.ControllerInterface;
+import Class.Car;
+import Controller.CarRaceController;
+import Model.CarRaceModel;
+import Controller.HeartController;
+import Model.HeartModel;
+import Model.HeartModelInterface;
+import View.StrategyView;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -163,7 +163,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHeartActionPerformed
 
     private void btnRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaceActionPerformed
-        CarRaceModel Modelo = new CarRaceModel(new Autos(80,0,"Azul",false) ,new ArrayList<Autos>());//"carRaceTestDrive"
+        CarRaceModel Modelo = new CarRaceModel(new Car(80,0,"Azul",false) ,new ArrayList<Car>());//"carRaceTestDrive"
         ControllerInterface controladorJuego = new CarRaceController(Modelo);
     }//GEN-LAST:event_btnRaceActionPerformed
 
@@ -182,7 +182,7 @@ public class Principal extends javax.swing.JFrame {
         
         HeartModelInterface modelo = HeartModel.getInstance();
         HeartController controlador = new HeartController((HeartModel) modelo);
-        CarRaceModel Modelo = new CarRaceModel(new Autos(80,0,"AZul",false) ,new ArrayList<Autos>());
+        CarRaceModel Modelo = new CarRaceModel(new Car(80,0,"AZul",false) ,new ArrayList<Car>());
         ControllerInterface controladorJuego = new CarRaceController(Modelo);
         BeatModelInterface modelo2 = new BeatModel();
         ControllerInterface controlador2 = new BeatController(modelo2);

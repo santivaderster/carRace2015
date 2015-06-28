@@ -1,12 +1,13 @@
-package Heart;
+package Model;
 
 
 
+import Observer.BeatObserver;
+import Observer.BPMObserver;
 import java.util.*;
  
 
  
-import Beat.*;
  
 
  

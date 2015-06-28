@@ -1,8 +1,8 @@
-package CarRace;
+package Class;
 
 import java.util.Random;
 
-public class Autos {
+public class Car {
 
     private int posicionx;
     private int posiciony;
@@ -11,7 +11,7 @@ public class Autos {
     private int fuel ;
     private int maxFuel = 10;
 
-    public Autos( int x , int y , String color, boolean visible) {
+    public Car( int x , int y , String color, boolean visible) {
         fuel =maxFuel;
         posicionx = x; // genera posicion x aleatoria de autos en contramano
         posiciony = y;  //  colocar la posicion de donde arranca los autos en contra mano 

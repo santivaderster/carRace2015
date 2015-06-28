@@ -1,5 +1,20 @@
-package Strategy;
+package View;
 
+import Model.HeartModel;
+import Controller.HeartController;
+import Class.Car;
+import Class.BeatBar;
+import View.DJView;
+import Observer.BeatObserver;
+import Adapters.HeartAdapter;
+import Observer.BPMObserver;
+import Adapters.CarRaceAdapter;
+import Controller.CarRaceController;
+import Model.CarRaceModel;
+import Controller.ControllerInterface;
+import Controller.BeatController;
+import Model.BeatModelInterface;
+import Model.BeatModel;
 import java.awt.*;
 
 import java.awt.event.ItemEvent;
@@ -8,11 +23,8 @@ import java.awt.event.ItemListener;
 
 import javax.swing.*;
 
-import Beat.*;
 
-import Heart.*;
 
-import CarRace.*;
 import java.util.ArrayList;
 
 public class StrategyView extends DJView {
@@ -92,7 +104,7 @@ public class StrategyView extends DJView {
                         {
                             controller.stop();
                         }
-                       CarRaceModel car = new CarRaceModel(new Autos(80,0,"Azul",false) ,new ArrayList<Autos>());
+                       CarRaceModel car = new CarRaceModel(new Car(80,0,"Azul",false) ,new ArrayList<Car>());
                         CarRaceController carController = new CarRaceController(car, thisView);
                         setController(carController);
                         setModel((new CarRaceAdapter(car)));

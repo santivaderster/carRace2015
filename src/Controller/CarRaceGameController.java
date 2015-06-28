@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CarRace;
+package Controller;
 
-import Beat.ControllerInterface;
+import Model.CarRaceModel;
+import Controller.ControllerInterface;
 import Ventanas.Juego;
 
 /**

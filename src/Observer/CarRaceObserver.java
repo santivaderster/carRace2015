@@ -1,6 +1,6 @@
-package CarRace;
+package Observer;
 
-public interface ModelObserver 
+public interface CarRaceObserver 
 {
     void setfuel(int i);
     void getfuel ();

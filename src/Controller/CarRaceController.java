@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CarRace;
-import Beat.ControllerInterface;
-import Beat.DJView;
+package Controller;
+import Model.CarRaceModel;
+import Controller.ControllerInterface;
+import View.DJView;
+import Adapters.CarRaceAdapter;
 
 /**
  *

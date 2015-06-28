@@ -1,8 +1,8 @@
-package Heart;
+package Model;
 
-import Beat.BPMObserver;
+import Observer.BPMObserver;
 
-import Beat.BeatObserver;
+import Observer.BeatObserver;
  
 
  

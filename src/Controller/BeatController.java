@@ -1,6 +1,9 @@
-package Beat;
+package Controller;
 
-import Strategy.StrategyView;
+import View.DJView;
+import Model.BeatModelInterface;
+import Model.BeatModel;
+import View.StrategyView;
 
 
 

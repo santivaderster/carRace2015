@@ -5,11 +5,11 @@
  */
 package Ventanas;
 
-import Beat.ControllerInterface;
-import CarRace.Autos;
-import CarRace.CarRaceGameController;
-import CarRace.CarRaceModel;
-import CarRace.ModelObserver;
+import Controller.ControllerInterface;
+import Class.Car;
+import Controller.CarRaceGameController;
+import Model.CarRaceModel;
+import Observer.CarRaceObserver;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import javax.swing.WindowConstants;
  *
  * @author Pato
  */
-public class Juego extends javax.swing.JFrame implements ModelObserver{
+public class Juego extends javax.swing.JFrame implements CarRaceObserver{
 
     /**
      * Creates new form Juego
@@ -44,13 +44,13 @@ public class Juego extends javax.swing.JFrame implements ModelObserver{
     private String sIconoActual = "Amarillo";
     private CarRaceGameController controlador;
     private CarRaceModel modelo;
-    private Autos miauto;
-    private ArrayList<Autos> autosContra = new ArrayList<Autos>();
+    private Car miauto;
+    private ArrayList<Car> autosContra = new ArrayList<Car>();
     
     public Juego() 
     {
         initComponents();
-        miauto = new Autos(80, 0, "Azul",true);
+        miauto = new Car(80, 0, "Azul",true);
         this.modelo = new CarRaceModel(miauto,autosContra);
         this.controlador = new CarRaceGameController (modelo,this);
         modelo.registerObserver(this);

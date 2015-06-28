@@ -1,9 +1,10 @@
 
-package CarRace;
+package Adapters;
 
-import Beat.BPMObserver;
-import Beat.BeatModelInterface;
-import Beat.BeatObserver;
+import Model.CarRaceModel;
+import Observer.BPMObserver;
+import Model.BeatModelInterface;
+import Observer.BeatObserver;
 
 
 public class CarRaceAdapter implements BeatModelInterface {

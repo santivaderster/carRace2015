@@ -1,7 +1,8 @@
-package CarRace;
+package Model;
 
-import Beat.BPMObserver;
-import Beat.BeatObserver;
+import Observer.BPMObserver;
+import Observer.BeatObserver;
+import Observer.CarRaceObserver;
 
 public interface CarRaceModelInterface 
 {
@@ -10,8 +11,8 @@ public interface CarRaceModelInterface
     void off();
     void setBPM(int bpm);
     int getBPM();
-    void registerObserver(ModelObserver o);
-    void removeObserver(ModelObserver o);
+    void registerObserver(CarRaceObserver o);
+    void removeObserver(CarRaceObserver o);
     void registerObserver(BPMObserver o);
     void removeObserver(BPMObserver o);
     void FlechaIzquierda();

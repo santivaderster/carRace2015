@@ -1,4 +1,4 @@
-package Beat;
+package Controller;
 
 public interface ControllerInterface {
 	 

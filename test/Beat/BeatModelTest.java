@@ -5,6 +5,7 @@
  */
 package Beat;
 
+import Model.BeatModel;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiEvent;
 import org.junit.After;

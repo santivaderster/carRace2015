@@ -1,4 +1,7 @@
-package Beat;
+package Model;
+
+import Observer.BPMObserver;
+import Observer.BeatObserver;
 
 public interface BeatModelInterface {
 	 

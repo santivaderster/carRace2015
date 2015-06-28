@@ -5,8 +5,9 @@
  */
 package Heart;
 
-import Beat.BPMObserver;
-import Beat.BeatObserver;
+import Model.HeartModel;
+import Observer.BPMObserver;
+import Observer.BeatObserver;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

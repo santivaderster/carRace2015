@@ -1,4 +1,4 @@
-package Beat;
+package Observer;
 
 public interface BPMObserver {
 	 

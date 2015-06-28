@@ -1,5 +1,10 @@
-package Beat;
+package View;
 
+import Class.BeatBar;
+import Observer.BeatObserver;
+import Observer.BPMObserver;
+import Controller.ControllerInterface;
+import Model.BeatModelInterface;
 import java.awt.*;
 
 import java.awt.event.*;

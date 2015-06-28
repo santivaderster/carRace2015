@@ -1,10 +1,11 @@
-package Heart;
+package Adapters;
 
-import Beat.BPMObserver;
+import Observer.BPMObserver;
 
-import Beat.BeatModelInterface;
+import Model.BeatModelInterface;
  
-import Beat.BeatObserver;
+import Observer.BeatObserver;
+import Model.HeartModelInterface;
  
 
  

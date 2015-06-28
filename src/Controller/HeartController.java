@@ -1,11 +1,14 @@
-package Heart;
+package Controller;
 
 
-import Strategy.StrategyView;
+import Adapters.HeartAdapter;
+import View.StrategyView;
 
-import Beat.ControllerInterface;
+import Controller.ControllerInterface;
+import Model.HeartModel;
+import View.HeartView;
  
-import Beat.DJView; 
+import View.DJView; 
 
 
 public class HeartController implements ControllerInterface {

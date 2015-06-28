@@ -1,10 +1,10 @@
-package Heart;
+package View;
 
-import Beat.BeatModelInterface;
+import Model.BeatModelInterface;
 
-import Beat.ControllerInterface;
+import Controller.ControllerInterface;
  
-import Beat.DJView;
+import View.DJView;
  
 
  

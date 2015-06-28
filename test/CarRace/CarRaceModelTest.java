@@ -5,8 +5,8 @@
  */
 package CarRace;
 
-import Beat.BPMObserver;
-import Beat.BeatObserver;
+import Observer.BPMObserver;
+import Observer.BeatObserver;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.MidiEvent;
 import org.junit.After;

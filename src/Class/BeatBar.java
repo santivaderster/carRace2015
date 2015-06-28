@@ -1,4 +1,4 @@
-package Beat;
+package Class;
 
 import javax.swing.*;
 
