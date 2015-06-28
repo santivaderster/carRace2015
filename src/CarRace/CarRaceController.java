@@ -64,8 +64,8 @@ public class CarRaceController implements ControllerInterface
 
     @Override
     public void setBPM(int bpm) {
-        //	model.setDistancia(bpm); // ver este metodo por el momento no hace nada porque ya tiene el increase y decrease
-        model.UpdateFuel();
+       
+       // model.UpdateFuel();
     }
 
     public void setView(DJView view) {

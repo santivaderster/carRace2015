@@ -15,6 +15,7 @@ import CarRace.CarRaceModel;
 import Heart.HeartController;
 import Heart.HeartModel;
 import Heart.HeartModelInterface;
+import Strategy.StrategyView;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jvnet.substance.SubstanceLookAndFeel;
@@ -54,7 +55,7 @@ public class Principal extends javax.swing.JFrame {
         btnJuego = new javax.swing.JButton();
         btnRace = new javax.swing.JButton();
         btnTodos = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCmbBox = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,7 +94,12 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Todos cmbBox");
+        btnCmbBox.setText("CmbBox");
+        btnCmbBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCmbBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -101,33 +107,31 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHeart)
-                    .addComponent(btnJuego))
-                .addGap(58, 58, 58)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(btnRace))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBeat)
-                    .addComponent(btnTodos))
-                .addGap(61, 61, 61))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRace, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBeat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHeart, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnJuego, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCmbBox, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
+                .addGap(61, 293, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHeart)
-                    .addComponent(btnBeat)
-                    .addComponent(btnRace))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnJuego)
-                    .addComponent(btnTodos)
-                    .addComponent(jButton1))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addComponent(btnHeart)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBeat)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRace)
+                .addGap(5, 5, 5)
+                .addComponent(btnCmbBox)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnTodos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnJuego)
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -151,12 +155,15 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHeartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHeartActionPerformed
+        
         HeartModelInterface modelo = HeartModel.getInstance();
         HeartController controlador = new HeartController((HeartModel) modelo);
+        
+        
     }//GEN-LAST:event_btnHeartActionPerformed
 
     private void btnRaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRaceActionPerformed
-        CarRaceModel Modelo = new CarRaceModel(new Autos(80,0,null,false) ,new ArrayList<Autos>());
+        CarRaceModel Modelo = new CarRaceModel(new Autos(80,0,"Azul",false) ,new ArrayList<Autos>());//"carRaceTestDrive"
         ControllerInterface controladorJuego = new CarRaceController(Modelo);
     }//GEN-LAST:event_btnRaceActionPerformed
 
@@ -171,13 +178,21 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBeatActionPerformed
 
     private void btnTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTodosActionPerformed
+
+        
         HeartModelInterface modelo = HeartModel.getInstance();
         HeartController controlador = new HeartController((HeartModel) modelo);
-        CarRaceModel Modelo = new CarRaceModel(new Autos(80,0,null,false) ,new ArrayList<Autos>());
+        CarRaceModel Modelo = new CarRaceModel(new Autos(80,0,"AZul",false) ,new ArrayList<Autos>());
         ControllerInterface controladorJuego = new CarRaceController(Modelo);
         BeatModelInterface modelo2 = new BeatModel();
         ControllerInterface controlador2 = new BeatController(modelo2);
     }//GEN-LAST:event_btnTodosActionPerformed
+
+    private void btnCmbBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCmbBoxActionPerformed
+       StrategyView view = new StrategyView();
+       view.createView();
+       view.createControls();
+    }//GEN-LAST:event_btnCmbBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -216,11 +231,11 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBeat;
+    private javax.swing.JButton btnCmbBox;
     private javax.swing.JButton btnHeart;
     private javax.swing.JButton btnJuego;
     private javax.swing.JButton btnRace;
     private javax.swing.JButton btnTodos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

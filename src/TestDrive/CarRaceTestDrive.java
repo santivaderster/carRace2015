@@ -12,7 +12,7 @@ public class CarRaceTestDrive
 { 
     public static void main(String[] args) 
     {
-       CarRaceModel Modelo = new CarRaceModel(new Autos(80,0,null,false) ,new ArrayList<Autos>());
+       CarRaceModel Modelo = new CarRaceModel(new Autos(80,0,"eventTestDrive",false) ,new ArrayList<Autos>());
        ControllerInterface controladorJuego = new CarRaceController(Modelo);
     }
 } 

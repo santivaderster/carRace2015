@@ -40,7 +40,8 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
     private int iRefrescoAutoContra = 3;
     private int iTamanoAuto = 63;
     private boolean tiempofinalizado=false; 
-     public CarRaceModel(Autos auto, ArrayList<Autos> autosContra) {
+     
+    public CarRaceModel(Autos auto, ArrayList<Autos> autosContra) {
         beatObservers = new ArrayList<BeatObserver>();
         bpmObservers = new ArrayList<BPMObserver>();
         modelObservers = new ArrayList<ModelObserver>();
@@ -141,7 +142,7 @@ public class CarRaceModel implements CarRaceModelInterface, MetaEventListener
                             autosContra.get(num).setPosiciony(iLimiteYAbajo);
                         }
                     }
-                if (detectorChoque()){//calculo de choque 
+                if (detectorChoque()){ //&& miauto.getColorSelectionJugador()!="carRaceTestDrive"){//calculo de choque 
                 
                 notifyModelObservers("AutoSeleccionado");
                 notifyModelObservers("GameOver");

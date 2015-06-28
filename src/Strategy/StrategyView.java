@@ -13,6 +13,7 @@ import Beat.*;
 import Heart.*;
 
 import CarRace.*;
+import java.util.ArrayList;
 
 public class StrategyView extends DJView {
 
@@ -55,7 +56,7 @@ public class StrategyView extends DJView {
         viewFrame.getContentPane().add(viewPanel, BorderLayout.CENTER);
         viewFrame.pack();
         viewFrame.setVisible(true);
-        comboBox.setModel(new DefaultComboBoxModel(new String[]{"", "Heart", "Beat", "Detector"}));
+        comboBox.setModel(new DefaultComboBoxModel(new String[]{"", "ModelHeart", "ModelBeat", "ModelCarRace"}));
         comboBox.setSelectedIndex(0);
         comboBox.setToolTipText("");
         comboBox.addItemListener(new ItemListener()
@@ -91,10 +92,10 @@ public class StrategyView extends DJView {
                         {
                             controller.stop();
                         }
-//                        CarRaceModel detector = new CarRaceModel() {};
-//                        CarRaceController detectorController = new CarRaceController(detector, thisView);
-//                        setController(detectorController);
-//                        setModel((new CarRaceAdapter(detector)));
+                       CarRaceModel car = new CarRaceModel(new Autos(80,0,null,false) ,new ArrayList<Autos>());
+                        CarRaceController detectorController = new CarRaceController(car, thisView);
+                        setController(detectorController);
+                        setModel((new CarRaceAdapter(car)));
                     }
                 }
             }
