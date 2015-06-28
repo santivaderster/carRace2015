@@ -23,9 +23,10 @@ import static org.junit.Assert.*;
  *
  * @author Ariel
  */
-public class CarRaceModelTest {
-    
-    Car autoTest = new Car(80, 460, "Amarillo", true);    
+public class CarRaceModelTest 
+{
+
+    Car autoTest = new Car(80, 460, "Amarillo", true);
     ArrayList<Car> autosContra = new ArrayList<>();
     Car oAuto;
     String sColor = null;
@@ -36,53 +37,80 @@ public class CarRaceModelTest {
     int iMovimientoX = 100;
     int iMovimientoY = 50;
     CarRaceModel model = new CarRaceModel(autoTest, autosContra);
-    
-    
+
     @Before
-    public void inicializar(){
+    public void inicializar() 
+    {
         for (int i = 0; i < 5; i++) {
-        switch (i)
-        {
-            case 0:
-                sColor = "Amarillo";
-                break;
-            case 1:
-                sColor = "Rojo";
-                break;
-            case 2:
-                sColor = "Azul";
-                break;
-            case 3:
-                sColor = "Amarillo";
-                break;
-            case 4:
-                sColor = "Azul";
-                break;
+            switch (i) {
+                case 0:
+                    sColor = "Amarillo";
+                    break;
+                case 1:
+                    sColor = "Rojo";
+                    break;
+                case 2:
+                    sColor = "Azul";
+                    break;
+                case 3:
+                    sColor = "Amarillo";
+                    break;
+                case 4:
+                    sColor = "Azul";
+                    break;
+            }
+            oAuto = new Car(i * iMovimientoX + iLimiteXIzquierda, iLimiteYAbajo, sColor, false);
+            autosContra.add(oAuto);
+            oAuto = null;
         }
-        oAuto = new Car(i*iMovimientoX + iLimiteXIzquierda,iLimiteYAbajo, sColor,false);
-         autosContra.add(oAuto);
-         oAuto = null;
-     }
         model.initialize();
         model.on();
     }
-    
+
     @Test
-        public void testBPM() {
-                int iBPM=60;
-                model.setBPM(iBPM);
-                assertEquals(iBPM, model.getBPM());
-        }
-        
+    public void testBPM() 
+    {
+        int iBPM = 60;
+        model.setBPM(iBPM);
+        assertEquals(iBPM, model.getBPM());
+    }
+
     @Test
-    public void testFuelNegativa(){
-            int iPositiva = 5;
-            int iNegativa = -5;
-            autoTest.setFuel(iPositiva);
-            autoTest.setFuel(iNegativa);
-            assertEquals(iPositiva, autoTest.getFuel());           
+    public void testFuelNegativa() 
+    {
+        int iPositiva = 5;
+        int iNegativa = -5;
+        autoTest.setFuel(iPositiva);
+        autoTest.setFuel(iNegativa);
+        assertEquals(iPositiva, autoTest.getFuel());
     }
     
+    @Test
+    public void testChoque() 
+    {
+        autoTest.setPosicionx(80);
+        autosContra.get(0).setPosiciony(100);
+        assertTrue(model.detectorChoque());
+    }
+
+    @Test
+    public void testPasarLimiteX() 
+    {
+        int iAceptable = 1;
+        int iSuperaLimite = 5000;
+        int esperada = 180;
+
+        model.setPosicionX(iAceptable);
+        model.setPosicionX(iSuperaLimite);
+        assertEquals(esperada, model.getMiauto().getPosicionx());
+    }
+
+    @After
+    public void finalizar() 
+    {
+        model.off();
+    }    
+
 //    @Test
 //    public void testBPMEncontrado(){
 //            int iFuel = 3;
@@ -90,29 +118,4 @@ public class CarRaceModelTest {
 //            autoTest.setFuel(iFuel);
 //            assertEquals(iBPMEncontrado, model.getBPM());
 //    }
-
-//    @Test
-//    public void testPasarLimiteY(){
-//        
-//    }
-
-    @Test
-    public void testPasarLimiteX(){
-        int iAceptable = 1;
-        int iSuperaLimite = 5000;
-        int esperada = 180;
-        
-//        autoTest.setPosicionx(iAceptable);
-//        model.setPosicionX(autoTest.getPosicionx());
-//        assertEquals(esperada,model.getMiauto().getPosicionx());
-        
-        model.setPosicionX(iAceptable);
-        model.setPosicionX(iSuperaLimite);
-        assertEquals(esperada,model.getMiauto().getPosicionx());
-    }
-    
-    @After
-        public void finalizar(){
-                model.off();
-        }
 }
