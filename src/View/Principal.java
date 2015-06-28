@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Ventanas;
+package View;
 
+import View.Juego;
 import Controller.BeatController;
 import Model.BeatModel;
 import Model.BeatModelInterface;

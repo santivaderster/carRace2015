@@ -7,7 +7,7 @@ package Controller;
 
 import Model.CarRaceModel;
 import Controller.ControllerInterface;
-import Ventanas.Juego;
+import View.Juego;
 
 /**
  *
