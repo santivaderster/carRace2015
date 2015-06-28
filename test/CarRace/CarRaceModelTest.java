@@ -89,6 +89,7 @@ public class CarRaceModelTest
     public void testChoque() 
     {
         autoTest.setPosicionx(80);
+        autosContra.get(0).setVisible(true);
         autosContra.get(0).setPosiciony(100);
         assertTrue(model.detectorChoque());
     }
