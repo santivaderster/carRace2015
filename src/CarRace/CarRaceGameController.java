@@ -74,18 +74,7 @@ public class CarRaceGameController implements ControllerInterface
     public void FlechaIzquierda() 
     {
         Modelo.FlechaIzquierda();
-//        switch(sIconoActual)
-//        {
-//            case "Amarillo":
-//                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAma.png")));
-//                break;
-//            case "Rojo":
-//                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoRojo.png")));
-//                break;
-//            case "Azul":
-//                Vista.getLblAuto().setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/autoAzul.png")));
-//                break;
-//        }
+
     }
 
 
