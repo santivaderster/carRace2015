@@ -391,7 +391,7 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
             case KeyEvent.VK_ENTER:
                 if(!txtNombre.getText().isEmpty())
                 {
-                    Inicarjuego();
+                     Inicarjuego();
                 }
                 break;
         }
