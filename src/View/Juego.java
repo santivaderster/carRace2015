@@ -7,7 +7,9 @@ package View;
 
 import Class.Car;
 import Controller.CarRaceGameController;
+import Controller.ControllerInterface;
 import Model.CarRaceModel;
+import Model.CarRaceModelInterface;
 import Observer.CarRaceObserver;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
      * Creates new form Juego
      */
     private CarRaceGameController controlador;
-    private CarRaceModel modelo;
+    private CarRaceModelInterface modelo;
     private Car miauto;
     private ArrayList<Car> autosContra = new ArrayList<Car>();
     

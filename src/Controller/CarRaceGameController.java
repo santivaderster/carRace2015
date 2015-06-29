@@ -7,6 +7,7 @@ package Controller;
 
 import Model.CarRaceModel;
 import Controller.ControllerInterface;
+import Model.CarRaceModelInterface;
 import View.Juego;
 
 /**
@@ -16,10 +17,10 @@ import View.Juego;
 
 public class CarRaceGameController implements ControllerInterface
 {
-    private CarRaceModel Modelo ;
+    private CarRaceModelInterface Modelo ;
     private Juego Vista ;
 
-    public CarRaceGameController(CarRaceModel modelo, Juego vista) 
+    public CarRaceGameController(CarRaceModelInterface modelo, Juego vista) 
     {
         this.Modelo = modelo;
         this.Vista = vista;
