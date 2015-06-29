@@ -389,7 +389,10 @@ public class Juego extends javax.swing.JFrame implements CarRaceObserver{
                 controlador.FlechaDerecha();
                 break;
             case KeyEvent.VK_ENTER:
-                Inicarjuego();
+                if(!txtNombre.getText().isEmpty())
+                {
+                    Inicarjuego();
+                }
                 break;
         }
     }//GEN-LAST:event_lblAutoKeyReleased
