@@ -36,6 +36,8 @@ public class HeartModelTest {
         @Test
         public void testSingleton() {
                 HeartModel aux = HeartModel.getInstance();
+                
+                
                 assertEquals(aux, HeartModel.getInstance());
                 assertEquals(aux, HeartModel.getInstance());
                 assertEquals(aux, HeartModel.getInstance());
