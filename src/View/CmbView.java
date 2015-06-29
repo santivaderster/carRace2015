@@ -33,8 +33,6 @@ public class CmbView extends DJView {
 
     private final CmbView thisView = this;
 
-    private HeartAdapter heartAdapter = new HeartAdapter(HeartModel.getInstance());
-
     /**
      *
      * @param controller
@@ -84,7 +82,7 @@ public class CmbView extends DJView {
                         case "ModelHeart":
                             HeartController heartController = new HeartController(thisView);
                             setController(heartController);
-                            setModel(heartAdapter);
+                            setModel(new HeartAdapter(HeartModel.getInstance()));
                             break;
                         case "ModelBeat":
                             BeatModel beat = new BeatModel();
