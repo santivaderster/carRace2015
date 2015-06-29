@@ -31,6 +31,13 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+        HeartModelInterface modelo;
+        HeartController controlador;
+        CarRaceModel Modelo;
+        ControllerInterface controladorJuego;
+        BeatModelInterface modelo2;
+        ControllerInterface controlador2 ;
+        
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
