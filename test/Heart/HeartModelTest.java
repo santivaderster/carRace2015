@@ -22,13 +22,14 @@ import static org.junit.Assert.*;
 public class HeartModelTest {
     
     @Test
-        public void testContador() {
+        public void testRitmoCardiaco() {
                 
                 HeartModel heart = HeartModel.getInstance();
                 assertNotNull(heart);
                 
                 int esperado = heart.getHeartRate();
                 HeartModel heart2 = HeartModel.getInstance();
+                
                 int actual = heart2.getHeartRate();
                 assertEquals(esperado, actual-1);
         }
@@ -37,11 +38,9 @@ public class HeartModelTest {
         public void testSingleton() {
                 HeartModel aux = HeartModel.getInstance();
                 
-                
+                for (int i = 0; i < 5; i++) {
                 assertEquals(aux, HeartModel.getInstance());
-                assertEquals(aux, HeartModel.getInstance());
-                assertEquals(aux, HeartModel.getInstance());
-                assertEquals(aux, HeartModel.getInstance());
+            }
         }
         
 }

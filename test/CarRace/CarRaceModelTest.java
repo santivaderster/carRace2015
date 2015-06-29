@@ -39,7 +39,7 @@ public class CarRaceModelTest
     CarRaceModel model = new CarRaceModel(autoTest, autosContra);
 
     @Before
-    public void inicializar() 
+    public void iniciar() 
     {
         for (int i = 0; i < 5; i++) {
             switch (i) {
@@ -65,14 +65,6 @@ public class CarRaceModelTest
         }
         model.initialize();
         model.on();
-    }
-
-    @Test
-    public void testBPM() 
-    {
-        int iBPM = 60;
-        model.setBPM(iBPM);
-        assertEquals(iBPM, model.getBPM());
     }
 
     @Test

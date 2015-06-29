@@ -21,14 +21,27 @@ import static org.junit.Assert.*;
  */
 public class BeatModelTest {
     
+    BeatModel model = new BeatModel();
+    
+    @Before
+    public void iniciar()
+    {
+        model.initialize();
+        model.on();        
+    }
+    
     @Test
-        public void testBPM() {
-                int var=60;
-                BeatModel model = new BeatModel();
-                model.initialize();
-                model.on();
-                model.setBPM(var);
-                assertEquals(var, model.getBPM());
-                model.off();
-        }   
+    public void testSetBPM() 
+    {
+            int BPM=60;               
+            model.setBPM(BPM);
+
+            assertEquals(BPM, model.getBPM());
+    }   
+        
+    @After
+    public void terminar()
+    {
+        model.off();
+    }
 }
